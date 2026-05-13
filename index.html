@@ -6,193 +6,99 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Descubre tu café en grano ideal en 5 preguntas. Configurador personalizado con pódium de afinidad.">
 <title>EligeTuGrano — Encuentra tu café ideal en grano</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K8HG73FW');</script>
+<!-- End Google Tag Manager -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilos.css">
 <style>
 /* ── ESTILOS ESPECÍFICOS DE LA HOME ── */
-
-/* HERO */
-.hero {
-  min-height: 100vh; position: relative;
-  display: flex; align-items: center; justify-content: center;
-  text-align: center; padding: 100px 24px 80px; overflow: hidden;
-}
-.hero-bg {
-  position: absolute; inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1600&q=80');
-  background-size: cover; background-position: center;
-  filter: brightness(0.35);
-}
-.hero-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(160deg,rgba(30,15,8,0.7) 0%,rgba(61,31,13,0.5) 50%,rgba(30,15,8,0.8) 100%);
-}
-.hero-content { position: relative; z-index: 2; max-width: 720px; }
-.hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11px; font-weight: 500; letter-spacing: 3.5px;
-  text-transform: uppercase; color: var(--honey);
-  margin-bottom: 28px;
-  border: 1px solid rgba(200,137,42,0.35);
-  padding: 7px 18px; border-radius: 40px;
-  background: rgba(200,137,42,0.08);
-}
-.hero-title {
-  font-family: var(--font-serif);
-  font-size: clamp(44px,7vw,76px); font-weight: 700;
-  color: var(--cream); line-height: 1.05;
-  margin-bottom: 24px; letter-spacing: -1.5px;
-}
-.hero-title em { font-style: italic; color: var(--honey); }
-.hero-subtitle {
-  font-size: 18px; color: rgba(242,228,200,0.65);
-  font-weight: 300; line-height: 1.75;
-  max-width: 520px; margin: 0 auto 44px;
-}
-.hero-cta {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: var(--honey); color: var(--espresso);
-  border: none; border-radius: var(--radius-sm);
-  padding: 17px 36px; font-size: 16px; font-weight: 500;
-  font-family: var(--font-sans); cursor: pointer;
-  transition: all 0.25s; letter-spacing: 0.2px;
-}
-.hero-cta:hover { background: var(--latte); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(200,137,42,0.35); }
-.hero-cta-arrow { font-size: 18px; transition: transform 0.2s; }
-.hero-cta:hover .hero-cta-arrow { transform: translateX(4px); }
-.hero-scroll {
-  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  animation: bounce 2s infinite;
-}
-.hero-scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom,rgba(200,137,42,0.4),transparent); }
-@keyframes bounce {
-  0%,100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(6px); }
-}
-
-/* CÓMO FUNCIONA */
-.como { background: var(--milk); }
-.como-header { margin-bottom: 56px; }
-.como-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
-.como-card {
-  background: white; border-radius: var(--radius-lg); padding: 36px 28px;
-  border: 1px solid rgba(106,58,31,0.07);
-  transition: all 0.35s; position: relative; overflow: hidden;
-  opacity: 0; transform: translateY(24px);
-}
-.como-card.visible { opacity: 1; transform: translateY(0); }
-.como-card::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg,var(--honey),var(--caramel));
-  transform: scaleX(0); transition: transform 0.35s; transform-origin: left;
-}
-.como-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(106,58,31,0.1); }
-.como-card:hover::after { transform: scaleX(1); }
-.como-num {
-  font-family: var(--font-serif); font-size: 56px; font-weight: 700;
-  color: rgba(200,137,42,0.1); line-height: 1; margin-bottom: 20px;
-}
-.como-icon { font-size: 32px; margin-bottom: 16px; display: block; }
-.como-card-title { font-family: var(--font-serif); font-size: 19px; font-weight: 600; color: var(--espresso); margin-bottom: 12px; }
-.como-card-desc { font-size: 14px; color: var(--text-soft); line-height: 1.7; font-weight: 300; }
-
-/* CAFÉS DESTACADOS */
-.destacados { background: var(--foam); }
-.destacados-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; flex-wrap: wrap; gap: 16px; }
-.destacados-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
-.destacado-card {
-  background: white; border-radius: var(--radius-md); overflow: hidden;
-  border: 1px solid rgba(106,58,31,0.07);
-  transition: all 0.3s; cursor: pointer;
-  opacity: 0; transform: translateY(20px);
-  display: block;
-}
-.destacado-card.visible { opacity: 1; transform: translateY(0); }
-.destacado-card:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(106,58,31,0.14); }
-.destacado-img {
-  height: 200px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 56px; position: relative; overflow: hidden;
-}
-.dest-bg1 { background: linear-gradient(135deg,#2C1810,#5C3317); }
-.dest-bg2 { background: linear-gradient(135deg,#1E0F08,#3D1F0D); }
-.dest-bg3 { background: linear-gradient(135deg,#4A2010,#8B4A1A); }
-.dest-bg4 { background: linear-gradient(135deg,#3D1F0D,#7A4020); }
-.destacado-badge {
-  position: absolute; top: 12px; left: 12px;
-  background: var(--honey); color: var(--espresso);
-  font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
-  text-transform: uppercase; padding: 4px 10px; border-radius: 4px;
-}
-.destacado-body { padding: 18px 16px 20px; }
-.destacado-brand { font-size: 11px; color: var(--text-soft); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 4px; text-transform: uppercase; }
-.destacado-name { font-family: var(--font-serif); font-size: 17px; font-weight: 600; color: var(--espresso); line-height: 1.3; }
-
-/* CARRUSEL */
-.carrusel-section { background: var(--milk); }
-.carrusel-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 36px; flex-wrap: wrap; gap: 16px; }
-.carrusel-wrap { position: relative; }
-.carrusel-track-outer { overflow: hidden; border-radius: var(--radius-md); }
-.carrusel-track { display: flex; gap: 20px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
-.carrusel-item {
-  flex: 0 0 calc(25% - 15px);
-  background: white; border-radius: var(--radius-md);
-  border: 1px solid rgba(106,58,31,0.08);
-  overflow: hidden; cursor: pointer; transition: all 0.25s; display: block;
-}
-.carrusel-item:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(106,58,31,0.12); }
-.carrusel-img { height: 120px; display: flex; align-items: center; justify-content: center; font-size: 36px; }
-.car-bg1 { background: linear-gradient(135deg,#3D1F0D,#6B3A1F); }
-.car-bg2 { background: linear-gradient(135deg,#1E0F08,#3D1F0D); }
-.car-bg3 { background: linear-gradient(135deg,#5C3317,#A0622D); }
-.car-bg4 { background: linear-gradient(135deg,#2C1810,#5C3317); }
-.car-bg5 { background: linear-gradient(135deg,#4A2010,#8B4A1A); }
-.car-bg6 { background: linear-gradient(135deg,#3A1A08,#704020); }
-.carrusel-body { padding: 14px; }
-.carrusel-brand { font-size: 10px; color: var(--text-soft); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 2px; text-transform: uppercase; }
-.carrusel-name { font-family: var(--font-serif); font-size: 14px; font-weight: 600; color: var(--espresso); line-height: 1.3; }
-.carrusel-btn {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  width: 44px; height: 44px; border-radius: 50%;
-  background: white; border: 1px solid rgba(106,58,31,0.15);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: all 0.2s; font-size: 18px; color: var(--bark);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10;
-}
-.carrusel-btn:hover { background: var(--honey); color: var(--espresso); border-color: var(--honey); }
-.carrusel-btn.prev { left: -22px; }
-.carrusel-btn.next { right: -22px; }
-
-/* CONTACTO HOME */
-.contacto-home { background: var(--espresso); padding: 96px 24px; }
-.contacto-home-inner { max-width: 600px; margin: 0 auto; text-align: center; }
-.contacto-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--honey); margin-bottom: 12px; }
-.contacto-title { font-family: var(--font-serif); font-size: clamp(28px,4vw,44px); font-weight: 700; color: var(--cream); line-height: 1.15; margin-bottom: 14px; }
-.contacto-title em { font-style: italic; color: var(--honey); }
-.contacto-sub { font-size: 15px; color: rgba(242,228,200,0.45); font-weight: 300; line-height: 1.7; margin-bottom: 48px; }
-.form-box { text-align: left; }
-
-/* RESPONSIVE HOME */
-@media(max-width: 1024px) {
-  .destacados-grid { grid-template-columns: repeat(2,1fr); }
-  .carrusel-item { flex: 0 0 calc(33.33% - 14px); }
-}
-@media(max-width: 768px) {
-  .como-grid { grid-template-columns: 1fr; }
-  .destacados-grid { grid-template-columns: repeat(2,1fr); }
-  .carrusel-item { flex: 0 0 calc(50% - 10px); }
-}
-@media(max-width: 480px) {
-  .destacados-grid { grid-template-columns: 1fr; }
-  .carrusel-item { flex: 0 0 100%; }
-}
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 24px 80px;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1600&q=80');background-size:cover;background-position:center;filter:brightness(0.35);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(30,15,8,0.7) 0%,rgba(61,31,13,0.5) 50%,rgba(30,15,8,0.8) 100%);}
+.hero-content{position:relative;z-index:2;max-width:720px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:3.5px;text-transform:uppercase;color:var(--honey);margin-bottom:28px;border:1px solid rgba(200,137,42,0.35);padding:7px 18px;border-radius:40px;background:rgba(200,137,42,0.08);}
+.hero-title{font-family:var(--font-serif);font-size:clamp(44px,7vw,76px);font-weight:700;color:var(--cream);line-height:1.05;margin-bottom:24px;letter-spacing:-1.5px;}
+.hero-title em{font-style:italic;color:var(--honey);}
+.hero-subtitle{font-size:18px;color:rgba(242,228,200,0.65);font-weight:300;line-height:1.75;max-width:520px;margin:0 auto 44px;}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--honey);color:var(--espresso);border:none;border-radius:var(--radius-sm);padding:17px 36px;font-size:16px;font-weight:500;font-family:var(--font-sans);cursor:pointer;transition:all 0.25s;letter-spacing:0.2px;}
+.hero-cta:hover{background:var(--latte);transform:translateY(-3px);box-shadow:0 12px 32px rgba(200,137,42,0.35);}
+.hero-cta-arrow{font-size:18px;transition:transform 0.2s;}
+.hero-cta:hover .hero-cta-arrow{transform:translateX(4px);}
+.hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:bounce 2s infinite;}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(200,137,42,0.4),transparent);}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+.como{background:var(--milk);}
+.como-header{margin-bottom:56px;}
+.como-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.como-card{background:white;border-radius:var(--radius-lg);padding:36px 28px;border:1px solid rgba(106,58,31,0.07);transition:all 0.35s;position:relative;overflow:hidden;opacity:0;transform:translateY(24px);}
+.como-card.visible{opacity:1;transform:translateY(0);}
+.como-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--honey),var(--caramel));transform:scaleX(0);transition:transform 0.35s;transform-origin:left;}
+.como-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(106,58,31,0.1);}
+.como-card:hover::after{transform:scaleX(1);}
+.como-num{font-family:var(--font-serif);font-size:56px;font-weight:700;color:rgba(200,137,42,0.1);line-height:1;margin-bottom:20px;}
+.como-icon{font-size:32px;margin-bottom:16px;display:block;}
+.como-card-title{font-family:var(--font-serif);font-size:19px;font-weight:600;color:var(--espresso);margin-bottom:12px;}
+.como-card-desc{font-size:14px;color:var(--text-soft);line-height:1.7;font-weight:300;}
+.destacados{background:var(--foam);}
+.destacados-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:16px;}
+.destacados-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.destacado-card{background:white;border-radius:var(--radius-md);overflow:hidden;border:1px solid rgba(106,58,31,0.07);transition:all 0.3s;cursor:pointer;opacity:0;transform:translateY(20px);display:block;}
+.destacado-card.visible{opacity:1;transform:translateY(0);}
+.destacado-card:hover{transform:translateY(-6px);box-shadow:0 16px 32px rgba(106,58,31,0.14);}
+.destacado-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:56px;position:relative;overflow:hidden;}
+.dest-bg1{background:linear-gradient(135deg,#2C1810,#5C3317);}
+.dest-bg2{background:linear-gradient(135deg,#1E0F08,#3D1F0D);}
+.dest-bg3{background:linear-gradient(135deg,#4A2010,#8B4A1A);}
+.dest-bg4{background:linear-gradient(135deg,#3D1F0D,#7A4020);}
+.destacado-badge{position:absolute;top:12px;left:12px;background:var(--honey);color:var(--espresso);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:4px;}
+.destacado-body{padding:18px 16px 20px;}
+.destacado-brand{font-size:11px;color:var(--text-soft);font-weight:500;letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;}
+.destacado-name{font-family:var(--font-serif);font-size:17px;font-weight:600;color:var(--espresso);line-height:1.3;}
+.carrusel-section{background:var(--milk);}
+.carrusel-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px;flex-wrap:wrap;gap:16px;}
+.carrusel-wrap{position:relative;}
+.carrusel-track-outer{overflow:hidden;border-radius:var(--radius-md);}
+.carrusel-track{display:flex;gap:20px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);}
+.carrusel-item{flex:0 0 calc(25% - 15px);background:white;border-radius:var(--radius-md);border:1px solid rgba(106,58,31,0.08);overflow:hidden;cursor:pointer;transition:all 0.25s;display:block;}
+.carrusel-item:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(106,58,31,0.12);}
+.carrusel-img{height:120px;display:flex;align-items:center;justify-content:center;font-size:36px;}
+.car-bg1{background:linear-gradient(135deg,#3D1F0D,#6B3A1F);}
+.car-bg2{background:linear-gradient(135deg,#1E0F08,#3D1F0D);}
+.car-bg3{background:linear-gradient(135deg,#5C3317,#A0622D);}
+.car-bg4{background:linear-gradient(135deg,#2C1810,#5C3317);}
+.car-bg5{background:linear-gradient(135deg,#4A2010,#8B4A1A);}
+.car-bg6{background:linear-gradient(135deg,#3A1A08,#704020);}
+.carrusel-body{padding:14px;}
+.carrusel-brand{font-size:10px;color:var(--text-soft);font-weight:500;letter-spacing:0.5px;margin-bottom:2px;text-transform:uppercase;}
+.carrusel-name{font-family:var(--font-serif);font-size:14px;font-weight:600;color:var(--espresso);line-height:1.3;}
+.carrusel-btn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:white;border:1px solid rgba(106,58,31,0.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;font-size:18px;color:var(--bark);box-shadow:0 4px 12px rgba(0,0,0,0.1);z-index:10;}
+.carrusel-btn:hover{background:var(--honey);color:var(--espresso);border-color:var(--honey);}
+.carrusel-btn.prev{left:-22px;}
+.carrusel-btn.next{right:-22px;}
+.contacto-home{background:var(--espresso);padding:96px 24px;}
+.contacto-home-inner{max-width:600px;margin:0 auto;text-align:center;}
+.contacto-eyebrow{font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--honey);margin-bottom:12px;}
+.contacto-title{font-family:var(--font-serif);font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--cream);line-height:1.15;margin-bottom:14px;}
+.contacto-title em{font-style:italic;color:var(--honey);}
+.contacto-sub{font-size:15px;color:rgba(242,228,200,0.45);font-weight:300;line-height:1.7;margin-bottom:48px;}
+.form-box{text-align:left;}
+@media(max-width:1024px){.destacados-grid{grid-template-columns:repeat(2,1fr);}.carrusel-item{flex:0 0 calc(33.33% - 14px);}}
+@media(max-width:768px){.como-grid{grid-template-columns:1fr;}.destacados-grid{grid-template-columns:repeat(2,1fr);}.carrusel-item{flex:0 0 calc(50% - 10px);}}
+@media(max-width:480px){.destacados-grid{grid-template-columns:1fr;}.carrusel-item{flex:0 0 100%;}}
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8HG73FW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
-<!-- NAV -->
 <nav>
   <a class="nav-logo" href="index.html">elige<span>tu</span>grano</a>
   <div class="nav-links" id="nav-links">
@@ -203,7 +109,6 @@
   <button class="nav-burger" onclick="toggleNav()">☰</button>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="inicio">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
@@ -211,17 +116,11 @@
     <div class="hero-eyebrow">☕ Solo café en grano</div>
     <h1 class="hero-title">Tu café ideal<br><em>te está esperando</em></h1>
     <p class="hero-subtitle">Responde 5 preguntas y te decimos exactamente qué grano comprar. Sin tecnicismos. Solo el café perfecto para ti.</p>
-    <a href="configurador.html" class="hero-cta">
-      Encontrar mi grano mitad
-      <span class="hero-cta-arrow">→</span>
-    </a>
+    <a href="configurador.html" class="hero-cta">Encontrar mi grano mitad <span class="hero-cta-arrow">→</span></a>
   </div>
-  <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
-  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div></div>
 </section>
 
-<!-- CÓMO FUNCIONA -->
 <section class="como" id="como">
   <div class="section-inner">
     <div class="como-header fade-in">
@@ -251,7 +150,6 @@
   </div>
 </section>
 
-<!-- CAFÉS DESTACADOS -->
 <section class="destacados" id="destacados">
   <div class="section-inner">
     <div class="destacados-header fade-in">
@@ -263,46 +161,25 @@
     </div>
     <div class="destacados-grid">
       <a href="productos.html" class="destacado-card">
-        <div class="destacado-img dest-bg1">
-          ☕<span class="destacado-badge">⭐ Top ventas</span>
-        </div>
-        <div class="destacado-body">
-          <div class="destacado-brand">Lavazza</div>
-          <div class="destacado-name">Qualità Oro</div>
-        </div>
+        <div class="destacado-img dest-bg1">☕<span class="destacado-badge">⭐ Top ventas</span></div>
+        <div class="destacado-body"><div class="destacado-brand">Lavazza</div><div class="destacado-name">Qualità Oro</div></div>
       </a>
       <a href="productos.html" class="destacado-card">
-        <div class="destacado-img dest-bg2">
-          💪<span class="destacado-badge">🔥 Intenso</span>
-        </div>
-        <div class="destacado-body">
-          <div class="destacado-brand">Caffè Borbone</div>
-          <div class="destacado-name">Crema Superiore</div>
-        </div>
+        <div class="destacado-img dest-bg2">💪<span class="destacado-badge">🔥 Intenso</span></div>
+        <div class="destacado-body"><div class="destacado-brand">Caffè Borbone</div><div class="destacado-name">Crema Superiore</div></div>
       </a>
       <a href="productos.html" class="destacado-card">
-        <div class="destacado-img dest-bg3">
-          🍓<span class="destacado-badge">✨ Gourmet</span>
-        </div>
-        <div class="destacado-body">
-          <div class="destacado-brand">Saula</div>
-          <div class="destacado-name">Premium Blend</div>
-        </div>
+        <div class="destacado-img dest-bg3">🍓<span class="destacado-badge">✨ Gourmet</span></div>
+        <div class="destacado-body"><div class="destacado-brand">Saula</div><div class="destacado-name">Premium Blend</div></div>
       </a>
       <a href="productos.html" class="destacado-card">
-        <div class="destacado-img dest-bg4">
-          🍃<span class="destacado-badge">☕ Desca</span>
-        </div>
-        <div class="destacado-body">
-          <div class="destacado-brand">Lavazza</div>
-          <div class="destacado-name">Dek</div>
-        </div>
+        <div class="destacado-img dest-bg4">🍃<span class="destacado-badge">☕ Desca</span></div>
+        <div class="destacado-body"><div class="destacado-brand">Lavazza</div><div class="destacado-name">Dek</div></div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- CARRUSEL -->
 <section class="carrusel-section" id="carrusel">
   <div class="section-inner">
     <div class="carrusel-header fade-in">
@@ -331,7 +208,6 @@
   </div>
 </section>
 
-<!-- CONTACTO -->
 <section class="contacto-home" id="contacto">
   <div class="contacto-home-inner">
     <div class="contacto-eyebrow fade-in">Hablemos</div>
@@ -339,29 +215,16 @@
     <p class="contacto-sub fade-in">Escríbenos y te respondemos en menos de 24 horas.</p>
     <div class="form-box fade-in">
       <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Nombre</label>
-          <input class="form-input" type="text" placeholder="Tu nombre">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Apellido</label>
-          <input class="form-input" type="text" placeholder="Tu apellido">
-        </div>
+        <div class="form-group"><label class="form-label">Nombre</label><input class="form-input" type="text" placeholder="Tu nombre"></div>
+        <div class="form-group"><label class="form-label">Apellido</label><input class="form-input" type="text" placeholder="Tu apellido"></div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Email</label>
-        <input class="form-input" type="email" placeholder="tu@email.com">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Mensaje</label>
-        <textarea class="form-textarea" placeholder="¿En qué podemos ayudarte?"></textarea>
-      </div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="tu@email.com"></div>
+      <div class="form-group"><label class="form-label">Mensaje</label><textarea class="form-textarea" placeholder="¿En qué podemos ayudarte?"></textarea></div>
       <button class="btn-enviar">Enviar mensaje →</button>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">elige<span>tu</span>grano</div>
@@ -377,24 +240,10 @@
 </footer>
 
 <script>
-function toggleNav(){
-  document.getElementById('nav-links').classList.toggle('open');
-}
-let carruselPos = 0;
-function getVisible(){
-  if(window.innerWidth<=480)return 1;
-  if(window.innerWidth<=768)return 2;
-  if(window.innerWidth<=1024)return 3;
-  return 4;
-}
-function moverCarrusel(dir){
-  const track=document.getElementById('carrusel-track');
-  const items=track.querySelectorAll('.carrusel-item');
-  const max=items.length-getVisible();
-  carruselPos=Math.max(0,Math.min(carruselPos+dir,max));
-  const w=track.querySelector('.carrusel-item').offsetWidth+20;
-  track.style.transform=`translateX(-${carruselPos*w}px)`;
-}
+function toggleNav(){document.getElementById('nav-links').classList.toggle('open');}
+let carruselPos=0;
+function getVisible(){if(window.innerWidth<=480)return 1;if(window.innerWidth<=768)return 2;if(window.innerWidth<=1024)return 3;return 4;}
+function moverCarrusel(dir){const track=document.getElementById('carrusel-track');const items=track.querySelectorAll('.carrusel-item');const max=items.length-getVisible();carruselPos=Math.max(0,Math.min(carruselPos+dir,max));const w=track.querySelector('.carrusel-item').offsetWidth+20;track.style.transform=`translateX(-${carruselPos*w}px)`;}
 window.addEventListener('resize',()=>{carruselPos=0;document.getElementById('carrusel-track').style.transform='translateX(0)';});
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.12});
 document.querySelectorAll('.como-card,.destacado-card,.fade-in').forEach(el=>obs.observe(el));
