@@ -43,8 +43,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .atributo-label { display:flex; align-items:center; gap:5px; font-size:12px; font-weight:500; color:var(--text-dark); }
 .atributo-tooltip { position:relative; display:inline-flex; align-items:center; cursor:help; }
 .atributo-tooltip-icon { width:14px; height:14px; border-radius:50%; background:rgba(160,98,45,0.15); color:var(--caramel); font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.atributo-tooltip-text { display:none; position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:var(--espresso); color:var(--cream); font-size:11px; font-weight:300; line-height:1.4; padding:8px 10px; border-radius:6px; white-space:nowrap; z-index:10; box-shadow:0 4px 12px rgba(0,0,0,0.2); pointer-events:none; }
-.atributo-tooltip-text::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); border:5px solid transparent; border-top-color:var(--espresso); }
+
+
 .atributo-tooltip:hover .atributo-tooltip-text { display:block; }
 .pdp-divider { border:none; border-top:1px solid rgba(106,58,31,0.1); margin:48px 0; }
 .carrusel-pdp-title { font-family:var(--font-serif); font-size:22px; font-weight:600; color:var(--espresso); margin-bottom:24px; }
@@ -150,9 +150,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="atributo-item">
             <div class="atributo-label">
               Intensidad
-              <div class="atributo-tooltip">
+              <div class="atributo-tooltip" data-tooltip="intensidad">
                 <div class="atributo-tooltip-icon">?</div>
-                <div class="atributo-tooltip-text">Potencia general del sabor en boca.<br>A más granos, más contundente.</div>
+                <div class="atributo-tooltip-text"></div>
               </div>
             </div>
             <div class="granos">
@@ -168,9 +168,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="atributo-item">
             <div class="atributo-label">
               Acidez
-              <div class="atributo-tooltip">
+              <div class="atributo-tooltip" data-tooltip="acidez">
                 <div class="atributo-tooltip-icon">?</div>
-                <div class="atributo-tooltip-text">Viveza y frescura en el paladar.<br>No es agresividad, es carácter.</div>
+                <div class="atributo-tooltip-text"></div>
               </div>
             </div>
             <div class="granos">
@@ -186,9 +186,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="atributo-item">
             <div class="atributo-label">
               Cuerpo
-              <div class="atributo-tooltip">
+              <div class="atributo-tooltip" data-tooltip="cuerpo">
                 <div class="atributo-tooltip-icon">?</div>
-                <div class="atributo-tooltip-text">Textura y peso del café en boca.<br>De ligero y fluido a denso y aterciopelado.</div>
+                <div class="atributo-tooltip-text"></div>
               </div>
             </div>
             <div class="granos">
@@ -204,9 +204,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="atributo-item">
             <div class="atributo-label">
               Dulzura
-              <div class="atributo-tooltip">
+              <div class="atributo-tooltip" data-tooltip="dulzura">
                 <div class="atributo-tooltip-icon">?</div>
-                <div class="atributo-tooltip-text">Notas naturales de caramelo,<br>fruta o miel sin añadir azúcar.</div>
+                <div class="atributo-tooltip-text"></div>
               </div>
             </div>
             <div class="granos">
@@ -222,9 +222,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="atributo-item">
             <div class="atributo-label">
               Aroma
-              <div class="atributo-tooltip">
+              <div class="atributo-tooltip" data-tooltip="aroma">
                 <div class="atributo-tooltip-icon">?</div>
-                <div class="atributo-tooltip-text">Intensidad y complejidad de los<br>aromas en taza y en nariz.</div>
+                <div class="atributo-tooltip-text"></div>
               </div>
             </div>
             <div class="granos">
@@ -240,9 +240,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="atributo-item">
             <div class="atributo-label">
               Cafeína
-              <div class="atributo-tooltip">
+              <div class="atributo-tooltip" data-tooltip="cafeina">
                 <div class="atributo-tooltip-icon">?</div>
-                <div class="atributo-tooltip-text">Grano lleno = con cafeína<br>Grano vacío = descafeinado</div>
+                <div class="atributo-tooltip-text"></div>
               </div>
             </div>
             <div class="granos">
@@ -343,5 +343,6 @@ window.addEventListener('resize',()=>{
   });
 });
 </script>
+<script src="config.js"></script>
 </body>
 </html>
