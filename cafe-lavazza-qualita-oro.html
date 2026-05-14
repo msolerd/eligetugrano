@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Lavazza Qualità Oro — El estándar de oro del café en grano. 100% arábica, tueste medio, versátil y equilibrado.">
+<title>Lavazza Qualità Oro — EligeTuGrano</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K8HG73FW');</script>
+<!-- End Google Tag Manager -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
+<style>
+/* ── SVG GRANOS ── */
+.granos { display:flex; gap:4px; align-items:center; }
+
+/* ── PDP ── */
+.pdp-wrap { max-width:1100px; margin:0 auto; padding:40px 24px 96px; }
+.pdp-breadcrumb { font-size:12px; color:var(--text-soft); margin-bottom:28px; display:flex; align-items:center; gap:8px; }
+.pdp-breadcrumb a { color:var(--text-soft); text-decoration:none; transition:color 0.2s; }
+.pdp-breadcrumb a:hover { color:var(--caramel); }
+.pdp-nombre { font-family:var(--font-serif); font-size:clamp(28px,4vw,42px); font-weight:700; color:var(--espresso); line-height:1.1; margin-bottom:6px; }
+.pdp-marca { font-size:14px; color:var(--caramel); font-weight:500; letter-spacing:0.5px; text-transform:uppercase; margin-bottom:32px; }
+.pdp-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; margin-bottom:56px; }
+.pdp-img-wrap { background:linear-gradient(135deg,#2C1810,#5C3317); border-radius:var(--radius-lg); aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:120px; position:relative; overflow:hidden; }
+.pdp-img-wrap::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 30% 30%,rgba(200,137,42,0.15),transparent 60%); }
+.pdp-img-badge { position:absolute; top:16px; left:16px; background:var(--honey); color:var(--espresso); font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:5px 12px; border-radius:4px; }
+.pdp-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:16px; }
+.pdp-right { display:flex; flex-direction:column; gap:20px; }
+.pdp-desc { font-size:15px; color:var(--text-mid); line-height:1.8; font-weight:300; text-align:justify; }
+.btn-amazon-pdp { display:flex; align-items:center; justify-content:center; gap:10px; background:#FF9900; color:#111; border:none; border-radius:var(--radius-sm); padding:15px 24px; font-size:15px; font-weight:600; font-family:var(--font-sans); cursor:pointer; transition:all 0.2s; width:100%; text-decoration:none; }
+.btn-amazon-pdp:hover { background:#e68900; transform:translateY(-2px); box-shadow:0 6px 20px rgba(255,153,0,0.3); }
+.btn-amazon-pdp-note { font-size:11px; color:var(--text-soft); text-align:center; margin-top:-12px; }
+.atributos-titulo { font-family:var(--font-serif); font-size:16px; font-weight:600; color:var(--espresso); margin-bottom:16px; }
+.atributos-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.atributo-item { display:flex; flex-direction:column; gap:6px; }
+.atributo-label { display:flex; align-items:center; gap:5px; font-size:12px; font-weight:500; color:var(--text-dark); }
+.atributo-tooltip { position:relative; display:inline-flex; align-items:center; cursor:help; }
+.atributo-tooltip-icon { width:14px; height:14px; border-radius:50%; background:rgba(160,98,45,0.15); color:var(--caramel); font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.atributo-tooltip-text { display:none; position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:var(--espresso); color:var(--cream); font-size:11px; font-weight:300; line-height:1.4; padding:8px 10px; border-radius:6px; white-space:nowrap; z-index:10; box-shadow:0 4px 12px rgba(0,0,0,0.2); pointer-events:none; }
+.atributo-tooltip-text::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); border:5px solid transparent; border-top-color:var(--espresso); }
+.atributo-tooltip:hover .atributo-tooltip-text { display:block; }
+.pdp-divider { border:none; border-top:1px solid rgba(106,58,31,0.1); margin:48px 0; }
+.carrusel-pdp-title { font-family:var(--font-serif); font-size:22px; font-weight:600; color:var(--espresso); margin-bottom:24px; }
+.carrusel-pdp-title em { font-style:italic; color:var(--caramel); }
+.carrusel-pdp-wrap { position:relative; margin-bottom:48px; }
+.carrusel-pdp-outer { overflow:hidden; }
+.carrusel-pdp-track { display:flex; gap:16px; transition:transform 0.4s cubic-bezier(0.4,0,0.2,1); }
+.carrusel-pdp-item { flex:0 0 calc(25% - 12px); background:white; border-radius:var(--radius-md); border:1px solid rgba(106,58,31,0.08); overflow:hidden; cursor:pointer; transition:all 0.25s; text-decoration:none; display:block; }
+.carrusel-pdp-item:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(106,58,31,0.12); }
+.carrusel-pdp-img { height:110px; display:flex; align-items:center; justify-content:center; font-size:32px; }
+.carrusel-pdp-body { padding:12px; }
+.carrusel-pdp-brand { font-size:10px; color:var(--text-soft); font-weight:500; letter-spacing:0.5px; text-transform:uppercase; margin-bottom:2px; }
+.carrusel-pdp-name { font-family:var(--font-serif); font-size:13px; font-weight:600; color:var(--espresso); line-height:1.3; }
+.carrusel-pdp-btn { position:absolute; top:50%; transform:translateY(-50%); width:36px; height:36px; border-radius:50%; background:white; border:1px solid rgba(106,58,31,0.15); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s; font-size:16px; color:var(--bark); box-shadow:0 2px 8px rgba(0,0,0,0.08); z-index:10; }
+.carrusel-pdp-btn:hover { background:var(--honey); color:var(--espresso); border-color:var(--honey); }
+.carrusel-pdp-btn.prev { left:-18px; }
+.carrusel-pdp-btn.next { right:-18px; }
+.bg-a { background:linear-gradient(135deg,#3D1F0D,#6B3A1F); }
+.bg-b { background:linear-gradient(135deg,#1E0F08,#3D1F0D); }
+.bg-c { background:linear-gradient(135deg,#5C3317,#A0622D); }
+.bg-d { background:linear-gradient(135deg,#2C1810,#5C3317); }
+@media(max-width:768px){ .pdp-grid{grid-template-columns:1fr;gap:32px;} .atributos-grid{grid-template-columns:repeat(2,1fr);} .carrusel-pdp-item{flex:0 0 calc(50% - 8px);} }
+@media(max-width:480px){ .carrusel-pdp-item{flex:0 0 100%;} }
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8HG73FW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- SVG DEFS reutilizables -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="grano-lleno" viewBox="0 0 36 44">
+      <path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="#A0622D"/>
+      <path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="none" stroke="#7A4218" stroke-width="1"/>
+      <path d="M18 5 C15 10, 13 14, 14 20 C15 26, 17 31, 18 40" stroke="#7A4218" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M10 10 C9 13, 8 16, 9 19" stroke="#C8883A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+    </symbol>
+    <symbol id="grano-vacio" viewBox="0 0 36 44">
+      <path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="none" stroke="#C8892A" stroke-width="1.5" opacity="0.25"/>
+      <path d="M18 5 C15 10, 13 14, 14 20 C15 26, 17 31, 18 40" stroke="#C8892A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.25"/>
+    </symbol>
+  </defs>
+</svg>
+
+<nav>
+  <a class="nav-logo" href="index.html">elige<span>tu</span>grano</a>
+  <div class="nav-links" id="nav-links">
+    <a href="configurador.html">Configurador</a>
+    <a href="productos.html" class="active">Productos</a>
+    <a href="index.html#contacto">Contacto</a>
+  </div>
+  <button class="nav-burger" onclick="toggleNav()">☰</button>
+</nav>
+
+<div style="height:64px"></div>
+
+<div class="pdp-wrap">
+
+  <div class="pdp-breadcrumb">
+    <a href="index.html">Inicio</a>
+    <span>›</span>
+    <a href="productos.html">Productos</a>
+    <span>›</span>
+    <span style="color:var(--text-dark)">Qualità Oro</span>
+  </div>
+
+  <div class="pdp-nombre">Qualità Oro</div>
+  <div class="pdp-marca">Lavazza</div>
+
+  <div class="pdp-grid">
+
+    <!-- IMAGEN -->
+    <div>
+      <div class="pdp-img-wrap">
+        ☕
+        <span class="pdp-img-badge">⭐ Top ventas</span>
+      </div>
+      <div class="pdp-tags">
+        <span class="tag">100% Arábica</span>
+        <span class="tag">Tueste medio</span>
+        <span class="tag">Muy versátil</span>
+        <span class="tag">Gran superficie</span>
+      </div>
+    </div>
+
+    <!-- DERECHA -->
+    <div class="pdp-right">
+
+      <p class="pdp-desc">El estándar de oro del café en grano. 100% arábica con notas de frutos secos y un acabado floral delicado. Equilibrado, aromático y absolutamente infalible. El más vendido de Europa por algo: combina una acidez amable, un cuerpo redondo y una versatilidad que funciona tanto en espresso como en cualquier preparación con leche. Si nunca has probado un arábica puro de calidad, este es el punto de partida perfecto.</p>
+
+      <a href="https://www.amazon.es/" target="_blank" class="btn-amazon-pdp">🛒 Comprar en Amazon</a>
+      <p class="btn-amazon-pdp-note">* Enlace de afiliado. Sin coste adicional para ti.</p>
+
+      <!-- ATRIBUTOS -->
+      <div>
+        <div class="atributos-titulo">Perfil de sabor</div>
+        <div class="atributos-grid">
+
+          <!-- Intensidad: 3/5 -->
+          <div class="atributo-item">
+            <div class="atributo-label">
+              Intensidad
+              <div class="atributo-tooltip">
+                <div class="atributo-tooltip-icon">?</div>
+                <div class="atributo-tooltip-text">Potencia general del sabor en boca.<br>A más granos, más contundente.</div>
+              </div>
+            </div>
+            <div class="granos">
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-vacio"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-vacio"/></svg>
+            </div>
+          </div>
+
+          <!-- Acidez: 4/5 -->
+          <div class="atributo-item">
+            <div class="atributo-label">
+              Acidez
+              <div class="atributo-tooltip">
+                <div class="atributo-tooltip-icon">?</div>
+                <div class="atributo-tooltip-text">Viveza y frescura en el paladar.<br>No es agresividad, es carácter.</div>
+              </div>
+            </div>
+            <div class="granos">
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-vacio"/></svg>
+            </div>
+          </div>
+
+          <!-- Cuerpo: 2/5 -->
+          <div class="atributo-item">
+            <div class="atributo-label">
+              Cuerpo
+              <div class="atributo-tooltip">
+                <div class="atributo-tooltip-icon">?</div>
+                <div class="atributo-tooltip-text">Textura y peso del café en boca.<br>De ligero y fluido a denso y aterciopelado.</div>
+              </div>
+            </div>
+            <div class="granos">
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-vacio"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-vacio"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-vacio"/></svg>
+            </div>
+          </div>
+
+          <!-- Dulzura: 4/5 -->
+          <div class="atributo-item">
+            <div class="atributo-label">
+              Dulzura
+              <div class="atributo-tooltip">
+                <div class="atributo-tooltip-icon">?</div>
+                <div class="atributo-tooltip-text">Notas naturales de caramelo,<br>fruta o miel sin añadir azúcar.</div>
+              </div>
+            </div>
+            <div class="granos">
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-vacio"/></svg>
+            </div>
+          </div>
+
+          <!-- Aroma: 5/5 -->
+          <div class="atributo-item">
+            <div class="atributo-label">
+              Aroma
+              <div class="atributo-tooltip">
+                <div class="atributo-tooltip-icon">?</div>
+                <div class="atributo-tooltip-text">Intensidad y complejidad de los<br>aromas en taza y en nariz.</div>
+              </div>
+            </div>
+            <div class="granos">
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+            </div>
+          </div>
+
+          <!-- Cafeína: binario — lleno = con cafeína -->
+          <div class="atributo-item">
+            <div class="atributo-label">
+              Cafeína
+              <div class="atributo-tooltip">
+                <div class="atributo-tooltip-icon">?</div>
+                <div class="atributo-tooltip-text">Grano lleno = con cafeína<br>Grano vacío = descafeinado</div>
+              </div>
+            </div>
+            <div class="granos">
+              <svg width="20" height="25" viewBox="0 0 36 44"><use href="#grano-lleno"/></svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARRUSEL 1: Mismo perfil -->
+  <hr class="pdp-divider">
+  <div class="carrusel-pdp-wrap">
+    <div class="carrusel-pdp-title">Otros con perfil <em>clásico</em></div>
+    <div style="position:relative">
+      <button class="carrusel-pdp-btn prev" onclick="mover('c1',-1)">‹</button>
+      <div class="carrusel-pdp-outer">
+        <div class="carrusel-pdp-track" id="c1">
+          <a href="cafe-pellini-top.html" class="carrusel-pdp-item">
+            <div class="carrusel-pdp-img bg-a">☕</div>
+            <div class="carrusel-pdp-body"><div class="carrusel-pdp-brand">Pellini</div><div class="carrusel-pdp-name">Pellini Top</div></div>
+          </a>
+          <a href="cafe-lavazza-qualita-rossa.html" class="carrusel-pdp-item">
+            <div class="carrusel-pdp-img bg-b">☕</div>
+            <div class="carrusel-pdp-body"><div class="carrusel-pdp-brand">Lavazza</div><div class="carrusel-pdp-name">Qualità Rossa</div></div>
+          </a>
+          <a href="cafe-marcilla-gran-aroma.html" class="carrusel-pdp-item">
+            <div class="carrusel-pdp-img bg-c">☕</div>
+            <div class="carrusel-pdp-body"><div class="carrusel-pdp-brand">Marcilla</div><div class="carrusel-pdp-name">Gran Aroma</div></div>
+          </a>
+          <a href="cafe-consuelo-gran-crema.html" class="carrusel-pdp-item">
+            <div class="carrusel-pdp-img bg-d">☕</div>
+            <div class="carrusel-pdp-body"><div class="carrusel-pdp-brand">Consuelo</div><div class="carrusel-pdp-name">Gran Crema</div></div>
+          </a>
+        </div>
+      </div>
+      <button class="carrusel-pdp-btn next" onclick="mover('c1',1)">›</button>
+    </div>
+  </div>
+
+  <!-- CARRUSEL 2: Misma marca -->
+  <hr class="pdp-divider">
+  <div class="carrusel-pdp-wrap">
+    <div class="carrusel-pdp-title">Otros cafés de <em>Lavazza</em></div>
+    <div style="position:relative">
+      <button class="carrusel-pdp-btn prev" onclick="mover('c2',-1)">‹</button>
+      <div class="carrusel-pdp-outer">
+        <div class="carrusel-pdp-track" id="c2">
+          <a href="cafe-lavazza-qualita-rossa.html" class="carrusel-pdp-item">
+            <div class="carrusel-pdp-img bg-a">☕</div>
+            <div class="carrusel-pdp-body"><div class="carrusel-pdp-brand">Lavazza</div><div class="carrusel-pdp-name">Qualità Rossa</div></div>
+          </a>
+          <a href="cafe-lavazza-dek.html" class="carrusel-pdp-item">
+            <div class="carrusel-pdp-img bg-b">🍃</div>
+            <div class="carrusel-pdp-body"><div class="carrusel-pdp-brand">Lavazza</div><div class="carrusel-pdp-name">Dek</div></div>
+          </a>
+        </div>
+      </div>
+      <button class="carrusel-pdp-btn next" onclick="mover('c2',1)">›</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">elige<span>tu</span>grano</div>
+    <div class="footer-links">
+      <a>Política de privacidad</a>
+      <a>Aviso legal</a>
+      <a>Cookies</a>
+      <a>Afiliados</a>
+    </div>
+    <div class="footer-copy">© 2025 EligeTuGrano</div>
+  </div>
+  <div class="affil-note">* Esta web contiene enlaces de afiliado de Amazon. Si compras a través de ellos recibimos una pequeña comisión sin coste adicional para ti. Los resultados del configurador son editorialmente independientes.</div>
+</footer>
+
+<script>
+function toggleNav(){ document.getElementById('nav-links').classList.toggle('open'); }
+const positions = { c1:0, c2:0 };
+function getVisible(){ if(window.innerWidth<=480)return 1; if(window.innerWidth<=768)return 2; return 4; }
+function mover(id,dir){
+  const track=document.getElementById(id);
+  const items=track.querySelectorAll('.carrusel-pdp-item');
+  const max=Math.max(0,items.length-getVisible());
+  positions[id]=Math.max(0,Math.min(positions[id]+dir,max));
+  const w=track.querySelector('.carrusel-pdp-item').offsetWidth+16;
+  track.style.transform=`translateX(-${positions[id]*w}px)`;
+}
+window.addEventListener('resize',()=>{
+  Object.keys(positions).forEach(id=>{
+    positions[id]=0;
+    const t=document.getElementById(id);
+    if(t)t.style.transform='translateX(0)';
+  });
+});
+</script>
+</body>
+</html>
