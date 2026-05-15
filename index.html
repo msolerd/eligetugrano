@@ -246,7 +246,9 @@ function toggleNav(){document.getElementById('nav-links').classList.toggle('open
 let carruselPos=0;
 function getVisible(){if(window.innerWidth<=480)return 1;if(window.innerWidth<=768)return 2;if(window.innerWidth<=1024)return 3;return 4;}
 function moverCarrusel(dir){const track=document.getElementById('carrusel-track');const items=track.querySelectorAll('.carrusel-item');const max=items.length-getVisible();carruselPos=Math.max(0,Math.min(carruselPos+dir,max));const w=track.querySelector('.carrusel-item').offsetWidth+20;track.style.transform=`translateX(-${carruselPos*w}px)`;}
-window.addEventListener('resize',()=>{carruselPos=0;document.getElementById('carrusel-track').style.transform='translateX(0)';});
+function actualizarFlechas(){const track=document.getElementById('carrusel-track');if(!track)return;const items=track.querySelectorAll('.carrusel-item');const vis=getVisible();const mostrar=items.length>vis;document.querySelectorAll('.carrusel-btn').forEach(b=>b.style.display=mostrar?'flex':'none');}
+window.addEventListener('resize',()=>{carruselPos=0;document.getElementById('carrusel-track').style.transform='translateX(0)';actualizarFlechas();});
+document.addEventListener('DOMContentLoaded',actualizarFlechas);
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.12});
 document.querySelectorAll('.como-card,.destacado-card,.fade-in').forEach(el=>obs.observe(el));
 document.querySelectorAll('.como-card').forEach((c,i)=>c.style.transitionDelay=`${i*0.12}s`);
