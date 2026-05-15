@@ -337,13 +337,25 @@ function mover(id,dir){
   const w=track.querySelector('.carrusel-pdp-item').offsetWidth+16;
   track.style.transform=`translateX(-${positions[id]*w}px)`;
 }
+function actualizarFlechasPDP(){
+  ['c1','c2'].forEach(id=>{
+    const track=document.getElementById(id);
+    if(!track)return;
+    const items=track.querySelectorAll('.carrusel-pdp-item');
+    const mostrar=items.length>getVisible();
+    const wrap=track.closest('.carrusel-pdp-outer').parentElement;
+    wrap.querySelectorAll('.carrusel-pdp-btn').forEach(b=>b.style.display=mostrar?'flex':'none');
+  });
+}
 window.addEventListener('resize',()=>{
   Object.keys(positions).forEach(id=>{
     positions[id]=0;
     const t=document.getElementById(id);
     if(t)t.style.transform='translateX(0)';
   });
+  actualizarFlechasPDP();
 });
+document.addEventListener('DOMContentLoaded', actualizarFlechasPDP);
 </script>
 <script src="config.js"></script>
 </body>
