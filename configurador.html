@@ -59,44 +59,103 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 /* RESULTADOS */
 .result-screen{display:none;animation:fadeUp 0.5s ease;}
 .result-screen.active{display:block;}
-.result-header{text-align:center;padding:28px 20px 22px;background:linear-gradient(160deg,var(--espresso),var(--roast));margin:0 -20px 24px;border-radius:12px 12px 0 0;}
-.result-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--latte);margin-bottom:8px;}
-.result-title{font-family:var(--font-serif);font-size:18px;color:var(--cream);font-weight:500;line-height:1.3;margin-bottom:6px;}
-.result-profile{display:inline-block;margin-top:8px;background:rgba(255,255,255,0.1);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--latte);}
-.podium-winner{background:white;border-radius:14px;padding:20px;margin-bottom:10px;border:2px solid var(--honey);position:relative;overflow:hidden;}
-.podium-winner::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--honey),var(--caramel));}
-.podium-rank{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
-.rank-gold{color:var(--honey);}
-.rank-silver{color:#888;}
-.rank-bronze{color:var(--caramel);}
-.afinidad-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-.afinidad-pct{font-family:var(--font-serif);font-size:32px;font-weight:700;color:var(--honey);line-height:1;}
-.afinidad-info{flex:1;}
-.afinidad-label{font-size:11px;color:var(--caramel);line-height:1.4;}
-.afinidad-bar-wrap{height:4px;background:rgba(160,82,45,0.12);border-radius:2px;margin-top:6px;overflow:hidden;}
-.afinidad-bar{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--honey),var(--caramel));transition:width 1.2s cubic-bezier(0.4,0,0.2,1);}
-.coffee-name{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--espresso);margin-bottom:2px;}
-.coffee-brand{font-size:12px;color:var(--caramel);font-weight:500;margin-bottom:10px;}
-.coffee-why{background:var(--cream);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--bark);margin-bottom:12px;line-height:1.5;border-left:3px solid var(--honey);}
-.coffee-desc{font-size:13px;color:#5a4a3a;line-height:1.6;margin-bottom:12px;font-weight:300;}
-.tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
-.coffee-footer{display:flex;align-items:center;justify-content:flex-end;padding-top:12px;border-top:1px solid rgba(92,51,23,0.08);}
-.podium-alt{background:white;border-radius:12px;padding:16px;margin-bottom:8px;border:1px solid rgba(92,51,23,0.1);}
-.alt-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;}
-.alt-left{flex:1;}
-.alt-rank-name{display:flex;align-items:center;gap:10px;margin-bottom:3px;}
-.alt-pct{font-family:var(--font-serif);font-size:18px;font-weight:700;color:var(--caramel);}
-.alt-name{font-family:var(--font-serif);font-size:15px;font-weight:500;color:var(--espresso);}
-.alt-brand{font-size:11px;color:var(--caramel);margin-bottom:6px;}
-.alt-bar-wrap{height:3px;background:rgba(160,82,45,0.1);border-radius:2px;margin-bottom:8px;overflow:hidden;}
-.alt-bar{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--caramel),var(--latte));}
-.alt-desc{font-size:12px;color:#6a5a4a;line-height:1.5;font-weight:300;}
-.alt-why{font-size:11px;color:var(--caramel);margin-top:5px;font-style:italic;}
-.restart-row{text-align:center;margin-top:20px;}
+
+/* Header resultado */
+.res-header{background:linear-gradient(160deg,var(--espresso),var(--roast));padding:24px 20px 28px;margin:0 -20px;text-align:center;}
+.res-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--latte);margin-bottom:6px;}
+.res-profile{display:inline-block;background:rgba(255,255,255,0.1);border-radius:20px;padding:4px 14px;font-size:12px;color:var(--latte);margin-bottom:16px;}
+.res-section-label{font-family:var(--font-serif);font-size:12px;font-weight:600;color:rgba(242,228,200,0.45);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;}
+
+/* Pódium */
+.podium-wrap{display:flex;align-items:flex-end;justify-content:center;gap:8px;padding:0 8px;}
+.p-col{display:flex;flex-direction:column;align-items:center;}
+.p-col.first{width:136px;z-index:2;}
+.p-col.second,.p-col.third{width:110px;}
+.p-card{background:white;width:100%;border-radius:10px 10px 0 0;padding:11px 8px 10px;text-align:center;border:2px solid transparent;display:flex;flex-direction:column;align-items:center;gap:2px;}
+.p-card.gold{border-color:var(--honey);}
+.p-card.silver{border-color:#C0C0C0;}
+.p-card.bronze{border-color:#CD7F32;}
+.p-emoji{font-size:22px;line-height:1;margin-bottom:3px;}
+.p-brand{font-size:8px;color:var(--caramel);font-weight:500;letter-spacing:0.5px;text-transform:uppercase;}
+.p-name{font-family:var(--font-serif);font-size:10px;font-weight:600;color:var(--espresso);line-height:1.2;margin:2px 0 5px;}
+.p-pct{font-family:var(--font-serif);font-size:18px;font-weight:700;line-height:1;}
+.p-card.gold .p-pct{color:var(--honey);}
+.p-card.silver .p-pct{color:#999;}
+.p-card.bronze .p-pct{color:#CD7F32;}
+.p-pct-label{font-size:8px;color:var(--caramel);margin-bottom:7px;}
+.p-btns{display:flex;gap:3px;width:100%;}
+.p-btn-ver{flex:1;background:none;border:1px solid rgba(92,51,23,0.2);border-radius:4px;padding:5px 0;font-size:9px;font-weight:500;color:var(--bark);cursor:pointer;font-family:var(--font-sans);}
+.p-btn-cart{background:#FF9900;color:#111;border:none;border-radius:4px;padding:5px 7px;font-size:11px;cursor:pointer;}
+.p-base{width:100%;display:flex;align-items:center;justify-content:center;}
+.p-base.gold{background:var(--honey);height:64px;}
+.p-base.silver{background:#C0C0C0;height:44px;}
+.p-base.bronze{background:#CD7F32;height:32px;}
+.p-base-num{font-family:var(--font-serif);font-size:24px;font-weight:700;color:white;opacity:0.9;}
+
+/* Desglose */
+.desglose-wrap{padding:20px 0 0;}
+.desglose-title{font-family:var(--font-serif);font-size:20px;font-weight:700;color:var(--espresso);margin-bottom:14px;}
+.desglose-title em{font-style:italic;color:var(--caramel);}
+
+/* Result cards */
+.result-card{background:white;border-radius:14px;border:1px solid rgba(106,58,31,0.1);overflow:hidden;margin-bottom:12px;}
+.result-card.winner{border:2px solid var(--honey);}
+.result-card.second{border-left:4px solid #C0C0C0;}
+.result-card.third{border-left:4px solid #CD7F32;}
+.rc-top{display:flex;gap:12px;padding:14px 14px 12px;border-bottom:1px solid rgba(106,58,31,0.07);}
+.rc-img{width:72px;height:72px;flex-shrink:0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:30px;}
+.rc-info{flex:1;min-width:0;}
+.rc-rank{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px;}
+.rc-rank.gold{color:var(--honey);}
+.rc-rank.silver{color:#999;}
+.rc-rank.bronze{color:#CD7F32;}
+.rc-brand{font-size:10px;color:var(--caramel);font-weight:500;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:1px;}
+.rc-name{font-family:var(--font-serif);font-size:16px;font-weight:700;color:var(--espresso);line-height:1.2;margin-bottom:3px;}
+.rc-pct{font-family:var(--font-serif);font-size:12px;font-weight:600;color:var(--caramel);}
+.rc-body{padding:12px 14px;}
+.rc-why{background:var(--cream);border-radius:7px;padding:8px 11px;font-size:11px;color:var(--bark);margin-bottom:9px;line-height:1.5;border-left:3px solid var(--honey);}
+.rc-desc{font-size:12px;color:#5a4a3a;line-height:1.6;font-weight:300;margin-bottom:11px;}
+.rc-actions{display:flex;gap:7px;margin-bottom:14px;}
+.btn-ficha{background:none;border:1.5px solid rgba(92,51,23,0.2);border-radius:7px;padding:9px 12px;font-size:12px;font-weight:500;color:var(--bark);cursor:pointer;font-family:var(--font-sans);}
+.btn-amazon{background:#FF9900;color:#111;border:none;border-radius:7px;padding:9px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font-sans);flex:1;}
+
+/* Carrusel marca */
+.marca-car-title{font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--caramel);margin-bottom:9px;border-top:1px solid rgba(106,58,31,0.07);padding-top:11px;}
+.marca-car-track{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}
+.marca-car-track::-webkit-scrollbar{display:none;}
+.marca-item{flex:0 0 100px;background:var(--foam);border-radius:9px;border:1px solid rgba(106,58,31,0.1);padding:9px 7px;text-align:center;}
+.marca-item-img{width:40px;height:40px;border-radius:7px;margin:0 auto 5px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.marca-item-name{font-family:var(--font-serif);font-size:10px;font-weight:600;color:var(--espresso);line-height:1.2;margin-bottom:3px;}
+.marca-item-pct{font-family:var(--font-serif);font-size:12px;font-weight:700;color:var(--caramel);margin-bottom:6px;}
+.marca-item-btns{display:flex;gap:3px;justify-content:center;}
+.btn-ver{background:none;border:1px solid rgba(92,51,23,0.2);border-radius:4px;padding:4px 7px;font-size:9px;font-weight:500;color:var(--bark);cursor:pointer;font-family:var(--font-sans);}
+.btn-cart{background:#FF9900;color:#111;border:none;border-radius:4px;padding:4px 6px;font-size:10px;cursor:pointer;}
+
+/* Bloque extra */
+.extra-block{background:white;border-radius:14px;border:1px solid rgba(106,58,31,0.1);padding:14px;margin-bottom:12px;}
+.extra-title{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--espresso);margin-bottom:3px;}
+.extra-title em{font-style:italic;color:var(--caramel);}
+.extra-sub{font-size:11px;color:var(--caramel);margin-bottom:12px;font-weight:300;}
+.extra-track{display:flex;gap:9px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}
+.extra-track::-webkit-scrollbar{display:none;}
+.extra-item{flex:0 0 108px;background:var(--foam);border-radius:10px;border:1px solid rgba(106,58,31,0.1);padding:10px 8px;text-align:center;}
+.extra-item-img{width:44px;height:44px;border-radius:9px;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.extra-item-brand{font-size:8px;color:var(--caramel);font-weight:500;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:1px;}
+.extra-item-name{font-family:var(--font-serif);font-size:11px;font-weight:600;color:var(--espresso);line-height:1.2;margin-bottom:3px;}
+.extra-item-pct{font-family:var(--font-serif);font-size:13px;font-weight:700;color:var(--caramel);margin-bottom:7px;}
+.extra-item-btns{display:flex;gap:3px;justify-content:center;}
+
+
+.bg-a{background:linear-gradient(135deg,#2C1810,#5C3317);}
+.bg-b{background:linear-gradient(135deg,#1E0F08,#3D1F0D);}
+.bg-c{background:linear-gradient(135deg,#5C3317,#A0622D);}
+.bg-d{background:linear-gradient(135deg,#3D1F0D,#7A4020);}
+.bg-e{background:linear-gradient(135deg,#4A2010,#8B4A1A);}
+.bg-f{background:linear-gradient(135deg,#3A1A08,#704020);}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;}
+.restart-row{text-align:center;margin-top:16px;}
 .btn-restart{background:none;border:1.5px solid rgba(92,51,23,0.2);border-radius:10px;padding:11px 24px;font-size:13px;font-weight:500;color:var(--bark);cursor:pointer;font-family:var(--font-sans);transition:all 0.2s;}
 .btn-restart:hover{background:var(--cream);border-color:var(--bark);}
-.btn-ver-ficha{display:inline-flex;align-items:center;gap:6px;background:none;border:1.5px solid rgba(92,51,23,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--bark);cursor:pointer;font-family:var(--font-sans);transition:all 0.2s;text-decoration:none;margin-right:8px;}
-.btn-ver-ficha:hover{background:var(--cream);border-color:var(--bark);}
 @media(max-width:480px){.options-grid{grid-template-columns:1fr;}.options-grid.cols3{grid-template-columns:1fr;}}
 </style>
 </head>
@@ -266,14 +325,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- RESULTADOS -->
   <div class="result-screen" id="results">
-    <div class="result-header">
-      <div class="result-label">Tu resultado personalizado</div>
-      <div class="result-title" id="result-title"></div>
-      <div class="result-profile" id="result-profile"></div>
+    <div class="res-header">
+      <div class="res-label">Tu resultado personalizado</div>
+      <div class="res-profile" id="result-profile"></div>
+      <div class="res-section-label">Resumen de tus resultados</div>
+      <div id="podium-container"></div>
     </div>
-    <div id="podium-container"></div>
-    <div class="restart-row">
-      <button class="btn-restart" onclick="restart()">↩ Repetir el test</button>
+    <div class="desglose-wrap">
+      <div class="desglose-title">Desglose de <em>tus resultados</em></div>
+      <div id="desglose-container"></div>
+      <div id="extra-container"></div>
+      <div class="restart-row">
+        <button class="btn-restart" onclick="restart()">↩ Repetir el test</button>
+      </div>
     </div>
   </div>
 </div>
@@ -373,55 +437,159 @@ function getProfile(){
 function buildWhy(c){
   const m={sabor:{clasico:'paladar clásico y dulce',exotico:'paladar exótico y vibrante',equilibrado:'paladar equilibrado'},acidez:{suave:'acidez redonda y suave',brillante:'acidez brillante y refrescante',moderada:'acidez moderada'},cuerpo:{cremoso:'cuerpo cremoso y denso',ligero:'textura ligera y elegante',equilibrado:'cuerpo equilibrado'},leche:{solo:'tomarlo solo',conleche:'tomarlo con leche'},cafeina:{alta:'cafeína alta',normal:'cafeína equilibrada',desca:'sin cafeína'}};
   const r=[];
-  ['sabor','acidez','cuerpo','leche','cafeina'].forEach(k=>{if((c.scores[k][answers[k]]||0)*WEIGHTS[k]>=6)r.push(m[k][answers[k]]);});
+  ['sabor','acidez','cuerpo','leche','cafeina'].forEach(k=>{if((c.scores[k][answers[k]]||0)*WEIGHTS[k]>=12)r.push(m[k][answers[k]]);});
   return r.length?'✓ '+r.join(' · '):'✓ Buen encaje con tu perfil';
 }
+
+function getBgClass(i){
+  const bgs=['bg-a','bg-b','bg-c','bg-d','bg-e','bg-f'];
+  return bgs[i%bgs.length];
+}
+
 function showResults(){
   document.getElementById('progress').style.width='100%';
   for(let i=1;i<=TOTAL;i++)document.getElementById('dot-'+i).className='pdot done';
   document.querySelector('.step.active').classList.remove('active');
-  const ranked=rankCoffees();
-  document.getElementById('result-title').textContent=ranked[0].name+' · '+ranked[0].brand;
-  document.getElementById('result-profile').textContent=getProfile();
-  const medals=['🥇','🥈','🥉'];
-  const rl=['Tu café ideal','Segunda opción','Tercera opción'];
-  const rc=['rank-gold','rank-silver','rank-bronze'];
-  let html='';
-  const w=ranked[0];
-  html+=`<div class="podium-winner">
-    <div class="podium-rank ${rc[0]}">${medals[0]} ${rl[0]}${w.sponsored?'<span class="sponsored-badge">Destacado</span>':''}</div>
-    <div class="afinidad-row">
-      <div class="afinidad-pct">${w.pct}%</div>
-      <div class="afinidad-info"><div class="afinidad-label">de afinidad con tu perfil</div><div class="afinidad-bar-wrap"><div class="afinidad-bar" style="width:${w.pct}%"></div></div></div>
-    </div>
-    <div class="coffee-name">${w.name}</div>
-    <div class="coffee-brand">${w.brand}</div>
-    <div class="coffee-why"><strong>Por qué te encajará:</strong> ${buildWhy(w)}</div>
-    <div class="coffee-desc">${w.desc}</div>
-    <div class="tags">${w.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-    <div class="coffee-footer">
-      <a href="${w.url}" class="btn-ver-ficha">Ver ficha →</a>
-      <a href="${w.amazon}" target="_blank"><button class="btn-amazon">🛒 Ver en Amazon</button></a>
-    </div>
-  </div>`;
-  for(let i=1;i<=2;i++){
-    const c=ranked[i];if(!c)continue;
-    html+=`<div class="podium-alt">
-      <div class="alt-top">
-        <div class="alt-left">
-          <div class="alt-rank-name"><div class="podium-rank ${rc[i]}" style="margin:0">${medals[i]} ${rl[i]}</div><div class="alt-pct">${c.pct}%</div></div>
-          <div class="alt-bar-wrap"><div class="alt-bar" style="width:${c.pct}%"></div></div>
-          <div class="alt-name">${c.name}</div>
-          <div class="alt-brand">${c.brand}</div>
-        </div>
-        <a href="${c.amazon}" target="_blank"><button class="btn-amazon-sm">🛒 Amazon</button></a>
-      </div>
-      <div class="alt-desc">${c.desc}</div>
-      <div class="alt-why">${buildWhy(c)}</div>
-      <div style="margin-top:8px"><a href="${c.url}" class="btn-ver-ficha">Ver ficha →</a></div>
-    </div>`;
+
+  // 1. Rank all coffees
+  const allRanked = rankCoffees();
+
+  // 2. Build podium (no repeated brands)
+  const podium = [];
+  const podiumBrands = new Set();
+  for(const cafe of allRanked){
+    if(podium.length >= 3) break;
+    if(!podiumBrands.has(cafe.brand)){
+      podium.push(cafe);
+      podiumBrands.add(cafe.brand);
+    }
   }
-  document.getElementById('podium-container').innerHTML=html;
+
+  // 3. Track shown coffees
+  const shown = new Set(podium.map(c=>c.name));
+
+  // 4. Build brand carousels (within -10% of their podium position)
+  const brandCarousels = podium.map(pos => {
+    const threshold = pos.pct - 10;
+    const others = allRanked.filter(c =>
+      c.brand === pos.brand &&
+      c.name !== pos.name &&
+      c.pct >= threshold &&
+      c.pct <= pos.pct
+    ).slice(0,4);
+    others.forEach(c => shown.add(c.name));
+    return others;
+  });
+
+  // 5. Build extra block (≥75%, not already shown)
+  const extra = allRanked.filter(c => c.pct >= 75 && !shown.has(c.name));
+
+  // Set profile
+  document.getElementById('result-profile').textContent = getProfile();
+
+  // ── RENDER PÓDIUM ──
+  const medals = ['🥇','🥈','🥉'];
+  const pClass = ['gold','silver','bronze'];
+  const pOrder = [1,0,2]; // visual: 2nd left, 1st center, 3rd right
+  let podiumHTML = '<div class="podium-wrap">';
+  for(const vi of pOrder){
+    const cafe = podium[vi];
+    if(!cafe) continue;
+    const colClass = vi===0?'first':vi===1?'second':'third';
+    podiumHTML += `
+      <div class="p-col ${colClass}">
+        <div class="p-card ${pClass[vi]}">
+          <div class="p-emoji">☕</div>
+          <div class="p-brand">${cafe.brand}</div>
+          <div class="p-name">${cafe.name}</div>
+          <div class="p-pct">${cafe.pct}%</div>
+          <div class="p-pct-label">afinidad</div>
+          <div class="p-btns">
+            <button class="p-btn-ver" onclick="location.href='${cafe.url}'">Ver</button>
+            <button class="p-btn-cart" onclick="window.open('${cafe.amazon}','_blank')">🛒</button>
+          </div>
+        </div>
+        <div class="p-base ${pClass[vi]}"><span class="p-base-num">${vi+1}</span></div>
+      </div>`;
+  }
+  podiumHTML += '</div>';
+  document.getElementById('podium-container').innerHTML = podiumHTML;
+
+  // ── RENDER DESGLOSE ──
+  const rl = ['Tu café ideal','Segunda opción','Tercera opción'];
+  const rcClass = ['gold','silver','bronze'];
+  let desgloseHTML = '';
+
+  podium.forEach((cafe, i) => {
+    const bgClass = getBgClass(i);
+    desgloseHTML += `
+    <div class="result-card ${i===0?'winner':i===1?'second':'third'}">
+      <div class="rc-top">
+        <div class="rc-img ${bgClass}">☕</div>
+        <div class="rc-info">
+          <div class="rc-rank ${rcClass[i]}">${medals[i]} ${rl[i]}</div>
+          <div class="rc-brand">${cafe.brand}</div>
+          <div class="rc-name">${cafe.name}</div>
+          <div class="rc-pct">${cafe.pct}% afinidad</div>
+        </div>
+      </div>
+      <div class="rc-body">
+        <div class="rc-why">${buildWhy(cafe)}</div>
+        <div class="rc-desc">${cafe.desc}</div>
+        <div class="rc-actions">
+          <button class="btn-ficha" onclick="location.href='${cafe.url}'">Ver ficha →</button>
+          <button class="btn-amazon" onclick="window.open('${cafe.amazon}','_blank')">🛒 Comprar en Amazon</button>
+        </div>`;
+
+    // Brand carousel
+    const carItems = brandCarousels[i];
+    if(carItems.length > 0){
+      desgloseHTML += `<div class="marca-car-title">Otros ${cafe.brand} que podrían gustarte</div>
+        <div class="marca-car-track">`;
+      carItems.forEach((item,j) => {
+        desgloseHTML += `
+          <div class="marca-item">
+            <div class="marca-item-img ${getBgClass(j)}">☕</div>
+            <div class="marca-item-name">${item.name}</div>
+            <div class="marca-item-pct">${item.pct}%</div>
+            <div class="marca-item-btns">
+              <button class="btn-ver" onclick="location.href='${item.url}'">Ver</button>
+              <button class="btn-cart" onclick="window.open('${item.amazon}','_blank')">🛒</button>
+            </div>
+          </div>`;
+      });
+      desgloseHTML += '</div>';
+    }
+
+    desgloseHTML += '</div></div>';
+  });
+
+  document.getElementById('desglose-container').innerHTML = desgloseHTML;
+
+  // ── RENDER BLOQUE EXTRA ──
+  let extraHTML = '';
+  if(extra.length > 0){
+    extraHTML = `
+    <div class="extra-block">
+      <div class="extra-title">Otros cafés que <em>también podrían gustarte</em></div>
+      <div class="extra-sub">Con más del 75% de afinidad con tu perfil</div>
+      <div class="extra-track">`;
+    extra.forEach((item,j) => {
+      extraHTML += `
+        <div class="extra-item">
+          <div class="extra-item-img ${getBgClass(j)}">☕</div>
+          <div class="extra-item-brand">${item.brand}</div>
+          <div class="extra-item-name">${item.name}</div>
+          <div class="extra-item-pct">${item.pct}%</div>
+          <div class="extra-item-btns">
+            <button class="btn-ver" onclick="location.href='${item.url}'">Ver</button>
+            <button class="btn-cart" onclick="window.open('${item.amazon}','_blank')">🛒</button>
+          </div>
+        </div>`;
+    });
+    extraHTML += '</div></div>';
+  }
+  document.getElementById('extra-container').innerHTML = extraHTML;
   document.getElementById('results').classList.add('active');
 }
 function restart(){
