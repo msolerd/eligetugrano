@@ -552,7 +552,7 @@ function renderGrid() {
   grid.innerHTML = pagina.map(c => `
     <a href="${c.url}" class="cafe-card">
       <div class="cafe-card-img ${c.bg}" style="${c.imagen?'padding:0;overflow:hidden;':''}">
-        ${c.imagen ? `<img src="${c.imagen}" alt="${c.nombre}" style="width:100%;height:100%;object-fit:cover;">` : c.emoji}
+        ${c.imagen ? `<img src="${c.imagen}" alt="${c.nombre}" style="width:100%;height:100%;object-fit:cover;">` : `<svg width="40" height="50" viewBox="0 0 36 44" xmlns="http://www.w3.org/2000/svg" style="opacity:0.4"><path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="#C8892A"/><path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="none" stroke="#A0622D" stroke-width="1"/><path d="M18 5 C15 10, 13 14, 14 20 C15 26, 17 31, 18 40" stroke="#A0622D" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`}
         <span class="cafe-perfil-badge perfil-${c.perfil}">${PERFIL_LABELS[c.perfil]}</span>
       </div>
       <div class="cafe-card-body">
