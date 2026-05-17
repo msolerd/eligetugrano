@@ -46,13 +46,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .pdp-img-placeholder{font-size:120px;}
 .pdp-img-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(200,137,42,0.15),transparent 60%);}
 .pdp-img-badge{position:absolute;top:16px;left:16px;background:var(--honey);color:var(--espresso);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:4px;z-index:1;}
-.pdp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
+.pdp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;justify-content:center;}
 .pdp-right{display:flex;flex-direction:column;gap:20px;}
 .pdp-desc{font-size:15px;color:var(--text-mid);line-height:1.8;font-weight:300;text-align:justify;}
 .btn-amazon-pdp{display:flex;align-items:center;justify-content:center;gap:10px;background:#FF9900;color:#111;border:none;border-radius:var(--radius-sm);padding:15px 24px;font-size:15px;font-weight:600;font-family:var(--font-sans);cursor:pointer;transition:all 0.2s;width:100%;text-decoration:none;}
 .btn-amazon-pdp:hover{background:#e68900;transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,153,0,0.3);}
 .btn-amazon-pdp-note{font-size:11px;color:var(--text-soft);text-align:center;margin-top:-12px;}
-.btn-comparar{display:flex;align-items:center;justify-content:center;gap:8px;background:none;border:1.5px solid rgba(92,51,23,0.2);border-radius:var(--radius-sm);padding:12px 24px;font-size:14px;font-weight:500;color:var(--bark);cursor:pointer;font-family:var(--font-sans);transition:all 0.2s;width:100%;text-decoration:none;margin-top:4px;}
+.btn-comparar{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:none;border:1.5px solid rgba(92,51,23,0.2);border-radius:var(--radius-sm);padding:10px 20px;font-size:13px;font-weight:500;color:var(--bark);cursor:pointer;font-family:var(--font-sans);transition:all 0.2s;text-decoration:none;margin-top:8px;}
 .btn-comparar:hover{background:var(--cream);border-color:var(--caramel);}
 .atributos-titulo{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--espresso);margin-bottom:16px;}
 .atributos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
@@ -295,8 +295,10 @@ function renderPDP(cafe, todos){
           ${imgHTML}
           ${cafe.Patrocinado == 1 ? '<span class="pdp-img-badge">⭐ Destacado</span>' : ''}
         </div>
-        <div class="pdp-tags">${tagsHTML(cafe.Tags)}</div>
-        <a href="configurador.html" class="btn-comparar">🔍 Comparar cafés</a>
+        <div style="text-align:center">
+          <div class="pdp-tags">${tagsHTML(cafe.Tags)}</div>
+          <a href="configurador.html" class="btn-comparar">Descubre si este es tu café ideal →</a>
+        </div>
       </div>
 
       <div class="pdp-right">
