@@ -262,7 +262,7 @@ function renderPDP(cafe, todos){
 
   const imgHTML = cafe.Imagen && cafe.Imagen[0]
     ? `<img src="${cafe.Imagen[0].url}" alt="${cafe.Nombre}">`
-    : `<span class="pdp-img-placeholder">☕</span>`;
+    : `<svg width="80" height="100" viewBox="0 0 36 44" xmlns="http://www.w3.org/2000/svg" style="opacity:0.35"><path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="#C8892A"/><path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="none" stroke="#A0622D" stroke-width="1"/><path d="M18 5 C15 10, 13 14, 14 20 C15 26, 17 31, 18 40" stroke="#A0622D" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M10 10 C9 13, 8 16, 9 19" stroke="#D9B483" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/></svg>`;
 
   const mismoPerfil = todos.filter(c =>
     c.Slug !== cafe.Slug &&
@@ -296,6 +296,7 @@ function renderPDP(cafe, todos){
           ${cafe.Patrocinado == 1 ? '<span class="pdp-img-badge">⭐ Destacado</span>' : ''}
         </div>
         <div class="pdp-tags">${tagsHTML(cafe.Tags)}</div>
+        <a href="configurador.html" class="btn-comparar">🔍 Comparar cafés</a>
       </div>
 
       <div class="pdp-right">
