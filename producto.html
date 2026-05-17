@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ficha de producto — EligeTuGrano">
+<title>EligeTuGrano</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K8HG73FW');</script>
+<!-- End Google Tag Manager -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
+<style>
+/* ── LOADING ── */
+.loading-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:16px;}
+.loading-spinner{width:40px;height:40px;border:3px solid rgba(200,137,42,0.2);border-top-color:var(--honey);border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{font-size:14px;color:var(--text-soft);}
+
+/* ── ERROR / NO DISPONIBLE ── */
+.estado-wrap{max-width:560px;margin:80px auto;padding:0 24px;text-align:center;}
+.estado-icon{font-size:56px;margin-bottom:20px;opacity:0.4;}
+.estado-title{font-family:var(--font-serif);font-size:28px;font-weight:700;color:var(--espresso);margin-bottom:10px;}
+.estado-desc{font-size:15px;color:var(--text-soft);line-height:1.7;font-weight:300;margin-bottom:32px;}
+.estado-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+/* ── PDP ── */
+.pdp-wrap{max-width:1100px;margin:0 auto;padding:40px 24px 96px;}
+.pdp-breadcrumb{font-size:12px;color:var(--text-soft);margin-bottom:28px;display:flex;align-items:center;gap:8px;}
+.pdp-breadcrumb a{color:var(--text-soft);text-decoration:none;transition:color 0.2s;}
+.pdp-breadcrumb a:hover{color:var(--caramel);}
+.pdp-breadcrumb span{color:var(--caramel);}
+.pdp-nombre{font-family:var(--font-serif);font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--espresso);line-height:1.1;margin-bottom:6px;}
+.pdp-marca{font-size:14px;color:var(--caramel);font-weight:500;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:32px;}
+.pdp-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:56px;}
+.pdp-img-wrap{background:linear-gradient(135deg,#2C1810,#5C3317);border-radius:var(--radius-lg);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:120px;position:relative;overflow:hidden;}
+.pdp-img-wrap img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg);}
+.pdp-img-placeholder{font-size:120px;}
+.pdp-img-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(200,137,42,0.15),transparent 60%);}
+.pdp-img-badge{position:absolute;top:16px;left:16px;background:var(--honey);color:var(--espresso);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:4px;z-index:1;}
+.pdp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
+.pdp-right{display:flex;flex-direction:column;gap:20px;}
+.pdp-desc{font-size:15px;color:var(--text-mid);line-height:1.8;font-weight:300;text-align:justify;}
+.btn-amazon-pdp{display:flex;align-items:center;justify-content:center;gap:10px;background:#FF9900;color:#111;border:none;border-radius:var(--radius-sm);padding:15px 24px;font-size:15px;font-weight:600;font-family:var(--font-sans);cursor:pointer;transition:all 0.2s;width:100%;text-decoration:none;}
+.btn-amazon-pdp:hover{background:#e68900;transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,153,0,0.3);}
+.btn-amazon-pdp-note{font-size:11px;color:var(--text-soft);text-align:center;margin-top:-12px;}
+.atributos-titulo{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--espresso);margin-bottom:16px;}
+.atributos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.atributo-item{display:flex;flex-direction:column;gap:6px;}
+.atributo-label{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--text-dark);}
+.atributo-tooltip{position:relative;display:inline-flex;align-items:center;cursor:help;}
+.atributo-tooltip-icon{width:14px;height:14px;border-radius:50%;background:rgba(160,98,45,0.15);color:var(--caramel);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.atributo-tooltip-text{display:none;position:fixed;background:var(--espresso);color:var(--cream);font-size:11px;font-weight:300;line-height:1.5;padding:8px 10px;border-radius:6px;white-space:nowrap;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.2);pointer-events:none;text-transform:none;letter-spacing:0;font-family:var(--font-sans);}
+.granos{display:flex;gap:4px;align-items:center;}
+.pdp-divider{border:none;border-top:1px solid rgba(106,58,31,0.1);margin:48px 0;}
+.carrusel-pdp-title{font-family:var(--font-serif);font-size:22px;font-weight:600;color:var(--espresso);margin-bottom:24px;}
+.carrusel-pdp-title em{font-style:italic;color:var(--caramel);}
+.carrusel-pdp-wrap{position:relative;margin-bottom:48px;}
+.carrusel-pdp-outer{overflow:hidden;}
+.carrusel-pdp-track{display:flex;gap:16px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);}
+.carrusel-pdp-item{flex:0 0 calc(25% - 12px);background:white;border-radius:var(--radius-md);border:1px solid rgba(106,58,31,0.08);overflow:hidden;cursor:pointer;transition:all 0.25s;text-decoration:none;display:block;}
+.carrusel-pdp-item:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(106,58,31,0.12);}
+.carrusel-pdp-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:32px;}
+.carrusel-pdp-img img{width:100%;height:100%;object-fit:cover;}
+.carrusel-pdp-body{padding:12px;}
+.carrusel-pdp-brand{font-size:10px;color:var(--text-soft);font-weight:500;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:2px;}
+.carrusel-pdp-name{font-family:var(--font-serif);font-size:13px;font-weight:600;color:var(--espresso);line-height:1.3;}
+.carrusel-pdp-btn{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:white;border:1px solid rgba(106,58,31,0.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;font-size:16px;color:var(--bark);box-shadow:0 2px 8px rgba(0,0,0,0.08);z-index:10;}
+.carrusel-pdp-btn:hover{background:var(--honey);color:var(--espresso);border-color:var(--honey);}
+.carrusel-pdp-btn.prev{left:-18px;}
+.carrusel-pdp-btn.next{right:-18px;}
+.bg-a{background:linear-gradient(135deg,#3D1F0D,#6B3A1F);}
+.bg-b{background:linear-gradient(135deg,#1E0F08,#3D1F0D);}
+.bg-c{background:linear-gradient(135deg,#5C3317,#A0622D);}
+.bg-d{background:linear-gradient(135deg,#2C1810,#5C3317);}
+.bg-e{background:linear-gradient(135deg,#4A2010,#8B4A1A);}
+.bg-f{background:linear-gradient(135deg,#3A1A08,#704020);}
+@media(max-width:768px){.pdp-grid{grid-template-columns:1fr;gap:32px;}.atributos-grid{grid-template-columns:repeat(2,1fr);}.carrusel-pdp-item{flex:0 0 calc(50% - 8px);}}
+@media(max-width:480px){.carrusel-pdp-item{flex:0 0 100%;}}
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8HG73FW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- SVG SYMBOLS -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="grano-lleno" viewBox="0 0 36 44">
+      <path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="#A0622D"/>
+      <path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="none" stroke="#7A4218" stroke-width="1"/>
+      <path d="M18 5 C15 10, 13 14, 14 20 C15 26, 17 31, 18 40" stroke="#7A4218" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M10 10 C9 13, 8 16, 9 19" stroke="#C8883A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+    </symbol>
+    <symbol id="grano-vacio" viewBox="0 0 36 44">
+      <path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="none" stroke="#C8892A" stroke-width="1.5" opacity="0.25"/>
+      <path d="M18 5 C15 10, 13 14, 14 20 C15 26, 17 31, 18 40" stroke="#C8892A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.25"/>
+    </symbol>
+  </defs>
+</svg>
+
+<nav>
+  <a class="nav-logo" href="index.html">elige<span>tu</span>grano</a>
+  <div class="nav-links" id="nav-links">
+    <a href="configurador.html">Configurador</a>
+    <a href="productos.html" class="active">Productos</a>
+    <a href="index.html#contacto">Contacto</a>
+  </div>
+  <button class="nav-burger" onclick="toggleNav()">☰</button>
+</nav>
+
+<div style="height:64px"></div>
+
+<!-- CONTENIDO DINÁMICO -->
+<div id="app">
+  <div class="loading-wrap">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Cargando ficha del café...</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">elige<span>tu</span>grano</div>
+    <div class="footer-links">
+      <a>Política de privacidad</a>
+      <a>Aviso legal</a>
+      <a>Cookies</a>
+      <a>Afiliados</a>
+    </div>
+    <div class="footer-copy">© 2025 EligeTuGrano</div>
+  </div>
+  <div class="affil-note">* Esta web contiene enlaces de afiliado de Amazon. Si compras a través de ellos recibimos una pequeña comisión sin coste adicional para ti.</div>
+</footer>
+
+<script src="config.js"></script>
+<script>
+// ── CONFIGURACIÓN AIRTABLE ──
+const AIRTABLE_TOKEN = 'patQdzm6Gx3iHvsbB.d9d4213b9ea3fa38b2ea942538bb63563dab9a97c8857f237c2458e0ea175c33';
+const BASE_ID = 'appU497HbKExBkz2V';
+const TABLE_ID = 'tbladJ82IdKnwI1oq';
+const API_URL = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`;
+
+function toggleNav(){ document.getElementById('nav-links').classList.toggle('open'); }
+
+// ── HELPERS ──
+function granosHTML(val, max=5){
+  let h = '<div class="granos">';
+  for(let i=1;i<=max;i++){
+    h += `<svg width="20" height="25" viewBox="0 0 36 44"><use href="${i<=val?'#grano-lleno':'#grano-vacio'}"/></svg>`;
+  }
+  return h + '</div>';
+}
+
+function granoCafeinaHTML(val){
+  return `<div class="granos"><svg width="20" height="25" viewBox="0 0 36 44"><use href="${val==1?'#grano-lleno':'#grano-vacio'}"/></svg></div>`;
+}
+
+function getBg(i){
+  const bgs=['bg-a','bg-b','bg-c','bg-d','bg-e','bg-f'];
+  return bgs[i%bgs.length];
+}
+
+function tagsHTML(tagsStr){
+  if(!tagsStr) return '';
+  return tagsStr.split(',').map(t=>`<span class="tag">${t.trim()}</span>`).join('');
+}
+
+// ── LLAMADA A AIRTABLE ──
+async function fetchTodos(){
+  const res = await fetch(`${API_URL}?pageSize=100`, {
+    headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` }
+  });
+  const data = await res.json();
+  return data.records.map(r => ({ id: r.id, ...r.fields }));
+}
+
+// ── RENDER PÁGINA NO DISPONIBLE ──
+function renderNoDisponible(cafe){
+  document.title = `${cafe.Nombre} — No disponible — EligeTuGrano`;
+  return `
+  <div class="estado-wrap">
+    <div class="estado-icon">☕</div>
+    <div class="estado-title">${cafe.Nombre} ya no está disponible</div>
+    <div class="estado-desc">Este café ya no forma parte de nuestro catálogo activo. Pero seguro que encontramos otro que te encante igual.</div>
+    <div class="estado-btns">
+      <a href="configurador.html" class="btn-primary">Encontrar mi café ideal →</a>
+      <a href="productos.html" class="btn-secondary">Ver todo el catálogo</a>
+    </div>
+  </div>`;
+}
+
+// ── RENDER PÁGINA NO ENCONTRADA ──
+function renderNoEncontrado(){
+  return `
+  <div class="estado-wrap">
+    <div class="estado-icon">🔍</div>
+    <div class="estado-title">Café no encontrado</div>
+    <div class="estado-desc">No hemos encontrado ningún café con ese identificador. Puede que la URL sea incorrecta.</div>
+    <div class="estado-btns">
+      <a href="productos.html" class="btn-primary">Ver todo el catálogo →</a>
+    </div>
+  </div>`;
+}
+
+// ── RENDER CARRUSEL ──
+function renderCarrusel(items, titulo, idPrefix){
+  if(!items || items.length === 0) return '';
+  const bgsTrack = items.map((c,i) => {
+    const imgHTML = c.Imagen && c.Imagen[0]
+      ? `<img src="${c.Imagen[0].url}" alt="${c.Nombre}">`
+      : `<div class="${getBg(i)}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px">☕</div>`;
+    return `
+      <a href="producto.html?id=${c.Slug}" class="carrusel-pdp-item">
+        <div class="carrusel-pdp-img">${imgHTML}</div>
+        <div class="carrusel-pdp-body">
+          <div class="carrusel-pdp-brand">${c.Marca}</div>
+          <div class="carrusel-pdp-name">${c.Nombre}</div>
+        </div>
+      </a>`;
+  }).join('');
+
+  return `
+  <hr class="pdp-divider">
+  <div class="carrusel-pdp-wrap">
+    <div class="carrusel-pdp-title">${titulo}</div>
+    <div style="position:relative">
+      <button class="carrusel-pdp-btn prev" onclick="mover('${idPrefix}',-1)">‹</button>
+      <div class="carrusel-pdp-outer">
+        <div class="carrusel-pdp-track" id="${idPrefix}">${bgsTrack}</div>
+      </div>
+      <button class="carrusel-pdp-btn next" onclick="mover('${idPrefix}',1)">›</button>
+    </div>
+  </div>`;
+}
+
+// ── RENDER PDP ──
+function renderPDP(cafe, todos){
+  document.title = `${cafe.Nombre} — ${cafe.Marca} — EligeTuGrano`;
+  document.querySelector('meta[name="description"]').setAttribute('content',
+    `${cafe.Nombre} de ${cafe.Marca}. ${cafe.Descripcion ? cafe.Descripcion.substring(0,150) : ''}`
+  );
+
+  const imgHTML = cafe.Imagen && cafe.Imagen[0]
+    ? `<img src="${cafe.Imagen[0].url}" alt="${cafe.Nombre}">`
+    : `<span class="pdp-img-placeholder">☕</span>`;
+
+  const mismoPerfil = todos.filter(c =>
+    c.Slug !== cafe.Slug &&
+    c.Perfil === cafe.Perfil &&
+    c.Activo == 1
+  ).slice(0,4);
+
+  const mismaMarca = todos.filter(c =>
+    c.Slug !== cafe.Slug &&
+    c.Marca === cafe.Marca &&
+    c.Activo == 1
+  ).slice(0,4);
+
+  return `
+  <div class="pdp-wrap">
+    <div class="pdp-breadcrumb">
+      <a href="index.html">Inicio</a>
+      <span>›</span>
+      <a href="productos.html">Productos</a>
+      <span>›</span>
+      <span style="color:var(--text-dark)">${cafe.Nombre}</span>
+    </div>
+
+    <div class="pdp-nombre">${cafe.Nombre}</div>
+    <div class="pdp-marca">${cafe.Marca}</div>
+
+    <div class="pdp-grid">
+      <div>
+        <div class="pdp-img-wrap">
+          ${imgHTML}
+          ${cafe.Patrocinado == 1 ? '<span class="pdp-img-badge">⭐ Destacado</span>' : ''}
+        </div>
+        <div class="pdp-tags">${tagsHTML(cafe.Tags)}</div>
+      </div>
+
+      <div class="pdp-right">
+        <p class="pdp-desc">${cafe.Descripcion || ''}</p>
+
+        <a href="${cafe.URL_Amazon || '#'}" target="_blank" class="btn-amazon-pdp">🛒 Comprar en Amazon</a>
+        <p class="btn-amazon-pdp-note">* Enlace de afiliado. Sin coste adicional para ti.</p>
+
+        <div>
+          <div class="atributos-titulo">Perfil de sabor</div>
+          <div class="atributos-grid">
+
+            <div class="atributo-item">
+              <div class="atributo-label">Intensidad
+                <div class="atributo-tooltip" data-tooltip="intensidad">
+                  <div class="atributo-tooltip-icon">?</div>
+                  <div class="atributo-tooltip-text"></div>
+                </div>
+              </div>
+              ${granosHTML(cafe.Attr_Intensidad || 0)}
+            </div>
+
+            <div class="atributo-item">
+              <div class="atributo-label">Acidez
+                <div class="atributo-tooltip" data-tooltip="acidez">
+                  <div class="atributo-tooltip-icon">?</div>
+                  <div class="atributo-tooltip-text"></div>
+                </div>
+              </div>
+              ${granosHTML(cafe.Attr_Acidez || 0)}
+            </div>
+
+            <div class="atributo-item">
+              <div class="atributo-label">Cuerpo
+                <div class="atributo-tooltip" data-tooltip="cuerpo">
+                  <div class="atributo-tooltip-icon">?</div>
+                  <div class="atributo-tooltip-text"></div>
+                </div>
+              </div>
+              ${granosHTML(cafe.Attr_Cuerpo || 0)}
+            </div>
+
+            <div class="atributo-item">
+              <div class="atributo-label">Dulzura
+                <div class="atributo-tooltip" data-tooltip="dulzura">
+                  <div class="atributo-tooltip-icon">?</div>
+                  <div class="atributo-tooltip-text"></div>
+                </div>
+              </div>
+              ${granosHTML(cafe.Attr_Dulzura || 0)}
+            </div>
+
+            <div class="atributo-item">
+              <div class="atributo-label">Aroma
+                <div class="atributo-tooltip" data-tooltip="aroma">
+                  <div class="atributo-tooltip-icon">?</div>
+                  <div class="atributo-tooltip-text"></div>
+                </div>
+              </div>
+              ${granosHTML(cafe.Attr_Aroma || 0)}
+            </div>
+
+            <div class="atributo-item">
+              <div class="atributo-label">Cafeína
+                <div class="atributo-tooltip" data-tooltip="cafeina">
+                  <div class="atributo-tooltip-icon">?</div>
+                  <div class="atributo-tooltip-text"></div>
+                </div>
+              </div>
+              ${granoCafeinaHTML(cafe.Attr_Cafeina)}
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    ${renderCarrusel(mismoPerfil, `Otros con perfil <em>${cafe.Perfil}</em>`, 'c1')}
+    ${renderCarrusel(mismaMarca, `Otros cafés de <em>${cafe.Marca}</em>`, 'c2')}
+
+  </div>`;
+}
+
+// ── CARRUSEL JS ──
+const positions = {};
+function getVisible(){ if(window.innerWidth<=480)return 1; if(window.innerWidth<=768)return 2; return 4; }
+function mover(id, dir){
+  const track = document.getElementById(id);
+  if(!track) return;
+  const items = track.querySelectorAll('.carrusel-pdp-item');
+  const max = Math.max(0, items.length - getVisible());
+  positions[id] = Math.max(0, Math.min((positions[id]||0) + dir, max));
+  const w = track.querySelector('.carrusel-pdp-item').offsetWidth + 16;
+  track.style.transform = `translateX(-${positions[id]*w}px)`;
+}
+function actualizarFlechas(){
+  document.querySelectorAll('.carrusel-pdp-track').forEach(track => {
+    const items = track.querySelectorAll('.carrusel-pdp-item');
+    const mostrar = items.length > getVisible();
+    const wrap = track.closest('.carrusel-pdp-outer').parentElement;
+    wrap.querySelectorAll('.carrusel-pdp-btn').forEach(b => b.style.display = mostrar?'flex':'none');
+  });
+}
+window.addEventListener('resize', () => {
+  Object.keys(positions).forEach(id => {
+    positions[id] = 0;
+    const t = document.getElementById(id);
+    if(t) t.style.transform = 'translateX(0)';
+  });
+  actualizarFlechas();
+});
+
+// ── INICIALIZAR ──
+async function init(){
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('id');
+
+  if(!slug){
+    document.getElementById('app').innerHTML = renderNoEncontrado();
+    return;
+  }
+
+  try {
+    const todos = await fetchTodos();
+    const cafe = todos.find(c => c.Slug === slug);
+
+    if(!cafe){
+      document.getElementById('app').innerHTML = renderNoEncontrado();
+      return;
+    }
+
+    if(cafe.Activo == 0){
+      document.getElementById('app').innerHTML = renderNoDisponible(cafe);
+      return;
+    }
+
+    document.getElementById('app').innerHTML = renderPDP(cafe, todos);
+
+    // Iniciar tooltips y flechas después de renderizar
+    if(typeof inyectarTooltips === 'function') inyectarTooltips();
+    if(typeof iniciarTooltips === 'function') iniciarTooltips();
+    setTimeout(actualizarFlechas, 100);
+
+  } catch(err) {
+    console.error('Error cargando datos:', err);
+    document.getElementById('app').innerHTML = `
+    <div class="estado-wrap">
+      <div class="estado-icon">⚠️</div>
+      <div class="estado-title">Error cargando la ficha</div>
+      <div class="estado-desc">Ha habido un problema al cargar los datos. Por favor, inténtalo de nuevo en unos segundos.</div>
+      <div class="estado-btns">
+        <button class="btn-primary" onclick="location.reload()">Reintentar</button>
+        <a href="productos.html" class="btn-secondary">Ver catálogo</a>
+      </div>
+    </div>`;
+  }
+}
+
+init();
+</script>
+</body>
+</html>
