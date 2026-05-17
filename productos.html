@@ -470,14 +470,21 @@ function actualizarGranosFiltro(attr) {
 }
 
 function actualizarGranoCafeina() {
-  const el = document.getElementById('fcaf-use');
-  if (!el) return;
-  if (filtros.cafeina === 1) el.setAttribute('href', '#grano-lleno');
-  else if (filtros.cafeina === 0) el.setAttribute('href', '#grano-vacio');
-  else el.setAttribute('href', '#grano-vacio');
-  // Indicador visual para sin filtro
-  const svg = document.getElementById('fcaf-svg');
-  svg.style.opacity = filtros.cafeina === -1 ? '0.4' : '1';
+  actualizarTogglesCafeina();
+}
+
+function setFiltroCafeinaToggle(val) {
+  filtros.cafeina = filtros.cafeina === val ? -1 : val;
+  actualizarTogglesCafeina();
+  paginaActual = 1;
+  renderGrid();
+}
+
+function actualizarTogglesCafeina() {
+  const con = document.getElementById('toggle-con');
+  const sin = document.getElementById('toggle-sin');
+  if(con) con.classList.toggle('active', filtros.cafeina === 1);
+  if(sin) sin.classList.toggle('active', filtros.cafeina === 0);
 }
 
 function resetFiltros() {
