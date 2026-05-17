@@ -332,16 +332,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
+
+
     <!-- Cafeína -->
     <hr class="filtro-divider">
     <div class="filtro-grupo">
-      <div class="filtro-label">
-        Cafeína
-        <div class="filtro-tooltip" data-tooltip="cafeina">
-          <div class="filtro-tooltip-icon">?</div>
-          <div class="filtro-tooltip-text"></div>
-        </div>
-      </div>
+      <div class="filtro-label">Cafeína</div>
       <div style="display:flex;gap:8px;margin-top:4px;">
         <button class="toggle-cafeina" id="toggle-con" onclick="setFiltroCafeinaToggle(1)">Con cafeína</button>
         <button class="toggle-cafeina" id="toggle-sin" onclick="setFiltroCafeinaToggle(0)">Sin cafeína</button>
@@ -556,7 +552,6 @@ function renderGrid() {
         <div class="cafe-card-brand">${c.marca}</div>
         <div class="cafe-card-name">${c.nombre}</div>
         <div class="cafe-card-tags">${c.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-
       </div>
     </a>
   `).join('');
