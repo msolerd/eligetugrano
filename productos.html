@@ -534,7 +534,14 @@ function renderGrid() {
 
   if (total === 0) {
     grid.innerHTML = `<div class="no-resultados">
-      <div class="no-resultados-icon">☕</div>
+      <div class="no-resultados-icon">
+        <svg width="56" height="70" viewBox="0 0 36 44" xmlns="http://www.w3.org/2000/svg" style="opacity:0.25">
+          <path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="#A0622D"/>
+          <path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="none" stroke="#7A4218" stroke-width="1"/>
+          <path d="M18 5 C15 10, 13 14, 14 20 C15 26, 17 31, 18 40" stroke="#7A4218" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M10 10 C9 13, 8 16, 9 19" stroke="#C8883A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+      </div>
       <div class="no-resultados-title">No hay resultados para los filtros aplicados</div>
       <div class="no-resultados-sub">Prueba a cambiar o restablecer los filtros</div>
     </div>`;
