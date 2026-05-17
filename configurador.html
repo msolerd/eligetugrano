@@ -117,7 +117,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .rc-desc{font-size:12px;color:#5a4a3a;line-height:1.6;font-weight:300;margin-bottom:11px;}
 .rc-actions{display:flex;gap:7px;margin-bottom:14px;}
 .btn-ficha{background:none;border:1.5px solid rgba(92,51,23,0.2);border-radius:7px;padding:9px 12px;font-size:12px;font-weight:500;color:var(--bark);cursor:pointer;font-family:var(--font-sans);}
-.btn-amazon{background:#FF9900;color:#111;border:none;border-radius:7px;padding:9px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font-sans);flex:1;}
+.btn-amazon{background:#FF9900;color:#111;border:none;border-radius:7px;padding:9px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:var(--font-sans);white-space:nowrap;}
 
 /* Carrusel marca */
 .marca-car-title{font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--caramel);margin-bottom:9px;border-top:1px solid rgba(106,58,31,0.07);padding-top:11px;}
@@ -429,6 +429,32 @@ function getBgClass(i){
   return bgs[i%bgs.length];
 }
 
+function actualizarFlechasExtra(){
+  const track = document.getElementById('extra-track-inner');
+  if(!track) return;
+  const items = track.querySelectorAll('.extra-item');
+  const vis = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 4;
+  const pos = extraPos || 0;
+  const max = Math.max(0, items.length - vis);
+  const btnPrev = document.getElementById('extra-prev');
+  const btnNext = document.getElementById('extra-next');
+  if(btnPrev) btnPrev.style.display = pos > 0 ? 'flex' : 'none';
+  if(btnNext) btnNext.style.display = pos < max ? 'flex' : 'none';
+}
+
+let extraPos = 0;
+function moverExtra(dir){
+  const track = document.getElementById('extra-track-inner');
+  if(!track) return;
+  const items = track.querySelectorAll('.extra-item');
+  const vis = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 4;
+  const max = Math.max(0, items.length - vis);
+  extraPos = Math.max(0, Math.min(extraPos + dir, max));
+  const w = track.querySelector('.extra-item').offsetWidth + 9;
+  track.style.transform = `translateX(-${extraPos * w}px)`;
+  actualizarFlechasExtra();
+}
+
 function showResults(){
   document.getElementById('progress').style.width='100%';
   for(let i=1;i<=TOTAL;i++)document.getElementById('dot-'+i).className='pdot done';
@@ -556,7 +582,10 @@ function showResults(){
     <div class="extra-block">
       <div class="extra-title">Otros cafés que <em>también podrían gustarte</em></div>
       <div class="extra-sub">Con más del 75% de afinidad con tu perfil</div>
-      <div class="extra-track">`;
+      <div style="position:relative">
+        <button id="extra-prev" class="carrusel-pdp-btn prev" onclick="moverExtra(-1)" style="display:none">‹</button>
+        <div class="extra-track" style="overflow:hidden">
+          <div class="extra-track" id="extra-track-inner" style="display:flex;gap:9px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1)">`;
     extra.forEach((item,j) => {
       extraHTML += `
         <div class="extra-item">
@@ -574,6 +603,8 @@ function showResults(){
   }
   document.getElementById('extra-container').innerHTML = extraHTML;
   document.getElementById('results').classList.add('active');
+  extraPos = 0;
+  setTimeout(actualizarFlechasExtra, 100);
 }
 function restart(){
   Object.keys(answers).forEach(k=>delete answers[k]);
