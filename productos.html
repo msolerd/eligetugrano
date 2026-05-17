@@ -347,7 +347,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- CONTENIDO -->
   <div class="plp-content">
-    <div class="plp-topbar">
+    <div id="loading-plp" style="text-align:center;padding:48px 0;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <div style="width:36px;height:36px;border:3px solid rgba(200,137,42,0.2);border-top-color:var(--honey);border-radius:50%;animation:spin 0.8s linear infinite"></div>
+      <div style="font-size:14px;color:var(--text-soft)">Cargando catálogo...</div>
+    </div>
+    <style>@keyframes spin{to{transform:rotate(360deg);}}</style>
+    <div class="plp-topbar" id="plp-topbar" style="display:none">
       <div class="plp-count" id="plp-count"><strong>16</strong> cafés</div>
       <div class="plp-order">
         Ordenar:
@@ -394,7 +399,7 @@ function toggleNav(){ document.getElementById('nav-links').classList.toggle('ope
 const PER_PAGE = 25;
 let paginaActual = 1;
 
-const CAFES = [
+let CAFES = [
   { id:1, nombre:'Qualità Oro', marca:'Lavazza', perfil:'clasico', url:'cafe-lavazza-qualita-oro.html', bg:'bg-a', emoji:'☕', intensidad:3, acidez:4, cuerpo:2, dulzura:4, aroma:5, cafeina:1, tags:['100% Arábica','Tueste medio','Versátil'] },
   { id:2, nombre:'Crema Superiore', marca:'Caffè Borbone', perfil:'intenso', url:'cafe-caffe-borbone-crema-superiore.html', bg:'bg-b', emoji:'💪', intensidad:5, acidez:1, cuerpo:5, dulzura:3, aroma:3, cafeina:1, tags:['Blend','Crema densa','Alta cafeína'] },
   { id:3, nombre:'Qualità Rossa', marca:'Lavazza', perfil:'clasico', url:'cafe-lavazza-qualita-rossa.html', bg:'bg-a', emoji:'☕', intensidad:4, acidez:2, cuerpo:4, dulzura:3, aroma:3, cafeina:1, tags:['Blend','Tueste medio-oscuro','Desayuno'] },
@@ -505,6 +510,8 @@ function granosHTML(val, max=5) {
 }
 
 function renderGrid() {
+  document.getElementById('loading-plp').style.display = 'none';
+  document.getElementById('plp-topbar').style.display = 'flex';
   const cafes = getCafesFiltrados();
   const order = document.getElementById('plp-order').value;
   if (order === 'az') cafes.sort((a,b) => a.nombre.localeCompare(b.nombre));
@@ -534,8 +541,8 @@ function renderGrid() {
 
   grid.innerHTML = pagina.map(c => `
     <a href="${c.url}" class="cafe-card">
-      <div class="cafe-card-img ${c.bg}">
-        ${c.emoji}
+      <div class="cafe-card-img ${c.bg}" style="${c.imagen?'padding:0;overflow:hidden;':''}">
+        ${c.imagen ? `<img src="${c.imagen}" alt="${c.nombre}" style="width:100%;height:100%;object-fit:cover;">` : c.emoji}
         <span class="cafe-perfil-badge perfil-${c.perfil}">${PERFIL_LABELS[c.perfil]}</span>
       </div>
       <div class="cafe-card-body">
@@ -564,9 +571,46 @@ function irPagina(n) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// ── CONFIGURACIÓN AIRTABLE ──
+const AIRTABLE_TOKEN = 'patQdzm6Gx3iHvsbB.d9d4213b9ea3fa38b2ea942538bb63563dab9a97c8857f237c2458e0ea175c33';
+const BASE_ID = 'appU497HbKExBkz2V';
+const TABLE_ID = 'tbladJ82IdKnwI1oq';
+const API_URL = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`;
+
+async function cargarCafes() {
+  try {
+    const res = await fetch(`${API_URL}?pageSize=100`, {
+      headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` }
+    });
+    const data = await res.json();
+    return data.records
+      .map(r => ({ id: r.fields.ID, nombre: r.fields.Nombre, marca: r.fields.Marca,
+        perfil: r.fields.Perfil, url: `producto.html?id=${r.fields.Slug}`,
+        tags: r.fields.Tags ? r.fields.Tags.split(',').map(t=>t.trim()).slice(0,3) : [],
+        intensidad: r.fields.Attr_Intensidad || 0, acidez: r.fields.Attr_Acidez || 0,
+        cuerpo: r.fields.Attr_Cuerpo || 0, dulzura: r.fields.Attr_Dulzura || 0,
+        aroma: r.fields.Attr_Aroma || 0, cafeina: r.fields.Attr_Cafeina || 0,
+        activo: r.fields.Activo,
+        imagen: r.fields.Imagen && r.fields.Imagen[0] ? r.fields.Imagen[0].url : null,
+        bg: ['bg-a','bg-b','bg-c','bg-d','bg-e','bg-f'][Math.floor(Math.random()*6)],
+        emoji: '☕'
+      }))
+      .filter(c => c.activo == 1)
+      .sort((a,b) => a.id - b.id);
+  } catch(err) {
+    console.error('Error cargando catálogo:', err);
+    return [];
+  }
+}
+
 // Inicializar
 actualizarGranoCafeina();
-renderGrid();
+cargarCafes().then(cafes => {
+  CAFES.length = 0;
+  cafes.forEach(c => CAFES.push(c));
+  renderGrid();
+  document.getElementById('plp-count').innerHTML = `<strong>${cafes.length}</strong> cafés`;
+});
 </script>
 <script src="config.js"></script>
 </body>
