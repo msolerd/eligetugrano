@@ -155,7 +155,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="destacados" id="destacados">
+<section class="destacados" id="section-destacados" style="display:none">
   <div class="section-inner">
     <div class="destacados-header fade-in">
       <div>
@@ -164,7 +164,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="section-sub">Te presentamos las tendencias del momento</p>
       </div>
     </div>
-    <div class="destacados-grid">
+    <div class="destacados-grid" id="destacados-grid">
       <a href="productos.html" class="destacado-card">
         <div class="destacado-img dest-bg1">☕<span class="destacado-badge">⭐ Top ventas</span></div>
         <div class="destacado-body"><div class="destacado-brand">Lavazza</div><div class="destacado-name">Qualità Oro</div></div>
@@ -248,14 +248,86 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 function toggleNav(){document.getElementById('nav-links').classList.toggle('open');}
 let carruselPos=0;
 function getVisible(){if(window.innerWidth<=480)return 1;if(window.innerWidth<=768)return 2;if(window.innerWidth<=1024)return 3;return 4;}
-function moverCarrusel(dir){const track=document.getElementById('carrusel-track');const items=track.querySelectorAll('.carrusel-item');const max=items.length-getVisible();carruselPos=Math.max(0,Math.min(carruselPos+dir,max));const w=track.querySelector('.carrusel-item').offsetWidth+20;track.style.transform=`translateX(-${carruselPos*w}px)`;}
+function moverCarrusel(dir){
+  const track=document.getElementById('carrusel-track');
+  const items=track.querySelectorAll('.carrusel-item');
+  const vis=getVisible();
+  const max=items.length-vis;
+  carruselPos=Math.max(0,Math.min(carruselPos+dir*vis,max));
+  const w=track.querySelector('.carrusel-item').offsetWidth+20;
+  track.style.transform=`translateX(-${carruselPos*w}px)`;
+}
 function actualizarFlechas(){const track=document.getElementById('carrusel-track');if(!track)return;const items=track.querySelectorAll('.carrusel-item');const vis=getVisible();const mostrar=items.length>vis;document.querySelectorAll('.carrusel-btn').forEach(b=>b.style.display=mostrar?'flex':'none');}
 window.addEventListener('resize',()=>{carruselPos=0;document.getElementById('carrusel-track').style.transform='translateX(0)';actualizarFlechas();});
 document.addEventListener('DOMContentLoaded',actualizarFlechas);
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.12});
-document.querySelectorAll('.como-card,.destacado-card,.fade-in').forEach(el=>obs.observe(el));
+document.querySelectorAll('.como-card,.fade-in').forEach(el=>obs.observe(el));
 document.querySelectorAll('.como-card').forEach((c,i)=>c.style.transitionDelay=`${i*0.12}s`);
-document.querySelectorAll('.destacado-card').forEach((c,i)=>c.style.transitionDelay=`${i*0.08}s`);
+
+// ── AIRTABLE ──
+const AT_TOKEN = 'patQdzm6Gx3iHvsbB.d9d4213b9ea3fa38b2ea942538bb63563dab9a97c8857f237c2458e0ea175c33';
+const AT_URL = 'https://api.airtable.com/v0/appU497HbKExBkz2V/tbladJ82IdKnwI1oq';
+
+const BG_CLASSES = ['bg-a','bg-b','bg-c','bg-d','bg-e','bg-f'];
+const PERFIL_LABELS = {clasico:'Clásico',intenso:'Intenso',gourmet:'Gourmet',desca:'Descafeinado'};
+const PERFIL_COLORS = {clasico:'#6B3A1F',intenso:'#1E0F08',gourmet:'#C8892A',desca:'#A0622D'};
+
+function granosHome(i){ return BG_CLASSES[i % BG_CLASSES.length]; }
+
+function imgHTML(cafe, i){
+  if(cafe.Imagen && cafe.Imagen[0]) return `<img src="${cafe.Imagen[0].url}" alt="${cafe.Nombre}" style="width:100%;height:100%;object-fit:cover;">`;
+  return `<svg width="48" height="60" viewBox="0 0 36 44" xmlns="http://www.w3.org/2000/svg" style="opacity:0.4"><path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="#C8892A"/><path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="none" stroke="#A0622D" stroke-width="1"/><path d="M18 5 C15 10, 13 14, 14 20 C15 26, 17 31, 18 40" stroke="#A0622D" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`;
+}
+
+async function cargarHome(){
+  try {
+    const res = await fetch(`${AT_URL}?pageSize=100`, { headers: { Authorization: `Bearer ${AT_TOKEN}` } });
+    const data = await res.json();
+    const cafes = data.records.map(r => r.fields).filter(f => f.Activo == 1);
+
+    // ── DESTACADOS (máx 4) ──
+    const destacados = cafes.filter(f => f.Destacado_home == 1).slice(0, 4);
+    const gridEl = document.getElementById('destacados-grid');
+    const seccionEl = document.getElementById('section-destacados');
+    if(seccionEl) seccionEl.style.display = destacados.length > 0 ? '' : 'none';
+    if(gridEl && destacados.length > 0){
+      gridEl.innerHTML = destacados.map((f,i) => `
+        <a href="producto.html?id=${f.Slug}" class="destacado-card visible">
+          <div class="destacado-img ${granosHome(i)}" style="position:relative;overflow:hidden">
+            ${imgHTML(f, i)}
+            ${f.Patrocinado==1 ? '<span class="destacado-badge">⭐ Destacado</span>' : `<span class="destacado-badge" style="background:${PERFIL_COLORS[f.Perfil]||'#6B3A1F'};color:white">${PERFIL_LABELS[f.Perfil]||f.Perfil}</span>`}
+          </div>
+          <div class="destacado-body">
+            <div class="destacado-brand">${f.Marca}</div>
+            <div class="destacado-name">${f.Nombre}</div>
+          </div>
+        </a>`).join('');
+    }
+
+    // ── CARRUSEL ANALIZADOS (máx 16) ──
+    const analizados = cafes.sort((a,b) => a.ID - b.ID).slice(0, 16);
+    const track = document.getElementById('carrusel-track');
+    if(track && analizados.length > 0){
+      track.innerHTML = analizados.map((f,i) => `
+        <a href="producto.html?id=${f.Slug}" class="carrusel-item">
+          <div class="carrusel-img ${granosHome(i)}" style="overflow:hidden">
+            ${imgHTML(f, i)}
+          </div>
+          <div class="carrusel-body">
+            <div class="carrusel-brand">${f.Marca}</div>
+            <div class="carrusel-name">${f.Nombre}</div>
+          </div>
+        </a>`).join('');
+      carruselPos = 0;
+      track.style.transform = 'translateX(0)';
+      actualizarFlechas();
+    }
+  } catch(err){
+    console.error('Error cargando home desde Airtable:', err);
+  }
+}
+
+cargarHome();
 </script>
 </body>
 </html>
