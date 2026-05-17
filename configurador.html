@@ -363,24 +363,7 @@ const MAX_SCORE=80;
 const answers={};
 const TOTAL=5;
 
-const DB=[
-  {name:"Qualità Oro",brand:"Lavazza",perfil:"clasico",url:"cafe-lavazza-qualita-oro.html",desc:"El estándar de oro del café en grano. 100% arábica con notas de frutos secos y un acabado floral delicado. Equilibrado, aromático y absolutamente infalible.",tags:["100% Arábica","Tueste medio","Muy versátil"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:8,exotico:3,equilibrado:8},acidez:{suave:8,brillante:3,moderada:8},cuerpo:{cremoso:6,ligero:5,equilibrado:7},leche:{solo:6,conleche:9},cafeina:{alta:3,normal:9,desca:0}}},
-  {name:"Crema Superiore",brand:"Caffè Borbone",perfil:"intenso",url:"cafe-caffe-borbone-crema-superiore.html",desc:"El rey de la crema. Blend arábica/robusta napolitano que genera una espuma densa y persistente. Cuerpo pleno, amargor noble y una potencia que aguanta perfectamente con leche.",tags:["Blend arábica/robusta","Crema densa","Alta cafeína"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:10,exotico:0,equilibrado:3},acidez:{suave:10,brillante:0,moderada:2},cuerpo:{cremoso:10,ligero:0,equilibrado:2},leche:{solo:5,conleche:10},cafeina:{alta:10,normal:5,desca:0}}},
-  {name:"Qualità Rossa",brand:"Lavazza",perfil:"clasico",url:"cafe-lavazza-qualita-rossa.html",desc:"El clásico de toda la vida. La robusta le da cafeína y esa crema generosa que tanto gusta en el desayuno. Notas de chocolate con leche y frutos secos.",tags:["Blend arábica/robusta","Tueste medio-oscuro","Desayuno ideal"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:10,exotico:0,equilibrado:3},acidez:{suave:10,brillante:0,moderada:2},cuerpo:{cremoso:7,ligero:3,equilibrado:5},leche:{solo:2,conleche:10},cafeina:{alta:7,normal:9,desca:0}}},
-  {name:"Pellini Top",brand:"Pellini",perfil:"clasico",url:"cafe-pellini-top.html",desc:"El espresso italiano más elegante de esta selección. 100% arábica con un tueste cuidado que potencia notas dulces de almendra y una textura aterciopelada.",tags:["100% Arábica","Gama alta","Textura elegante"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:9,exotico:2,equilibrado:7},acidez:{suave:9,brillante:2,moderada:7},cuerpo:{cremoso:6,ligero:6,equilibrado:8},leche:{solo:8,conleche:6},cafeina:{alta:3,normal:9,desca:0}}},
-  {name:"Gran Aroma",brand:"Marcilla",perfil:"clasico",url:"cafe-marcilla-gran-aroma.html",desc:"El café de supermercado más reconocible de España. Sabor familiar, potente y consistente.",tags:["Blend clásico","Muy accesible","Sabor familiar"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:10,exotico:0,equilibrado:2},acidez:{suave:10,brillante:0,moderada:2},cuerpo:{cremoso:6,ligero:4,equilibrado:6},leche:{solo:2,conleche:9},cafeina:{alta:6,normal:9,desca:0}}},
-  {name:"Intermezzo",brand:"Segafredo",perfil:"intenso",url:"cafe-segafredo-intermezzo.html",desc:"Sabor tradicional italiano con mucha pegada. Tueste oscuro que da un café con carácter fuerte, cuerpo denso y ese amargor redondo que despierta hasta al más dormilón.",tags:["Tueste oscuro","Mucha intensidad","Espresso potente"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:10,exotico:0,equilibrado:2},acidez:{suave:10,brillante:0,moderada:2},cuerpo:{cremoso:10,ligero:0,equilibrado:2},leche:{solo:5,conleche:6},cafeina:{alta:9,normal:5,desca:0}}},
-  {name:"Espresso Onyx",brand:"L'Or",perfil:"intenso",url:"cafe-lor-espresso-onyx.html",desc:"Tostado muy oscuro e intenso. Notas de caramelo quemado y cacao profundo. Para quien quiere un espresso contundente con mucho cuerpo.",tags:["Tueste muy oscuro","Caramelo y cacao","Espresso intenso"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:10,exotico:0,equilibrado:2},acidez:{suave:10,brillante:0,moderada:2},cuerpo:{cremoso:9,ligero:1,equilibrado:3},leche:{solo:5,conleche:9},cafeina:{alta:9,normal:5,desca:0}}},
-  {name:"Miscela Rossa",brand:"Caffè Borbone",perfil:"intenso",url:"cafe-caffe-borbone-miscela-rossa.html",desc:"La versión más potente de Borbone. Máxima energía, máximo cuerpo. Alto porcentaje de robusta para quienes no conciben empezar el día sin un espresso que realmente despierte.",tags:["Máxima cafeína","Alto robusta","Para valientes"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:10,exotico:0,equilibrado:2},acidez:{suave:10,brillante:0,moderada:2},cuerpo:{cremoso:10,ligero:0,equilibrado:2},leche:{solo:4,conleche:6},cafeina:{alta:10,normal:3,desca:0}}},
-  {name:"Muy Intenso",brand:"Bonka",perfil:"intenso",url:"cafe-bonka-muy-intenso.html",desc:"Sabor clásico de tueste natural fuerte. Directo, sin pretensiones y con esa intensidad reconocible que acompaña a millones de desayunos desde hace décadas.",tags:["Tueste natural","Clásico español","Intenso"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:10,exotico:0,equilibrado:2},acidez:{suave:10,brillante:0,moderada:2},cuerpo:{cremoso:6,ligero:4,equilibrado:6},leche:{solo:3,conleche:9},cafeina:{alta:9,normal:5,desca:0}}},
-  {name:"Premium Blend",brand:"Saula",perfil:"gourmet",url:"cafe-saula-premium-blend.html",desc:"El café de especialidad comercial por excelencia en España. Muy aromático con notas cítricas limpias y un acabado floral que sorprende.",tags:["100% Arábica","Café de especialidad","Notas cítricas"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:1,exotico:10,equilibrado:4},acidez:{suave:2,brillante:9,moderada:5},cuerpo:{cremoso:2,ligero:9,equilibrado:4},leche:{solo:9,conleche:3},cafeina:{alta:5,normal:9,desca:0}}},
-  {name:"Etiopía",brand:"Happy Belly (Amazon)",perfil:"gourmet",url:"cafe-happy-belly-etiopia.html",desc:"La mejor opción calidad-precio para descubrir las notas frutales del café africano. Grano etíope de origen único con aromas florales y cítricos.",tags:["Origen único","Notas frutales","Mejor precio"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:0,exotico:10,equilibrado:3},acidez:{suave:1,brillante:10,moderada:4},cuerpo:{cremoso:2,ligero:9,equilibrado:4},leche:{solo:10,conleche:1},cafeina:{alta:0,normal:6,desca:0}}},
-  {name:"Classico",brand:"illy",perfil:"gourmet",url:"cafe-illy-classico.html",desc:"Nueve orígenes de arábica en un blend de precisión casi científica. Notas de caramelo, chocolate y flores en perfecto equilibrio.",tags:["100% Arábica","9 orígenes","Bote metálico"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:3,exotico:8,equilibrado:7},acidez:{suave:5,brillante:6,moderada:7},cuerpo:{cremoso:3,ligero:8,equilibrado:6},leche:{solo:9,conleche:5},cafeina:{alta:0,normal:9,desca:0}}},
-  {name:"Pike Place Roast",brand:"Starbucks",perfil:"gourmet",url:"cafe-starbucks-pike-place.html",desc:"El café de filtro más icónico del mundo. Tueste medio con notas de chocolate y nuez, diseñado para ser suave y muy bebible.",tags:["Tueste medio","Muy reconocible","Filtro ideal"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:3,exotico:7,equilibrado:7},acidez:{suave:5,brillante:6,moderada:7},cuerpo:{cremoso:2,ligero:9,equilibrado:5},leche:{solo:6,conleche:6},cafeina:{alta:2,normal:9,desca:0}}},
-  {name:"Gran Crema",brand:"Consuelo",perfil:"clasico",url:"cafe-consuelo-gran-crema.html",desc:"La sorpresa económica de esta selección. Muy buenos resultados de venta gracias a una crema generosa y un sabor clásico y agradable.",tags:["Mejor precio","Crema generosa","Calidad-precio"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:9,exotico:0,equilibrado:3},acidez:{suave:10,brillante:0,moderada:2},cuerpo:{cremoso:7,ligero:3,equilibrado:6},leche:{solo:2,conleche:9},cafeina:{alta:6,normal:9,desca:0}}},
-  {name:"Dek",brand:"Lavazza",perfil:"desca",url:"cafe-lavazza-dek.html",desc:"El descafeinado en grano más vendido de España. Proceso de descafeinado que preserva los aromas naturales del arábica.",tags:["Descafeinado","100% Arábica","Más vendido"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:8,exotico:3,equilibrado:7},acidez:{suave:9,brillante:2,moderada:7},cuerpo:{cremoso:5,ligero:6,equilibrado:7},leche:{solo:5,conleche:9},cafeina:{alta:0,normal:0,desca:10}}},
-  {name:"Descafeinado",brand:"illy",perfil:"desca",url:"cafe-illy-descafeinado.html",desc:"La opción de lujo para el perfil sin cafeína. Mantiene toda la complejidad aromática del blend de 9 orígenes de illy.",tags:["Descafeinado premium","9 orígenes","Sin cafeína de lujo"],amazon:"https://www.amazon.es/",sponsored:false,scores:{sabor:{clasico:3,exotico:8,equilibrado:6},acidez:{suave:5,brillante:6,moderada:7},cuerpo:{cremoso:3,ligero:8,equilibrado:6},leche:{solo:8,conleche:5},cafeina:{alta:0,normal:0,desca:10}}}
-];
+let DB = [];
 
 function buildDots(){
   const w=document.getElementById('dots');
@@ -600,8 +583,49 @@ function restart(){
   document.getElementById('step-1').classList.add('active');
   updateProgress(1);
 }
+// ── CONFIGURACIÓN AIRTABLE ──
+const AIRTABLE_TOKEN = 'patQdzm6Gx3iHvsbB.d9d4213b9ea3fa38b2ea942538bb63563dab9a97c8857f237c2458e0ea175c33';
+const BASE_ID = 'appU497HbKExBkz2V';
+const TABLE_ID = 'tbladJ82IdKnwI1oq';
+const API_URL = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`;
+
+async function cargarDB() {
+  try {
+    const res = await fetch(`${API_URL}?pageSize=100`, {
+      headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` }
+    });
+    const data = await res.json();
+    return data.records
+      .filter(r => r.fields.Activo == 1)
+      .map(r => {
+        const f = r.fields;
+        return {
+          name: f.Nombre, brand: f.Marca, perfil: f.Perfil,
+          url: `producto.html?id=${f.Slug}`,
+          desc: f.Descripcion || '',
+          tags: f.Tags ? f.Tags.split(',').map(t=>t.trim()).slice(0,3) : [],
+          amazon: f.URL_Amazon || '#',
+          sponsored: f.Patrocinado == 1,
+          scores: {
+            sabor:   { clasico: f.P1_clasico||0, exotico: f.P1_exotico||0, equilibrado: f.P1_equilibrado||0 },
+            acidez:  { suave: f.P2_suave||0, brillante: f.P2_brillante||0, moderada: f.P2_moderada||0 },
+            cuerpo:  { cremoso: f.P3_cremoso||0, ligero: f.P3_ligero||0, equilibrado: f.P3_equilibrado||0 },
+            leche:   { solo: f.P4_solo||0, conleche: f.P4_conleche||0 },
+            cafeina: { alta: f.P5_alta||0, normal: f.P5_normal||0, desca: f.P5_desca||0 }
+          }
+        };
+      });
+  } catch(err) {
+    console.error('Error cargando DB:', err);
+    return [];
+  }
+}
+
 function toggleNav(){document.getElementById('nav-links').classList.toggle('open');}
 buildDots();
+
+// Precarga la DB de Airtable en segundo plano
+cargarDB().then(cafes => { if(cafes.length > 0) DB = cafes; });
 </script>
 </body>
 </html>
