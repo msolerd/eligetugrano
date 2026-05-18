@@ -438,8 +438,8 @@ function actualizarFlechasExtra(){
   const max = Math.max(0, items.length - vis);
   const btnPrev = document.getElementById('extra-prev');
   const btnNext = document.getElementById('extra-next');
-  if(btnPrev) btnPrev.style.display = pos > 0 ? 'flex' : 'none';
-  if(btnNext) btnNext.style.display = pos < max ? 'flex' : 'none';
+  if(btnPrev){ btnPrev.style.display = pos > 0 ? 'flex' : 'none'; btnPrev.style.alignItems='center'; btnPrev.style.justifyContent='center'; }
+  if(btnNext){ btnNext.style.display = pos < max ? 'flex' : 'none'; btnNext.style.alignItems='center'; btnNext.style.justifyContent='center'; }
 }
 
 let extraPos = 0;
@@ -582,10 +582,10 @@ function showResults(){
     <div class="extra-block">
       <div class="extra-title">Otros cafés que <em>también podrían gustarte</em></div>
       <div class="extra-sub">Con más del 75% de afinidad con tu perfil</div>
-      <div style="position:relative">
-        <button id="extra-prev" class="carrusel-pdp-btn prev" onclick="moverExtra(-1)" style="display:none">‹</button>
-        <div class="extra-track" style="overflow:hidden">
-          <div class="extra-track" id="extra-track-inner" style="display:flex;gap:9px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1)">`;
+      <div style="position:relative;padding:0 28px;">
+        <button id="extra-prev" onclick="moverExtra(-1)" style="display:none;position:absolute;left:0;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:white;border:1px solid rgba(106,58,31,0.15);cursor:pointer;font-size:16px;color:var(--bark);z-index:10;align-items:center;justify-content:center;">‹</button>
+        <div style="overflow:hidden">
+          <div id="extra-track-inner" style="display:flex;gap:9px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1)">`;
     extra.forEach((item,j) => {
       extraHTML += `
         <div class="extra-item">
@@ -599,12 +599,15 @@ function showResults(){
           </div>
         </div>`;
     });
-    extraHTML += '</div></div>';
+    extraHTML += `</div></div>
+        <button id="extra-next" onclick="moverExtra(1)" style="display:none;position:absolute;right:0;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:white;border:1px solid rgba(106,58,31,0.15);cursor:pointer;font-size:16px;color:var(--bark);z-index:10;align-items:center;justify-content:center;">›</button>
+      </div>
+    </div>`;
   }
   document.getElementById('extra-container').innerHTML = extraHTML;
   document.getElementById('results').classList.add('active');
   extraPos = 0;
-  setTimeout(actualizarFlechasExtra, 100);
+  setTimeout(actualizarFlechasExtra, 200);
 }
 function restart(){
   Object.keys(answers).forEach(k=>delete answers[k]);
