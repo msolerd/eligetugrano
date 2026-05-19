@@ -84,7 +84,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .cafe-card:hover { transform:translateY(-5px); box-shadow:0 12px 28px rgba(106,58,31,0.12); }
 .cafe-card-img { height:160px; display:flex; align-items:center; justify-content:center; font-size:48px; position:relative; }
 .cafe-card-badge { position:absolute; top:10px; left:10px; background:var(--honey); color:var(--espresso); font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:3px 8px; border-radius:4px; }
-.cafe-perfil-badge { position:absolute; top:10px; right:10px; font-size:9px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; padding:3px 8px; border-radius:4px; color:white; }
+.cafe-perfil-badge { position:absolute; top:10px; right:10px; font-size:9px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; padding:3px 8px; border-radius:4px; color:white; border:1.5px solid rgba(255,255,255,0.7); }
 .perfil-clasico { background:var(--bark); }
 .perfil-intenso { background:var(--espresso); }
 .perfil-gourmet { background:var(--honey); }
@@ -118,6 +118,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .bg-d{background:linear-gradient(135deg,#2C1810,#5C3317);}
 .bg-e{background:linear-gradient(135deg,#4A2010,#8B4A1A);}
 .bg-f{background:linear-gradient(135deg,#3A1A08,#704020);}
+.bg-clasico{background:linear-gradient(135deg,#4A2410,#6B3A1F);}
+.bg-intenso{background:linear-gradient(135deg,#0E0704,#1E0F08);}
+.bg-gourmet{background:linear-gradient(135deg,#A06D18,#C8892A);}
+.bg-desca{background:linear-gradient(135deg,#7A4018,#A0622D);}
 
 @media(max-width:900px){ .plp-wrap{grid-template-columns:1fr;} .filtros-panel{position:static;} }
 @media(max-width:600px){ .plp-grid{grid-template-columns:repeat(2,1fr);} }
@@ -609,7 +613,7 @@ async function cargarCafes() {
         aroma: r.fields.Attr_Aroma || 0, cafeina: r.fields.Attr_Cafeina || 0,
         activo: r.fields.Activo,
         imagen: r.fields.Imagen && r.fields.Imagen[0] ? r.fields.Imagen[0].url : null,
-        bg: ['bg-a','bg-b','bg-c','bg-d','bg-e','bg-f'][Math.floor(Math.random()*6)],
+        bg: {clasico:'bg-clasico',intenso:'bg-intenso',gourmet:'bg-gourmet',desca:'bg-desca'}[r.fields.Perfil] || 'bg-a',
         emoji: '☕'
       }))
       .filter(c => c.activo == 1)

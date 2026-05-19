@@ -275,6 +275,7 @@ const PERFIL_LABELS = {clasico:'Clásico',intenso:'Intenso',gourmet:'Gourmet',de
 const PERFIL_COLORS = {clasico:'#6B3A1F',intenso:'#1E0F08',gourmet:'#C8892A',desca:'#A0622D'};
 
 function granosHome(i){ return BG_CLASSES[i % BG_CLASSES.length]; }
+function bgPerfil(perfil){ return {clasico:'bg-clasico',intenso:'bg-intenso',gourmet:'bg-gourmet',desca:'bg-desca'}[perfil] || 'bg-a'; }
 
 function imgHTML(cafe, i){
   if(cafe.Imagen && cafe.Imagen[0]) return `<img src="${cafe.Imagen[0].url}" alt="${cafe.Nombre}" style="width:100%;height:100%;object-fit:cover;">`;

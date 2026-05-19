@@ -85,6 +85,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .bg-d{background:linear-gradient(135deg,#2C1810,#5C3317);}
 .bg-e{background:linear-gradient(135deg,#4A2010,#8B4A1A);}
 .bg-f{background:linear-gradient(135deg,#3A1A08,#704020);}
+.bg-clasico{background:linear-gradient(135deg,#4A2410,#6B3A1F);}
+.bg-intenso{background:linear-gradient(135deg,#0E0704,#1E0F08);}
+.bg-gourmet{background:linear-gradient(135deg,#A06D18,#C8892A);}
+.bg-desca{background:linear-gradient(135deg,#7A4018,#A0622D);}
 @media(max-width:768px){.pdp-grid{grid-template-columns:1fr;gap:32px;}.atributos-grid{grid-template-columns:repeat(2,1fr);}.carrusel-pdp-item{flex:0 0 calc(50% - 8px);}}
 /* ── STICKY AMAZON MÓVIL ── */
 .sticky-amazon-wrap{display:none;}
@@ -176,10 +180,8 @@ function granoCafeinaHTML(val){
   return `<div class="granos"><svg width="20" height="25" viewBox="0 0 36 44"><use href="${val==1?'#grano-lleno':'#grano-vacio'}"/></svg></div>`;
 }
 
-function getBg(i){
-  const bgs=['bg-a','bg-b','bg-c','bg-d','bg-e','bg-f'];
-  return bgs[i%bgs.length];
-}
+function getBg(i){ return ['bg-a','bg-b','bg-c','bg-d','bg-e','bg-f'][i%6]; }
+function getBgPerfil(perfil){ return {clasico:'bg-clasico',intenso:'bg-intenso',gourmet:'bg-gourmet',desca:'bg-desca'}[perfil]||'bg-a'; }
 
 function tagsHTML(tagsStr){
   if(!tagsStr) return '';
@@ -229,7 +231,7 @@ function renderCarrusel(items, titulo, idPrefix){
   const bgsTrack = items.map((c,i) => {
     const imgHTML = c.Imagen && c.Imagen[0]
       ? `<img src="${c.Imagen[0].url}" alt="${c.Nombre}">`
-      : `<div class="${getBg(i)}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px">☕</div>`;
+      : `<div class="${getBgPerfil(c.Perfil)}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px">☕</div>`;
     return `
       <a href="producto.html?id=${c.Slug}" class="carrusel-pdp-item">
         <div class="carrusel-pdp-img">${imgHTML}</div>
