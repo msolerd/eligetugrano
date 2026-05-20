@@ -440,6 +440,16 @@ async function init(){
 
     document.getElementById('app').innerHTML = renderPDP(cafe, todos);
 
+    // GTM — evento pdp_vista
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+      event: 'pdp_vista',
+      cafe_nombre: cafe.Nombre,
+      cafe_marca: cafe.Marca,
+      cafe_perfil: cafe.Perfil,
+      cafe_slug: cafe.Slug
+    });
+
     // Iniciar tooltips y flechas después de renderizar
     if(typeof inyectarTooltips === 'function') inyectarTooltips();
     if(typeof iniciarTooltips === 'function') iniciarTooltips();
