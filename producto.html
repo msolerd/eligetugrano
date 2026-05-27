@@ -122,17 +122,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </defs>
 </svg>
 
-<nav>
-  <a class="nav-logo" href="index.html">elige<span>tu</span>grano</a>
-  <div class="nav-links" id="nav-links">
-    <a href="index.html">Inicio</a>
-    <a href="configurador.html">Test de café</a>
-    <a href="productos.html" class="active">Productos</a>
-    <a href="index.html#contacto">Contacto</a>
-  </div>
-  <button class="nav-burger" onclick="toggleNav()">☰</button>
-</nav>
-
+<div id="nav-placeholder"></div>
 <div style="height:64px"></div>
 
 <!-- CONTENIDO DINÁMICO -->
@@ -143,20 +133,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-logo">elige<span>tu</span>grano</div>
-    <div class="footer-links">
-      <a>Política de privacidad</a>
-      <a>Aviso legal</a>
-      <a>Cookies</a>
-      <a>Afiliados</a>
-    </div>
-    <div class="footer-copy">© 2025 EligeTuGrano</div>
-  </div>
-  <div class="affil-note">* Esta web contiene enlaces de afiliado de Amazon. Si compras a través de ellos recibimos una pequeña comisión sin coste adicional para ti.</div>
-</footer>
-
+<div id="footer-placeholder"></div>
 <script src="config.js"></script>
 <script>
 // ── CONFIGURACIÓN AIRTABLE ──
@@ -472,5 +449,25 @@ async function init(){
 
 init();
 </script>
+
+// Cargar nav y footer dinámicamente
+function cargarComponente(id, archivo) {
+  fetch(archivo)
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById(id).innerHTML = html;
+      // Marcar página activa en el nav
+      if(id === 'nav-placeholder') {
+        const ruta = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('#nav-links a').forEach(a => {
+          if(a.getAttribute('href') === ruta) a.classList.add('active');
+        });
+      }
+    })
+    .catch(() => console.warn('No se pudo cargar ' + archivo));
+}
+cargarComponente('nav-placeholder', 'nav.html');
+cargarComponente('footer-placeholder', 'footer.html');
+
 </body>
 </html>
