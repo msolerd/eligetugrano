@@ -89,7 +89,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .bg-intenso{background:linear-gradient(135deg,#0E0704,#1E0F08);}
 .bg-gourmet{background:linear-gradient(135deg,#A06D18,#C8892A);}
 .bg-desca{background:linear-gradient(135deg,#7A4018,#A0622D);}
-@media(max-width:768px){.pdp-grid{grid-template-columns:1fr;gap:32px;}.atributos-grid{grid-template-columns:repeat(2,1fr);}.carrusel-pdp-item{flex:0 0 calc(50% - 8px);}}
+@media(max-width:768px){.pdp-grid{grid-template-columns:1fr;gap:32px;}.atributos-grid{grid-template-columns:repeat(2,1fr);}.carrusel-pdp-item{flex:0 0 calc(50% - 8px);}.carrusel-pdp-img{height:120px;}}
 /* ── STICKY AMAZON MÓVIL ── */
 .sticky-amazon-wrap{display:none;}
 @media(max-width:768px){
@@ -364,7 +364,7 @@ function renderPDP(cafe, todos){
 
 // ── CARRUSEL JS ──
 const positions = {};
-function getVisible(){ if(window.innerWidth<=480)return 1; if(window.innerWidth<=768)return 2; return 4; }
+function getVisible(){ if(window.innerWidth<=768)return 2; return 4; }
 function mover(id, dir){
   const track = document.getElementById(id);
   if(!track) return;
@@ -373,13 +373,20 @@ function mover(id, dir){
   positions[id] = Math.max(0, Math.min((positions[id]||0) + dir, max));
   const w = track.querySelector('.carrusel-pdp-item').offsetWidth + 16;
   track.style.transform = `translateX(-${positions[id]*w}px)`;
+  actualizarFlechas();
 }
 function actualizarFlechas(){
   document.querySelectorAll('.carrusel-pdp-track').forEach(track => {
+    const id = track.id;
     const items = track.querySelectorAll('.carrusel-pdp-item');
-    const mostrar = items.length > getVisible();
+    const vis = getVisible();
+    const max = Math.max(0, items.length - vis);
+    const pos = positions[id] || 0;
     const wrap = track.closest('.carrusel-pdp-outer').parentElement;
-    wrap.querySelectorAll('.carrusel-pdp-btn').forEach(b => b.style.display = mostrar?'flex':'none');
+    const btnPrev = wrap.querySelector('.carrusel-pdp-btn.prev');
+    const btnNext = wrap.querySelector('.carrusel-pdp-btn.next');
+    if(btnPrev) btnPrev.style.display = pos > 0 ? 'flex' : 'none';
+    if(btnNext) btnNext.style.display = pos < max ? 'flex' : 'none';
   });
 }
 window.addEventListener('resize', () => {
