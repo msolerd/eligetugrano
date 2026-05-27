@@ -612,6 +612,7 @@ cargarCafes().then(cafes => {
 </script>
 <script src="config.js"></script>
 
+<script>
 // Cargar nav y footer dinámicamente
 function cargarComponente(id, archivo) {
   fetch(archivo)
@@ -630,6 +631,6 @@ function cargarComponente(id, archivo) {
 }
 cargarComponente('nav-placeholder', 'nav.html');
 cargarComponente('footer-placeholder', 'footer.html');
-
+</script>
 </body>
 </html>
