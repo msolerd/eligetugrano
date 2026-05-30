@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,8 +35,9 @@
   <h2>1. Responsable del tratamiento</h2>
   <p>El responsable del tratamiento de los datos recogidos a través de esta web es:</p>
   <ul>
-    <li><strong>Titular:</strong> MARIO SOLER DORIA</li>
-    <li><strong>Domicilio:</strong> BARCELONA, ESPAÑA/li>
+    <li><strong>Titular:</strong> [NOMBRE COMPLETO]</li>
+    <li><strong>DNI:</strong> [DNI]</li>
+    <li><strong>Domicilio:</strong> [DIRECCIÓN]</li>
     <li><strong>Email:</strong> <a href="mailto:digital@eligetugrano.com">digital@eligetugrano.com</a></li>
   </ul>
 
@@ -103,6 +103,43 @@ function cargarComponente(id, archivo) {
 }
 cargarComponente('nav-placeholder', 'nav.html');
 cargarComponente('footer-placeholder', 'footer.html');
+</script>
+
+<!-- Banner de cookies -->
+<div class="cookie-banner" id="cookie-banner">
+  <div class="cookie-banner-text">
+    Usamos cookies analíticas de Google Analytics para mejorar la web. Puedes aceptarlas o rechazarlas. <a href="cookies.html">Más información</a>
+  </div>
+  <div class="cookie-banner-btns">
+    <button class="btn-cookie-reject" onclick="cookieDecision(false)">Rechazar</button>
+    <button class="btn-cookie-accept" onclick="cookieDecision(true)">Aceptar cookies</button>
+  </div>
+</div>
+<script>
+(function(){
+  const consent = localStorage.getItem('etg_cookie_consent');
+  if(consent === null){
+    setTimeout(() => { const b=document.getElementById('cookie-banner'); if(b) b.classList.add('visible'); }, 800);
+  } else if(consent === 'true'){
+    loadGTM();
+  }
+})();
+function cookieDecision(accepted){
+  localStorage.setItem('etg_cookie_consent', accepted ? 'true' : 'false');
+  const b=document.getElementById('cookie-banner');
+  if(b) b.classList.remove('visible');
+  if(accepted) loadGTM();
+}
+function loadGTM(){
+  if(window._gtmLoaded) return;
+  window._gtmLoaded = true;
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-K8HG73FW');
+}
+function abrirPreferenciasCookies(){
+  localStorage.removeItem('etg_cookie_consent');
+  const b=document.getElementById('cookie-banner');
+  if(b) b.classList.add('visible');
+}
 </script>
 </body>
 </html>

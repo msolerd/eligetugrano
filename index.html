@@ -5,16 +5,8 @@
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Descubre tu café en grano ideal en 5 preguntas. Configurador personalizado con pódium de afinidad.">
 <title>EligeTuGrano — Encuentra tu café ideal en grano</title>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-K8HG73FW');</script>
-<!-- End Google Tag Manager -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilos.css">
@@ -96,11 +88,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8HG73FW"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
 <div id="nav-placeholder"></div>
 <section class="hero" id="inicio">
   <div class="hero-bg"></div>
@@ -337,6 +324,16 @@ cargarHome();
 </script>
 
 <script>
+// Scroll a ancla tras carga completa
+window.addEventListener('load', function() {
+  if(window.location.hash) {
+    setTimeout(() => {
+      const el = document.querySelector(window.location.hash);
+      if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+});
+
 // Formulario de contacto Web3Forms
 document.getElementById('contact-form').addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -394,6 +391,43 @@ function cargarComponente(id, archivo) {
 }
 cargarComponente('nav-placeholder', 'nav.html');
 cargarComponente('footer-placeholder', 'footer.html');
+</script>
+
+<!-- Banner de cookies -->
+<div class="cookie-banner" id="cookie-banner">
+  <div class="cookie-banner-text">
+    Usamos cookies analíticas de Google Analytics para mejorar la web. Puedes aceptarlas o rechazarlas. <a href="cookies.html">Más información</a>
+  </div>
+  <div class="cookie-banner-btns">
+    <button class="btn-cookie-reject" onclick="cookieDecision(false)">Rechazar</button>
+    <button class="btn-cookie-accept" onclick="cookieDecision(true)">Aceptar cookies</button>
+  </div>
+</div>
+<script>
+(function(){
+  const consent = localStorage.getItem('etg_cookie_consent');
+  if(consent === null){
+    setTimeout(() => { const b=document.getElementById('cookie-banner'); if(b) b.classList.add('visible'); }, 800);
+  } else if(consent === 'true'){
+    loadGTM();
+  }
+})();
+function cookieDecision(accepted){
+  localStorage.setItem('etg_cookie_consent', accepted ? 'true' : 'false');
+  const b=document.getElementById('cookie-banner');
+  if(b) b.classList.remove('visible');
+  if(accepted) loadGTM();
+}
+function loadGTM(){
+  if(window._gtmLoaded) return;
+  window._gtmLoaded = true;
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-K8HG73FW');
+}
+function abrirPreferenciasCookies(){
+  localStorage.removeItem('etg_cookie_consent');
+  const b=document.getElementById('cookie-banner');
+  if(b) b.classList.add('visible');
+}
 </script>
 </body>
 </html>
