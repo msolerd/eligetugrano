@@ -155,69 +155,9 @@
     <!-- Marcas -->
     <div class="filtro-grupo">
       <div class="filtro-label">Marca</div>
-      <div class="marcas-lista colapsada" id="marcas-lista">
-        <div class="marca-item" onclick="toggleMarca('Bonka')">
-          <div class="marca-checkbox" data-marca="Bonka"></div>
-          <span class="marca-nombre">Bonka</span>
-          <span class="marca-count">1</span>
-        </div>
-        <div class="marca-item" onclick="toggleMarca('Caffè Borbone')">
-          <div class="marca-checkbox" data-marca="Caffè Borbone"></div>
-          <span class="marca-nombre">Caffè Borbone</span>
-          <span class="marca-count">2</span>
-        </div>
-        <div class="marca-item" onclick="toggleMarca('Consuelo')">
-          <div class="marca-checkbox" data-marca="Consuelo"></div>
-          <span class="marca-nombre">Consuelo</span>
-          <span class="marca-count">1</span>
-        </div>
-        <div class="marca-item" onclick="toggleMarca('Happy Belly (Amazon)')">
-          <div class="marca-checkbox" data-marca="Happy Belly (Amazon)"></div>
-          <span class="marca-nombre">Happy Belly</span>
-          <span class="marca-count">1</span>
-        </div>
-        <div class="marca-item" onclick="toggleMarca('illy')">
-          <div class="marca-checkbox" data-marca="illy"></div>
-          <span class="marca-nombre">illy</span>
-          <span class="marca-count">2</span>
-        </div>
-        <div class="marca-item" onclick="toggleMarca('L'Or')">
-          <div class="marca-checkbox" data-marca="L'Or"></div>
-          <span class="marca-nombre">L'Or</span>
-          <span class="marca-count">1</span>
-        </div>
-        <div class="marca-item" onclick="toggleMarca('Lavazza')">
-          <div class="marca-checkbox" data-marca="Lavazza"></div>
-          <span class="marca-nombre">Lavazza</span>
-          <span class="marca-count">3</span>
-        </div>
-        <div class="marca-item" onclick="toggleMarca('Marcilla')">
-          <div class="marca-checkbox" data-marca="Marcilla"></div>
-          <span class="marca-nombre">Marcilla</span>
-          <span class="marca-count">1</span>
-        </div>
-        <div class="marca-item" onclick="toggleMarca('Pellini')">
-          <div class="marca-checkbox" data-marca="Pellini"></div>
-          <span class="marca-nombre">Pellini</span>
-          <span class="marca-count">1</span>
-        </div>
-        <div class="marca-item" onclick="toggleMarca('Saula')">
-          <div class="marca-checkbox" data-marca="Saula"></div>
-          <span class="marca-nombre">Saula</span>
-          <span class="marca-count">1</span>
-        </div>
-        <div class="marca-item" onclick="toggleMarca('Segafredo')">
-          <div class="marca-checkbox" data-marca="Segafredo"></div>
-          <span class="marca-nombre">Segafredo</span>
-          <span class="marca-count">1</span>
-        </div>
-        <div class="marca-item" onclick="toggleMarca('Starbucks')">
-          <div class="marca-checkbox" data-marca="Starbucks"></div>
-          <span class="marca-nombre">Starbucks</span>
-          <span class="marca-count">1</span>
-        </div>
-      </div>
-      <button class="btn-ver-mas-marcas" id="btn-ver-mas" onclick="toggleMarcas()">
+      <div class="marcas-lista colapsada" id="marcas-lista"></div>
+
+        <button class="btn-ver-mas-marcas" id="btn-ver-mas" onclick="toggleMarcas()">
         Ver más <span class="arrow">↓</span>
       </button>
     </div>
@@ -370,24 +310,7 @@ function toggleNav(){ document.getElementById('nav-links').classList.toggle('ope
 const PER_PAGE = 25;
 let paginaActual = 1;
 
-let CAFES = [
-  { id:1, nombre:'Qualità Oro', marca:'Lavazza', perfil:'clasico', url:'cafe-lavazza-qualita-oro.html', bg:'bg-a', emoji:'☕', intensidad:3, acidez:4, cuerpo:2, dulzura:4, aroma:5, cafeina:1, tags:['100% Arábica','Tueste medio','Versátil'] },
-  { id:2, nombre:'Crema Superiore', marca:'Caffè Borbone', perfil:'intenso', url:'cafe-caffe-borbone-crema-superiore.html', bg:'bg-b', emoji:'💪', intensidad:5, acidez:1, cuerpo:5, dulzura:3, aroma:3, cafeina:1, tags:['Blend','Crema densa','Alta cafeína'] },
-  { id:3, nombre:'Qualità Rossa', marca:'Lavazza', perfil:'clasico', url:'cafe-lavazza-qualita-rossa.html', bg:'bg-a', emoji:'☕', intensidad:4, acidez:2, cuerpo:4, dulzura:3, aroma:3, cafeina:1, tags:['Blend','Tueste medio-oscuro','Desayuno'] },
-  { id:4, nombre:'Pellini Top', marca:'Pellini', perfil:'clasico', url:'cafe-pellini-top.html', bg:'bg-c', emoji:'🇮🇹', intensidad:2, acidez:3, cuerpo:3, dulzura:5, aroma:4, cafeina:1, tags:['100% Arábica','Gama alta','Elegante'] },
-  { id:5, nombre:'Gran Aroma', marca:'Marcilla', perfil:'clasico', url:'cafe-marcilla-gran-aroma.html', bg:'bg-d', emoji:'☕', intensidad:4, acidez:2, cuerpo:4, dulzura:2, aroma:3, cafeina:1, tags:['Blend','Muy accesible','Familiar'] },
-  { id:6, nombre:'Intermezzo', marca:'Segafredo', perfil:'intenso', url:'cafe-segafredo-intermezzo.html', bg:'bg-b', emoji:'⚡', intensidad:5, acidez:1, cuerpo:5, dulzura:2, aroma:2, cafeina:1, tags:['Tueste oscuro','Intenso','Espresso'] },
-  { id:7, nombre:'Espresso Onyx', marca:"L'Or", perfil:'intenso', url:'cafe-lor-espresso-onyx.html', bg:'bg-b', emoji:'🔥', intensidad:5, acidez:2, cuerpo:4, dulzura:2, aroma:3, cafeina:1, tags:['Tueste oscuro','Cacao','Gran superficie'] },
-  { id:8, nombre:'Miscela Rossa', marca:'Caffè Borbone', perfil:'intenso', url:'cafe-caffe-borbone-miscela-rossa.html', bg:'bg-b', emoji:'💪', intensidad:5, acidez:1, cuerpo:5, dulzura:2, aroma:2, cafeina:1, tags:['Máxima cafeína','Robusta','Para valientes'] },
-  { id:9, nombre:'Muy Intenso', marca:'Bonka', perfil:'intenso', url:'cafe-bonka-muy-intenso.html', bg:'bg-b', emoji:'🔥', intensidad:5, acidez:1, cuerpo:4, dulzura:2, aroma:2, cafeina:1, tags:['Tueste natural','Clásico español','Intenso'] },
-  { id:10, nombre:'Premium Blend', marca:'Saula', perfil:'gourmet', url:'cafe-saula-premium-blend.html', bg:'bg-c', emoji:'🍋', intensidad:3, acidez:3, cuerpo:3, dulzura:4, aroma:5, cafeina:1, tags:['100% Arábica','Especialidad','Cítrico'] },
-  { id:11, nombre:'Etiopía', marca:'Happy Belly (Amazon)', perfil:'gourmet', url:'cafe-happy-belly-etiopia.html', bg:'bg-c', emoji:'🍓', intensidad:2, acidez:5, cuerpo:2, dulzura:3, aroma:5, cafeina:1, tags:['Origen único','Frutal','Mejor precio'] },
-  { id:12, nombre:'Classico', marca:'illy', perfil:'gourmet', url:'cafe-illy-classico.html', bg:'bg-e', emoji:'🇮🇹', intensidad:3, acidez:3, cuerpo:3, dulzura:4, aroma:5, cafeina:1, tags:['9 orígenes','Bote metálico','Premium'] },
-  { id:13, nombre:'Pike Place Roast', marca:'Starbucks', perfil:'gourmet', url:'cafe-starbucks-pike-place.html', bg:'bg-c', emoji:'⭐', intensidad:4, acidez:2, cuerpo:3, dulzura:3, aroma:4, cafeina:1, tags:['Tueste medio','Reconocible','Filtro'] },
-  { id:14, nombre:'Gran Crema', marca:'Consuelo', perfil:'clasico', url:'cafe-consuelo-gran-crema.html', bg:'bg-d', emoji:'☕', intensidad:4, acidez:1, cuerpo:5, dulzura:3, aroma:2, cafeina:1, tags:['Mejor precio','Crema generosa','Clásico'] },
-  { id:15, nombre:'Dek', marca:'Lavazza', perfil:'desca', url:'cafe-lavazza-dek.html', bg:'bg-f', emoji:'🍃', intensidad:3, acidez:2, cuerpo:3, dulzura:4, aroma:3, cafeina:0, tags:['Descafeinado','100% Arábica','Más vendido'] },
-  { id:16, nombre:'Descafeinado', marca:'illy', perfil:'desca', url:'cafe-illy-descafeinado.html', bg:'bg-f', emoji:'🍃', intensidad:3, acidez:3, cuerpo:2, dulzura:4, aroma:4, cafeina:0, tags:['Descafeinado','9 orígenes','Premium'] },
-];
+let CAFES = [];
 
 const PERFIL_LABELS = { clasico:'Clásico', intenso:'Intenso', gourmet:'Gourmet', desca:'Descafeinado' };
 
@@ -398,7 +321,7 @@ const filtros = { marcas: new Set(), intensidad:0, acidez:0, cuerpo:0, dulzura:0
 function toggleMarca(marca) {
   if (filtros.marcas.has(marca)) filtros.marcas.delete(marca);
   else filtros.marcas.add(marca);
-  actualizarCheckboxMarcas();
+  renderMarcas();
   paginaActual = 1;
   renderGrid();
 }
@@ -458,7 +381,7 @@ function actualizarTogglesCafeina() {
 
 function resetFiltros() {
   filtros.marcas.clear();
-  actualizarCheckboxMarcas();
+  renderMarcas();
   Object.keys(filtros).forEach(k => { if(k !== 'marcas') filtros[k] = k === 'cafeina' ? -1 : 0; });
   actualizarTogglesCafeina();
   ['intensidad','acidez','cuerpo','dulzura','aroma'].forEach(a => actualizarGranosFiltro(a));
@@ -486,6 +409,25 @@ function granosHTML(val, max=5) {
     h += `<svg width="14" height="17" viewBox="0 0 36 44"><use href="${i<=val?'#grano-lleno':'#grano-vacio'}"/></svg>`;
   }
   return h + '</div>';
+}
+
+function renderMarcas() {
+  const lista = document.getElementById('marcas-lista');
+  if(!lista) return;
+  // Obtener marcas únicas de los cafés cargados, ordenadas A-Z
+  const marcas = [...new Set(CAFES.map(c => c.marca))].sort();
+  lista.innerHTML = marcas.map(marca => {
+    const count = CAFES.filter(c => c.marca === marca).length;
+    const active = filtros.marcas.has(marca);
+    return `<div class="marca-item" onclick="toggleMarca('${marca}')">
+      <div class="marca-checkbox${active ? ' checked' : ''}" data-marca="${marca}"></div>
+      <span class="marca-nombre">${marca}</span>
+      <span class="marca-count">${count}</span>
+    </div>`;
+  }).join('');
+  // Mostrar/ocultar botón ver más
+  const btn = document.getElementById('btn-ver-mas');
+  if(btn) btn.style.display = marcas.length > 5 ? 'block' : 'none';
 }
 
 function renderGrid() {
@@ -593,6 +535,7 @@ actualizarGranoCafeina();
 cargarCafes().then(cafes => {
   CAFES.length = 0;
   cafes.forEach(c => CAFES.push(c));
+  renderMarcas();
   renderGrid();
   document.getElementById('plp-count').innerHTML = `<strong>${cafes.length}</strong> cafés`;
 });
