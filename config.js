@@ -4,11 +4,11 @@
    ============================================================ */
 
 const TOOLTIPS = {
-  intensidad: 'Es la fuerza del sabor.<br>1 grano significa que es suave; 5 que es fuerte, oscuro y persistente.',
-  acidez:     'Es el tipo de sabor.<br>1 grano significa que es clásico y equilibrado; 5 que es exótico fresco y afrutado.',
-  cuerpo:     'Es la densidad en boca.<br>1 significa que es muy ligero; 5 granos que es denso y cremoso.',
-  dulzura:    'Es la suavidad natural.<br>1 grano significa que es amargo; 5 granos que es suave con notas a caramelo.',
-  aroma:      'Es el olor del café.<br>1/2 granos significa aroma clásico; 2/3 granos toque a frutos secos; 4/5 granos toque frutal.',
+  intensidad: 'Es la fuerza del sabor. 1 grano significa que es suave.<br>5 que es fuerte, oscuro y persistente.',
+  acidez:     'Es el tipo de sabor.1 grano significa que es clásico y equilibrado.<br>5 que es exótico fresco y afrutado.',
+  cuerpo:     'Es la densidad en boca.1 significa que es muy ligero.<br>5 granos que es denso y cremoso.',
+  dulzura:    'Es la suavidad natural.1 grano significa que es amargo.<br>5 granos que es suave con notas a caramelo.',
+  aroma:      'Es el olor del café.1/2 granos significa aroma clásico.<br>2/3 granos toque a frutos secos; 4/5 granos toque frutal.',
   cafeina:    'Grano lleno = con cafeína<br>Grano vacío = descafeinado'
 };
 
