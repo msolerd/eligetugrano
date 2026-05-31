@@ -33,7 +33,7 @@
 .pdp-nombre{font-family:var(--font-serif);font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--espresso);line-height:1.1;margin-bottom:6px;}
 .pdp-marca{font-size:14px;color:var(--caramel);font-weight:500;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:32px;}
 .pdp-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:56px;}
-.pdp-img-wrap{background:linear-gradient(135deg,#2C1810,#5C3317);border-radius:var(--radius-lg);width:100%;max-width:320px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:60px;position:relative;overflow:hidden;margin:0 auto;}
+.pdp-img-wrap{border-radius:var(--radius-lg);width:100%;max-width:320px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:60px;position:relative;overflow:hidden;margin:0 auto;}
 .pdp-img-wrap img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg);}
 .pdp-img-placeholder{font-size:120px;}
 .pdp-img-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(200,137,42,0.15),transparent 60%);}
@@ -63,7 +63,7 @@
 .carrusel-pdp-item{flex:0 0 calc(25% - 9px);background:white;border-radius:var(--radius-md);border:1px solid rgba(106,58,31,0.08);overflow:hidden;cursor:pointer;transition:all 0.25s;text-decoration:none;display:block;}
 .carrusel-pdp-item:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(106,58,31,0.12);}
 .carrusel-pdp-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:32px;background:white;}
-.carrusel-pdp-img img{width:100%;height:100%;object-fit:contain;padding:8px;}
+.carrusel-pdp-img img{width:100%;height:100%;object-fit:contain;padding:6px;}
 .carrusel-pdp-body{padding:12px;}
 .carrusel-pdp-brand{font-size:10px;color:var(--text-soft);font-weight:500;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:2px;}
 .carrusel-pdp-name{font-family:var(--font-serif);font-size:13px;font-weight:600;color:var(--espresso);line-height:1.3;}
@@ -227,6 +227,11 @@ function renderPDP(cafe, todos){
     `${cafe.Nombre} de ${cafe.Marca}. ${cafe.Descripcion ? cafe.Descripcion.substring(0,150) : ''}`
   );
 
+  const PERFIL_LABELS = {clasico:'Clásico', intenso:'Intenso', gourmet:'Gourmet', desca:'Descafeinado'};
+  const PERFIL_COLORS = {clasico:'#6B3A1F', intenso:'#1E0F08', gourmet:'#C8892A', desca:'#A0622D'};
+  const bgClass = getBgPerfil(cafe.Perfil);
+  const perfilLabel = PERFIL_LABELS[cafe.Perfil] || cafe.Perfil;
+  const perfilColor = PERFIL_COLORS[cafe.Perfil] || '#6B3A1F';
   const imgHTML = cafe.Imagen && cafe.Imagen[0]
     ? `<img src="${cafe.Imagen[0].url}" alt="${cafe.Nombre}">`
     : `<svg width="80" height="100" viewBox="0 0 36 44" xmlns="http://www.w3.org/2000/svg" style="opacity:0.35"><path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="#C8892A"/><path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="none" stroke="#A0622D" stroke-width="1"/><path d="M18 5 C15 10, 13 14, 14 20 C15 26, 17 31, 18 40" stroke="#A0622D" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M10 10 C9 13, 8 16, 9 19" stroke="#D9B483" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/></svg>`;
@@ -258,9 +263,9 @@ function renderPDP(cafe, todos){
 
     <div class="pdp-grid">
       <div>
-        <div class="pdp-img-wrap">
+        <div class="pdp-img-wrap ${bgClass}">
           ${imgHTML}
-          ${cafe.Patrocinado == 1 ? '<span class="pdp-img-badge">⭐ Destacado</span>' : ''}
+          <span class="pdp-img-badge" style="background:${perfilColor};color:white;border:1.5px solid rgba(255,255,255,0.7)">${perfilLabel}</span>
         </div>
         <div style="text-align:center">
           <div class="pdp-tags">${tagsHTML(cafe.Tags)}</div>
