@@ -426,6 +426,20 @@ async function init(){
       cafe_slug: cafe.Slug
     });
 
+    // GTM — evento clic_compra
+    document.querySelectorAll('.btn-amazon-pdp, .sticky-amazon-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        dataLayer.push({
+          event: 'clic_compra',
+          cafe_nombre: cafe.Nombre,
+          cafe_marca: cafe.Marca,
+          cafe_perfil: cafe.Perfil,
+          cafe_slug: cafe.Slug,
+          tienda: 'Amazon'
+        });
+      });
+    });
+
     // Iniciar tooltips y flechas después de renderizar
     if(typeof inyectarTooltips === 'function') inyectarTooltips();
     if(typeof iniciarTooltips === 'function') iniciarTooltips();
