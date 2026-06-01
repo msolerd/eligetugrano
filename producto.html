@@ -83,12 +83,7 @@
 .bg-desca{background:linear-gradient(135deg,#7A4018,#A0622D);}
 @media(max-width:768px){.pdp-grid{grid-template-columns:1fr;gap:32px;}.atributos-grid{grid-template-columns:repeat(2,1fr);}.carrusel-pdp-item{flex:0 0 calc(50% - 8px);}.carrusel-pdp-img{height:150px;}.carrusel-pdp-body{padding:8px 10px;}.carrusel-pdp-brand{font-size:9px;}.carrusel-pdp-name{font-size:12px;}}
 /* ── STICKY AMAZON MÓVIL ── */
-.sticky-amazon-wrap{display:none;}
-@media(max-width:768px){
-  .sticky-amazon-wrap{display:block;position:fixed;bottom:0;left:0;right:0;padding:12px 16px;background:rgba(253,250,243,0.97);backdrop-filter:blur(8px);border-top:1px solid rgba(106,58,31,0.1);z-index:50;box-shadow:0 -4px 20px rgba(0,0,0,0.08);}
-  .sticky-amazon-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:#FF9900;color:#111;border:none;border-radius:var(--radius-sm);padding:14px;font-size:15px;font-weight:600;font-family:var(--font-sans);cursor:pointer;width:100%;text-decoration:none;}
-  .pdp-wrap{padding-bottom:90px;}
-}
+
 @media(max-width:480px){.carrusel-pdp-item{flex:0 0 100%;}}
 </style>
 </head>
@@ -351,10 +346,6 @@ function renderPDP(cafe, todos){
     ${renderCarrusel(mismoPerfil, `Otros con perfil <em>${cafe.Perfil}</em>`, 'c1')}
     ${renderCarrusel(mismaMarca, `Otros cafés de <em>${cafe.Marca}</em>`, 'c2')}
 
-    <div class="sticky-amazon-wrap">
-      <a href="${cafe.URL_Amazon || '#'}" target="_blank" class="sticky-amazon-btn">🛒 Comprar en Amazon</a>
-    </div>
-
   </div>`;
 }
 
@@ -431,7 +422,7 @@ async function init(){
     });
 
     // GTM — evento clic_compra
-    document.querySelectorAll('.btn-amazon-pdp, .sticky-amazon-btn').forEach(btn => {
+    document.querySelectorAll('.btn-amazon-pdp').forEach(btn => {
       btn.addEventListener('click', function() {
         dataLayer.push({
           event: 'clic_compra',
