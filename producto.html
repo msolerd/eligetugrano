@@ -351,6 +351,10 @@ function renderPDP(cafe, todos){
     ${renderCarrusel(mismoPerfil, `Otros con perfil <em>${cafe.Perfil}</em>`, 'c1')}
     ${renderCarrusel(mismaMarca, `Otros cafés de <em>${cafe.Marca}</em>`, 'c2')}
 
+    <div class="sticky-amazon-wrap">
+      <a href="${cafe.URL_Amazon || '#'}" target="_blank" class="sticky-amazon-btn">🛒 Comprar en Amazon</a>
+    </div>
+
   </div>`;
 }
 
