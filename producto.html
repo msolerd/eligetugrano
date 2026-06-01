@@ -440,6 +440,19 @@ async function init(){
       });
     });
 
+    // GTM — evento clic_pdp_configurador
+    document.querySelectorAll('.btn-comparar').forEach(btn => {
+      btn.addEventListener('click', function() {
+        dataLayer.push({
+          event: 'clic_pdp_configurador',
+          cafe_nombre: cafe.Nombre,
+          cafe_marca: cafe.Marca,
+          cafe_perfil: cafe.Perfil,
+          cafe_slug: cafe.Slug
+        });
+      });
+    });
+
     // Iniciar tooltips y flechas después de renderizar
     if(typeof inyectarTooltips === 'function') inyectarTooltips();
     if(typeof iniciarTooltips === 'function') iniciarTooltips();
