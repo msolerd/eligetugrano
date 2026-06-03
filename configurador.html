@@ -421,6 +421,10 @@ function moverExtra(dir){
 }
 
 function showResults(){
+  // GTM — evento clic_ver_podium
+  window.dataLayer = window.dataLayer || [];
+  dataLayer.push({ event: 'clic_ver_podium' });
+
   document.getElementById('progress').style.width='100%';
   for(let i=1;i<=TOTAL;i++)document.getElementById('dot-'+i).className='pdot done';
   document.querySelector('.step.active').classList.remove('active');
