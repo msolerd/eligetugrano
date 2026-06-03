@@ -52,7 +52,7 @@
 .atributo-label{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--text-dark);}
 .atributo-tooltip{position:relative;display:inline-flex;align-items:center;cursor:help;}
 .atributo-tooltip-icon{width:14px;height:14px;border-radius:50%;background:rgba(160,98,45,0.15);color:var(--caramel);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.atributo-tooltip-text{display:none;position:fixed;background:var(--espresso);color:var(--cream);font-size:11px;font-weight:300;line-height:1.5;padding:8px 10px;border-radius:6px;white-space:nowrap;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.2);pointer-events:none;text-transform:none;letter-spacing:0;font-family:var(--font-sans);}
+.atributo-tooltip-text{display:none;position:fixed;background:var(--espresso);color:var(--cream);font-size:11px;font-weight:300;line-height:1.5;padding:8px 10px;border-radius:6px;white-space:normal;max-width:200px;word-wrap:break-word;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.2);pointer-events:none;text-transform:none;letter-spacing:0;font-family:var(--font-sans);}
 .granos{display:flex;gap:4px;align-items:center;}
 .pdp-divider{border:none;border-top:1px solid rgba(106,58,31,0.1);margin:48px 0;}
 .carrusel-pdp-title{font-family:var(--font-serif);font-size:22px;font-weight:600;color:var(--espresso);margin-bottom:24px;}
@@ -469,6 +469,47 @@ async function init(){
 }
 
 init();
+</script>
+
+<script>
+// ── TOOLTIPS INTELIGENTES PDP ──
+function iniciarTooltips() {
+  document.querySelectorAll('.atributo-tooltip').forEach(el => {
+    const icon = el.querySelector('.atributo-tooltip-icon');
+    const tip = el.querySelector('.atributo-tooltip-text');
+    if(!icon || !tip) return;
+
+    function mostrarTooltip() {
+      tip.style.display = 'block';
+      const r = icon.getBoundingClientRect();
+      const tw = tip.offsetWidth;
+      const th = tip.offsetHeight;
+      let left = r.left + r.width/2 - tw/2;
+      let top = r.top - th - 8;
+      if(left < 8) left = 8;
+      if(left + tw > window.innerWidth - 8) left = window.innerWidth - tw - 8;
+      if(top < 8) top = r.bottom + 8;
+      tip.style.left = left + 'px';
+      tip.style.top = top + 'px';
+    }
+
+    icon.addEventListener('mouseenter', mostrarTooltip);
+    icon.addEventListener('mouseleave', () => tip.style.display = 'none');
+
+    icon.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      const isVisible = tip.style.display === 'block';
+      document.querySelectorAll('.atributo-tooltip-text').forEach(t => t.style.display = 'none');
+      if(!isVisible) mostrarTooltip();
+    }, {passive: false});
+  });
+
+  document.addEventListener('touchstart', function(e) {
+    if(!e.target.closest('.atributo-tooltip')) {
+      document.querySelectorAll('.atributo-tooltip-text').forEach(t => t.style.display = 'none');
+    }
+  });
+}
 </script>
 
 <script>

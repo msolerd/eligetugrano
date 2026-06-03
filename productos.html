@@ -47,7 +47,7 @@
 .filtro-tooltip-icon { width:14px; height:14px; border-radius:50%; background:rgba(160,98,45,0.15); color:var(--caramel); font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; }
 
 
-.filtro-tooltip:hover .filtro-tooltip-text { display:block; }
+
 .filtro-granos { display:flex; gap:5px; align-items:center; cursor:pointer; }
 .filtro-grano { cursor:pointer; transition:transform 0.15s; }
 .filtro-grano:hover { transform:scale(1.15); }
@@ -541,6 +541,69 @@ cargarCafes().then(cafes => {
 });
 </script>
 <script src="config.js"></script>
+
+<script>
+// ── TOOLTIPS INTELIGENTES ──
+function initTooltips() {
+  document.querySelectorAll('.filtro-tooltip').forEach(el => {
+    const icon = el.querySelector('.filtro-tooltip-icon');
+    const tip = el.querySelector('.filtro-tooltip-text');
+    if(!icon || !tip) return;
+
+    icon.addEventListener('mouseenter', function() {
+      tip.style.display = 'block';
+      const r = icon.getBoundingClientRect();
+      const tw = tip.offsetWidth;
+      const th = tip.offsetHeight;
+      let left = r.left + r.width/2 - tw/2;
+      let top = r.top - th - 8;
+      // Evitar que se salga por la izquierda
+      if(left < 8) left = 8;
+      // Evitar que se salga por la derecha
+      if(left + tw > window.innerWidth - 8) left = window.innerWidth - tw - 8;
+      // Si se sale por arriba, mostrar abajo
+      if(top < 8) top = r.bottom + 8;
+      tip.style.left = left + 'px';
+      tip.style.top = top + 'px';
+    });
+
+    icon.addEventListener('mouseleave', function() {
+      tip.style.display = 'none';
+    });
+
+    // Touch en móvil
+    icon.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      const isVisible = tip.style.display === 'block';
+      document.querySelectorAll('.filtro-tooltip-text').forEach(t => t.style.display = 'none');
+      if(!isVisible) {
+        tip.style.display = 'block';
+        const r = icon.getBoundingClientRect();
+        const tw = tip.offsetWidth;
+        const th = tip.offsetHeight;
+        let left = r.left + r.width/2 - tw/2;
+        let top = r.top - th - 8;
+        if(left < 8) left = 8;
+        if(left + tw > window.innerWidth - 8) left = window.innerWidth - tw - 8;
+        if(top < 8) top = r.bottom + 8;
+        tip.style.left = left + 'px';
+        tip.style.top = top + 'px';
+      }
+    }, {passive: false});
+  });
+
+  // Cerrar tooltips al tocar fuera
+  document.addEventListener('touchstart', function(e) {
+    if(!e.target.closest('.filtro-tooltip')) {
+      document.querySelectorAll('.filtro-tooltip-text').forEach(t => t.style.display = 'none');
+    }
+  });
+}
+
+// Iniciar tooltips cuando cargue el catálogo
+const _origRenderGrid = typeof renderGrid === 'function' ? renderGrid : null;
+document.addEventListener('DOMContentLoaded', () => setTimeout(initTooltips, 500));
+</script>
 
 <script>
 // Cargar nav y footer dinámicamente
