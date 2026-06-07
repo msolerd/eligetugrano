@@ -683,6 +683,33 @@ async function cargarDB() {
 }
 
 function toggleNav(){document.getElementById('nav-links').classList.toggle('open');}
+// ── P1.1 CONDICIONAL ──
+function nextStepP1(){
+  if(answers.sabor === 'clasico'){
+    document.querySelector('.step.active').classList.remove('active');
+    const p11 = document.getElementById('step-1-1');
+    p11.style.display = 'flex';
+    p11.classList.add('active');
+    updateProgress(2);
+  } else {
+    delete answers.intensidad;
+    nextStep(2);
+  }
+}
+function mostrarP11(){
+  document.getElementById('next-1').onclick = function(){ nextStepP1(); };
+}
+function ocultarP11(){
+  delete answers.intensidad;
+  document.getElementById('next-1').onclick = function(){ nextStep(2); };
+}
+function volverP1(){
+  document.getElementById('step-1-1').classList.remove('active');
+  document.getElementById('step-1-1').style.display = 'none';
+  document.getElementById('step-1').classList.add('active');
+  updateProgress(1);
+}
+
 buildDots();
 
 // Precarga la DB de Airtable en segundo plano
