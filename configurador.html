@@ -179,7 +179,7 @@
 
   <!-- P1 -->
   <div class="step active" id="step-1">
-    <div class="step-counter">Pregunta 1 de 5 <span class="step-weight">CLAVE ×2</span></div>
+    <div class="step-counter">Pregunta 1 <span class="step-weight">CLAVE ×2</span></div>
     <div class="step-question">¿Qué tipo de sabor buscas en tu café?</div>
     <div class="step-hint">El sabor lo es todo. Empieza por aquí.</div>
     <div class="options-grid">
@@ -202,7 +202,7 @@
 
   <!-- P1.1 — solo si P1=clasico -->
   <div class="step" id="step-1-1">
-    <div class="step-counter">Pregunta 2 de 6 <span class="step-weight">×1.5</span></div>
+    <div class="step-counter">Pregunta 2 <span class="step-weight">×1.5</span></div>
     <div class="step-question">¿Cómo de intenso y potente te gusta el café?</div>
     <div class="step-hint">De ti depende cuánto café quieres sentir en cada sorbo.</div>
     <div class="options-grid cols3">
@@ -229,7 +229,7 @@
   </div>
 
   <div class="step" id="step-2">
-    <div class="step-counter">Pregunta 2 de 5 <span class="step-weight">CLAVE ×2</span></div>
+    <div class="step-counter">Pregunta 2 <span class="step-weight">CLAVE ×2</span></div>
     <div class="step-question">¿Cómo te gusta la chispa de tu café?</div>
     <div class="step-hint">La chispa del café es lo mucho o poco que quieres que te sorprenda.</div>
     <div class="options-grid cols3">
@@ -254,7 +254,7 @@
 
   <!-- P3 -->
   <div class="step" id="step-3">
-    <div class="step-counter">Pregunta 3 de 5 <span class="step-weight">×1.5</span></div>
+    <div class="step-counter">Pregunta 3 <span class="step-weight">×1.5</span></div>
     <div class="step-question">¿Tu café ideal es denso o ligero?</div>
     <div class="step-hint">Eso es la textura: cómo se queda la boca después de beberlo.</div>
     <div class="options-grid cols3">
@@ -279,7 +279,7 @@
 
   <!-- P4 -->
   <div class="step" id="step-4">
-    <div class="step-counter">Pregunta 4 de 5 <span class="step-weight">×1.5</span></div>
+    <div class="step-counter">Pregunta 4 <span class="step-weight">×1.5</span></div>
     <div class="step-question">¿Cómo lo vas a disfrutar?</div>
     <div class="step-hint">La leche transforma el café. La pregunta es cuánto quieres que lo haga.</div>
     <div class="options-grid cols3">
@@ -306,7 +306,7 @@
   </div>
 
   <div class="step" id="step-5">
-    <div class="step-counter">Pregunta 5 de 5 <span class="step-weight">×1</span></div>
+    <div class="step-counter">Pregunta 5 <span class="step-weight">×1</span></div>
     <div class="step-question">¿Con cafeína o descafeinado?</div>
     <div class="step-hint">La cafeína es opcional. El buen café, no.</div>
     <div class="options-grid cols3">
@@ -373,16 +373,12 @@ function nextStep(n){
 
 function actualizarCounter(n){
   const esClasico = answers.sabor === 'clasico';
-  const total = esClasico ? 6 : 5;
-  // Map: step number -> pregunta visual
-  // Si clasico: step2=3, step3=4, step4=5, step5=6
-  // Si aromatico: step2=2, step3=3, step4=4, step5=5
   const num = esClasico ? n + 1 : n;
   const el = document.querySelector('#step-' + n + ' .step-counter');
   if(el){
     const weight = el.querySelector('.step-weight');
     const weightHTML = weight ? weight.outerHTML : '';
-    el.innerHTML = `Pregunta ${num} de ${total} ${weightHTML}`;
+    el.innerHTML = `Pregunta ${num} ${weightHTML}`;
   }
 }
 function prevStep(n){
