@@ -189,15 +189,24 @@ function renderNoEncontrado(){
 }
 
 // ── RENDER CARRUSEL ──
+const PERFIL_LABELS_CAR = {clasico:'Clásico',intenso:'Intenso',gourmet:'Gourmet',desca:'Descafeinado'};
+const PERFIL_COLORS_CAR = {clasico:'#6B3A1F',intenso:'#1E0F08',gourmet:'#C8892A',desca:'#A0622D'};
+
 function renderCarrusel(items, titulo, idPrefix){
   if(!items || items.length === 0) return '';
   const bgsTrack = items.map((c,i) => {
+    const bgClass = getBgPerfil(c.Perfil);
+    const pLabel = PERFIL_LABELS_CAR[c.Perfil] || c.Perfil;
+    const pColor = PERFIL_COLORS_CAR[c.Perfil] || '#6B3A1F';
     const imgHTML = c.Imagen && c.Imagen[0]
-      ? `<img src="${c.Imagen[0].url}" alt="${c.Nombre}">`
-      : `<div class="${getBgPerfil(c.Perfil)}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px">☕</div>`;
+      ? `<img src="${c.Imagen[0].url}" alt="${c.Nombre}" style="width:100%;height:100%;object-fit:contain;padding:4px;">`
+      : `<div class="${bgClass}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px">☕</div>`;
     return `
       <a href="producto.html?id=${c.Slug}" class="carrusel-pdp-item">
-        <div class="carrusel-pdp-img">${imgHTML}</div>
+        <div class="carrusel-pdp-img ${bgClass}" style="position:relative;">
+          ${imgHTML}
+          <span style="position:absolute;top:6px;left:6px;background:${pColor};color:white;font-size:8px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;padding:2px 7px;border-radius:4px;border:1px solid rgba(255,255,255,0.5)">${pLabel}</span>
+        </div>
         <div class="carrusel-pdp-body">
           <div class="carrusel-pdp-brand">${c.Marca}</div>
           <div class="carrusel-pdp-name">${c.Nombre}</div>
@@ -235,17 +244,36 @@ function renderPDP(cafe, todos){
     ? `<img src="${cafe.Imagen[0].url}" alt="${cafe.Nombre}">`
     : `<svg width="80" height="100" viewBox="0 0 36 44" xmlns="http://www.w3.org/2000/svg" style="opacity:0.35"><path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="#C8892A"/><path d="M18 2 C10 2, 3 9, 3 18 C3 27, 7 36, 12 40 C14 42, 16 43, 18 43 C20 43, 22 42, 24 40 C29 36, 33 27, 33 18 C33 9, 26 2, 18 2 Z" fill="none" stroke="#A0622D" stroke-width="1"/><path d="M18 5 C15 10, 13 14, 14 20 C15 26, 17 31, 18 40" stroke="#A0622D" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M10 10 C9 13, 8 16, 9 19" stroke="#D9B483" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/></svg>`;
 
-  const mismoPerfil = todos.filter(c =>
-    c.Slug !== cafe.Slug &&
-    c.Perfil === cafe.Perfil &&
-    c.Activo == 1
-  ).slice(0,4);
-
+  // Carrusel 1 — misma marca
   const mismaMarca = todos.filter(c =>
     c.Slug !== cafe.Slug &&
     c.Marca === cafe.Marca &&
     c.Activo == 1
-  ).slice(0,4);
+  );
+
+  const slugsMarca = new Set(mismaMarca.map(c => c.Slug));
+
+  // Carrusel 2 — mismo perfil (excluye café actual y carrusel 1)
+  const mismoPerfil = todos.filter(c =>
+    c.Slug !== cafe.Slug &&
+    !slugsMarca.has(c.Slug) &&
+    c.Perfil === cafe.Perfil &&
+    c.Activo == 1
+  );
+
+  const slugsPerfil = new Set(mismoPerfil.map(c => c.Slug));
+
+  // Carrusel 3 — otros perfiles (excluye café actual, carrusel 1 y 2), aleatorio, máx 12
+  const otrosPerfil = todos
+    .filter(c =>
+      c.Slug !== cafe.Slug &&
+      !slugsMarca.has(c.Slug) &&
+      !slugsPerfil.has(c.Slug) &&
+      c.Perfil !== cafe.Perfil &&
+      c.Activo == 1
+    )
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 12);
 
   return `
   <div class="pdp-wrap">
@@ -347,8 +375,9 @@ function renderPDP(cafe, todos){
       </div>
     </div>
 
-    ${renderCarrusel(mismoPerfil, `Otros con perfil <em>${cafe.Perfil}</em>`, 'c1')}
-    ${renderCarrusel(mismaMarca, `Otros cafés de <em>${cafe.Marca}</em>`, 'c2')}
+    ${renderCarrusel(mismaMarca, `Otros cafés de <em>${cafe.Marca}</em>`, 'c1')}
+    ${renderCarrusel(mismoPerfil, `Otros con perfil <em>${cafe.Perfil}</em>`, 'c2')}
+    ${renderCarrusel(otrosPerfil, `Otros perfiles de café`, 'c3')}
 
   </div>`;
 }
