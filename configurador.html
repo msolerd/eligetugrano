@@ -20,13 +20,12 @@
 .config-sub{font-size:14px;color:rgba(245,236,215,0.65);font-weight:300;}
 .configurator{padding:32px 20px;max-width:640px;margin:0 auto;}
 .progress-wrap{margin:0 -20px;}
-.progress-bar{height:2px;background:rgba(44,24,16,0.1);}
+.progress-bar{height:2px;background:rgba(44,24,16,0.1);margin-bottom:36px;}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--caramel),var(--honey));transition:width 0.5s cubic-bezier(0.4,0,0.2,1);}
 .step{display:none;animation:fadeUp 0.4s ease;}
 .step.active{display:block;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 .step-counter{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--caramel);margin-bottom:8px;}
-.step-weight{display:inline-block;margin-left:8px;background:rgba(200,137,42,0.12);color:var(--honey);font-size:9px;font-weight:600;letter-spacing:1px;padding:2px 7px;border-radius:10px;vertical-align:middle;}
 .step-question{font-family:var(--font-serif);font-size:21px;font-weight:500;color:var(--espresso);line-height:1.3;margin-bottom:6px;}
 .step-hint{font-size:13px;color:var(--caramel);margin-bottom:24px;font-weight:300;}
 .options-grid{display:grid;gap:10px;margin-bottom:24px;grid-template-columns:1fr 1fr;}
@@ -37,8 +36,7 @@
 .opt-tag{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--honey);}
 .opt-label{font-size:13px;font-weight:500;color:var(--espresso);line-height:1.3;}
 .opt-sub{font-size:11px;color:var(--text-soft);font-weight:300;line-height:1.4;margin-top:2px;}
-.nav-row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
-.btn-back{background:none;border:none;font-size:13px;color:var(--caramel);cursor:pointer;font-family:var(--font-sans);padding:10px 0;transition:color 0.2s;}
+.nav-row,.btn-back{background:none;border:none;font-size:13px;color:var(--caramel);cursor:pointer;font-family:var(--font-sans);padding:10px 0;transition:color 0.2s;}
 .btn-back:hover{color:var(--bark);}
 .btn-next{background:linear-gradient(135deg,var(--bark),var(--espresso));color:var(--cream);border:none;border-radius:10px;padding:13px 28px;font-size:14px;font-weight:500;font-family:var(--font-sans);cursor:pointer;transition:all 0.2s;flex:1;max-width:220px;}
 .btn-next:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(44,24,16,0.25);}
@@ -179,7 +177,7 @@
 
   <!-- P1 -->
   <div class="step active" id="step-1">
-    <div class="step-counter">Pregunta 1 <span class="step-weight">CLAVE ×2</span></div>
+    <div class="step-counter">Pregunta 1</div>
     <div class="step-question">¿Qué tipo de sabor buscas en tu café?</div>
     <div class="step-hint">El sabor lo es todo. Empieza por aquí.</div>
     <div class="options-grid">
@@ -194,7 +192,7 @@
         <span class="opt-sub">Un café más exótico. Suele tener matices frutales, florales o cítricos.</span>
       </button>
     </div>
-    <div class="step-nav">
+    <div class="nav-row">
       <button class="btn-back" disabled>← Anterior</button>
       <button class="btn-next" id="next-1" disabled onclick="nextStepP1()">Siguiente →</button>
     </div>
@@ -202,7 +200,7 @@
 
   <!-- P1.1 — solo si P1=clasico -->
   <div class="step" id="step-1-1">
-    <div class="step-counter">Pregunta 2 <span class="step-weight">×1.5</span></div>
+    <div class="step-counter">Pregunta 2</div>
     <div class="step-question">¿Cómo de intenso y potente te gusta el café?</div>
     <div class="step-hint">De ti depende cuánto café quieres sentir en cada sorbo.</div>
     <div class="options-grid cols3">
@@ -222,14 +220,14 @@
         <span class="opt-sub">Fácil de beber. El café está ahí, pero no avasalla.</span>
       </button>
     </div>
-    <div class="step-nav">
+    <div class="nav-row">
       <button class="btn-back" onclick="volverP1()">← Anterior</button>
       <button class="btn-next" id="next-1-1" disabled onclick="nextStep(2)">Siguiente →</button>
     </div>
   </div>
 
   <div class="step" id="step-2">
-    <div class="step-counter">Pregunta 2 <span class="step-weight">CLAVE ×2</span></div>
+    <div class="step-counter">Pregunta 2</div>
     <div class="step-question">¿Cómo te gusta la chispa de tu café?</div>
     <div class="step-hint">La chispa del café es lo mucho o poco que quieres que te sorprenda.</div>
     <div class="options-grid cols3">
@@ -254,7 +252,7 @@
 
   <!-- P3 -->
   <div class="step" id="step-3">
-    <div class="step-counter">Pregunta 3 <span class="step-weight">×1.5</span></div>
+    <div class="step-counter">Pregunta 3</div>
     <div class="step-question">¿Tu café ideal es denso o ligero?</div>
     <div class="step-hint">Eso es la textura: cómo se queda la boca después de beberlo.</div>
     <div class="options-grid cols3">
@@ -279,7 +277,7 @@
 
   <!-- P4 -->
   <div class="step" id="step-4">
-    <div class="step-counter">Pregunta 4 <span class="step-weight">×1.5</span></div>
+    <div class="step-counter">Pregunta 4</div>
     <div class="step-question">¿Cómo lo vas a disfrutar?</div>
     <div class="step-hint">La leche transforma el café. La pregunta es cuánto quieres que lo haga.</div>
     <div class="options-grid cols3">
@@ -299,14 +297,14 @@
         <span class="opt-sub">Me gusta el café pero prefiero un sabor más suave y lácteo.</span>
       </button>
     </div>
-    <div class="step-nav">
+    <div class="nav-row">
       <button class="btn-back" onclick="prevStep(3)">← Anterior</button>
       <button class="btn-next" id="next-4" disabled onclick="nextStep(5)">Siguiente →</button>
     </div>
   </div>
 
   <div class="step" id="step-5">
-    <div class="step-counter">Pregunta 5 <span class="step-weight">×1</span></div>
+    <div class="step-counter">Pregunta 5</div>
     <div class="step-question">¿Con cafeína o descafeinado?</div>
     <div class="step-hint">La cafeína es opcional. El buen café, no.</div>
     <div class="options-grid cols3">
@@ -376,9 +374,7 @@ function actualizarCounter(n){
   const num = esClasico ? n + 1 : n;
   const el = document.querySelector('#step-' + n + ' .step-counter');
   if(el){
-    const weight = el.querySelector('.step-weight');
-    const weightHTML = weight ? weight.outerHTML : '';
-    el.innerHTML = `Pregunta ${num} ${weightHTML}`;
+    el.innerHTML = `Pregunta ${num}`;
   }
 }
 function prevStep(n){
