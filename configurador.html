@@ -202,7 +202,7 @@
 
   <!-- P1.1 — solo si P1=clasico -->
   <div class="step" id="step-1-1">
-    <div class="step-counter">Pregunta 1.1 de 5 <span class="step-weight">×1.5</span></div>
+    <div class="step-counter">Pregunta 2 de 6 <span class="step-weight">×1.5</span></div>
     <div class="step-question">¿Cómo de intenso y potente te gusta el café?</div>
     <div class="step-hint">De ti depende cuánto café quieres sentir en cada sorbo.</div>
     <div class="options-grid cols3">
@@ -368,6 +368,22 @@ function nextStep(n){
   document.querySelector('.step.active').classList.remove('active');
   document.getElementById('step-'+n).classList.add('active');
   updateProgress(n);
+  actualizarCounter(n);
+}
+
+function actualizarCounter(n){
+  const esClasico = answers.sabor === 'clasico';
+  const total = esClasico ? 6 : 5;
+  // Map: step number -> pregunta visual
+  // Si clasico: step2=3, step3=4, step4=5, step5=6
+  // Si aromatico: step2=2, step3=3, step4=4, step5=5
+  const num = esClasico ? n + 1 : n;
+  const el = document.querySelector('#step-' + n + ' .step-counter');
+  if(el){
+    const weight = el.querySelector('.step-weight');
+    const weightHTML = weight ? weight.outerHTML : '';
+    el.innerHTML = `Pregunta ${num} de ${total} ${weightHTML}`;
+  }
 }
 function prevStep(n){
   document.querySelector('.step.active').classList.remove('active');
@@ -569,7 +585,7 @@ function showResults(){
       carItems.forEach((item,j) => {
         desgloseHTML += `
           <div class="marca-item">
-            <div class="marca-item-img ${getBgClass(j)}">☕</div>
+            <div class="marca-item-img ${item.imagen ? '' : getBgClass(j)}" style="${item.imagen ? 'background:white;' : ''}">${item.imagen ? `<img src="${item.imagen}" alt="${item.name}" style="width:100%;height:100%;object-fit:contain;padding:3px;">` : '☕'}</div>
             <div class="marca-item-name">${item.name}</div>
             <div class="marca-item-pct">${item.pct}%</div>
             <div class="marca-item-btns">
@@ -600,7 +616,7 @@ function showResults(){
     extra.forEach((item,j) => {
       extraHTML += `
         <div class="extra-item">
-          <div class="extra-item-img ${getBgClass(j)}">☕</div>
+          <div class="extra-item-img ${item.imagen ? '' : getBgClass(j)}" style="${item.imagen ? 'background:white;' : ''}">${item.imagen ? `<img src="${item.imagen}" alt="${item.name}" style="width:100%;height:100%;object-fit:contain;padding:3px;">` : '☕'}</div>
           <div class="extra-item-brand">${item.brand}</div>
           <div class="extra-item-name">${item.name}</div>
           <div class="extra-item-pct">${item.pct}%</div>
