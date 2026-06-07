@@ -5,7 +5,7 @@
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Catálogo de cafés en grano analizados y seleccionados por EligeTuGrano. Encuentra tu café ideal filtrando por intensidad, acidez, cuerpo, dulzura y aroma.">
+<meta name="description" content="Catálogo de cafés en grano analizados y seleccionados por EligeTuGrano. Encuentra tu café ideal filtrando por intensidad, carácter, cuerpo, dulzura y aroma.">
 <title>Catálogo de cafés en grano — EligeTuGrano</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -47,7 +47,7 @@
 .filtro-tooltip-icon { width:14px; height:14px; border-radius:50%; background:rgba(160,98,45,0.15); color:var(--caramel); font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; }
 
 
-
+.filtro-tooltip:hover .filtro-tooltip-text { display:block; }
 .filtro-granos { display:flex; gap:5px; align-items:center; cursor:pointer; }
 .filtro-grano { cursor:pointer; transition:transform 0.15s; }
 .filtro-grano:hover { transform:scale(1.15); }
@@ -182,16 +182,16 @@
       </div>
     </div>
 
-    <!-- Acidez -->
+    <!-- Carácter -->
     <div class="filtro-grupo">
       <div class="filtro-label">
-        Acidez
-        <div class="filtro-tooltip" data-tooltip="acidez">
+        Carácter
+        <div class="filtro-tooltip" data-tooltip="caracter">
           <div class="filtro-tooltip-icon">?</div>
           <div class="filtro-tooltip-text"></div>
         </div>
       </div>
-      <div class="filtro-granos" id="f-acidez" data-attr="acidez" data-val="0">
+      <div class="filtro-granos" id="f-caracter" data-attr="caracter" data-val="0">
         <svg class="filtro-grano" width="22" height="27" viewBox="0 0 36 44" onclick="setFiltro('acidez',1)"><use href="#grano-vacio" id="fa-1"/></svg>
         <svg class="filtro-grano" width="22" height="27" viewBox="0 0 36 44" onclick="setFiltro('acidez',2)"><use href="#grano-vacio" id="fa-2"/></svg>
         <svg class="filtro-grano" width="22" height="27" viewBox="0 0 36 44" onclick="setFiltro('acidez',3)"><use href="#grano-vacio" id="fa-3"/></svg>
@@ -315,7 +315,7 @@ let CAFES = [];
 const PERFIL_LABELS = { clasico:'Clásico', intenso:'Intenso', gourmet:'Gourmet', desca:'Descafeinado' };
 
 // Estado filtros
-const filtros = { marcas: new Set(), intensidad:0, acidez:0, cuerpo:0, dulzura:0, aroma:0, cafeina:-1 };
+const filtros = { marcas: new Set(), intensidad:0, caracter:0, cuerpo:0, dulzura:0, aroma:0, cafeina:-1 };
 // -1 = sin filtro cafeína, 0 = desca, 1 = con cafeína
 
 function toggleMarca(marca) {
@@ -352,7 +352,7 @@ function setFiltroCafeina() {
 }
 
 function actualizarGranosFiltro(attr) {
-  const prefijos = { intensidad:'fi', acidez:'fa', cuerpo:'fc', dulzura:'fd', aroma:'faro' };
+  const prefijos = { intensidad:'fi', caracter:'fa', cuerpo:'fc', dulzura:'fd', aroma:'faro' };
   const p = prefijos[attr];
   const val = filtros[attr];
   for (let i = 1; i <= 5; i++) {
@@ -384,7 +384,7 @@ function resetFiltros() {
   renderMarcas();
   Object.keys(filtros).forEach(k => { if(k !== 'marcas') filtros[k] = k === 'cafeina' ? -1 : 0; });
   actualizarTogglesCafeina();
-  ['intensidad','acidez','cuerpo','dulzura','aroma'].forEach(a => actualizarGranosFiltro(a));
+  ['intensidad','caracter','cuerpo','dulzura','aroma'].forEach(a => actualizarGranosFiltro(a));
   actualizarGranoCafeina();
   paginaActual = 1;
   renderGrid();
@@ -394,7 +394,7 @@ function getCafesFiltrados() {
   return CAFES.filter(c => {
     if (filtros.marcas.size > 0 && !filtros.marcas.has(c.marca)) return false;
     if (filtros.intensidad > 0 && c.intensidad !== filtros.intensidad) return false;
-    if (filtros.acidez > 0 && c.acidez !== filtros.acidez) return false;
+    if (filtros.caracter > 0 && c.caracter !== filtros.caracter) return false;
     if (filtros.cuerpo > 0 && c.cuerpo !== filtros.cuerpo) return false;
     if (filtros.dulzura > 0 && c.dulzura !== filtros.dulzura) return false;
     if (filtros.aroma > 0 && c.aroma !== filtros.aroma) return false;
@@ -514,7 +514,7 @@ async function cargarCafes() {
       .map(r => ({ id: r.fields.ID, nombre: r.fields.Nombre, marca: r.fields.Marca,
         perfil: r.fields.Perfil, url: `producto.html?id=${r.fields.Slug}`,
         tags: r.fields.Tags ? r.fields.Tags.split(',').map(t=>t.trim()).slice(0,3) : [],
-        intensidad: r.fields.Attr_Intensidad || 0, acidez: r.fields.Attr_Acidez || 0,
+        intensidad: r.fields.Attr_Intensidad || 0, caracter: r.fields.Attr_Caracter || 0,
         cuerpo: r.fields.Attr_Cuerpo || 0, dulzura: r.fields.Attr_Dulzura || 0,
         aroma: r.fields.Attr_Aroma || 0, cafeina: r.fields.Attr_Cafeina || 0,
         activo: r.fields.Activo,
@@ -541,69 +541,6 @@ cargarCafes().then(cafes => {
 });
 </script>
 <script src="config.js"></script>
-
-<script>
-// ── TOOLTIPS INTELIGENTES ──
-function initTooltips() {
-  document.querySelectorAll('.filtro-tooltip').forEach(el => {
-    const icon = el.querySelector('.filtro-tooltip-icon');
-    const tip = el.querySelector('.filtro-tooltip-text');
-    if(!icon || !tip) return;
-
-    icon.addEventListener('mouseenter', function() {
-      tip.style.display = 'block';
-      const r = icon.getBoundingClientRect();
-      const tw = tip.offsetWidth;
-      const th = tip.offsetHeight;
-      let left = r.left + r.width/2 - tw/2;
-      let top = r.top - th - 8;
-      // Evitar que se salga por la izquierda
-      if(left < 8) left = 8;
-      // Evitar que se salga por la derecha
-      if(left + tw > window.innerWidth - 8) left = window.innerWidth - tw - 8;
-      // Si se sale por arriba, mostrar abajo
-      if(top < 8) top = r.bottom + 8;
-      tip.style.left = left + 'px';
-      tip.style.top = top + 'px';
-    });
-
-    icon.addEventListener('mouseleave', function() {
-      tip.style.display = 'none';
-    });
-
-    // Touch en móvil
-    icon.addEventListener('touchstart', function(e) {
-      e.preventDefault();
-      const isVisible = tip.style.display === 'block';
-      document.querySelectorAll('.filtro-tooltip-text').forEach(t => t.style.display = 'none');
-      if(!isVisible) {
-        tip.style.display = 'block';
-        const r = icon.getBoundingClientRect();
-        const tw = tip.offsetWidth;
-        const th = tip.offsetHeight;
-        let left = r.left + r.width/2 - tw/2;
-        let top = r.top - th - 8;
-        if(left < 8) left = 8;
-        if(left + tw > window.innerWidth - 8) left = window.innerWidth - tw - 8;
-        if(top < 8) top = r.bottom + 8;
-        tip.style.left = left + 'px';
-        tip.style.top = top + 'px';
-      }
-    }, {passive: false});
-  });
-
-  // Cerrar tooltips al tocar fuera
-  document.addEventListener('touchstart', function(e) {
-    if(!e.target.closest('.filtro-tooltip')) {
-      document.querySelectorAll('.filtro-tooltip-text').forEach(t => t.style.display = 'none');
-    }
-  });
-}
-
-// Iniciar tooltips cuando cargue el catálogo
-const _origRenderGrid = typeof renderGrid === 'function' ? renderGrid : null;
-document.addEventListener('DOMContentLoaded', () => setTimeout(initTooltips, 500));
-</script>
 
 <script>
 // Cargar nav y footer dinámicamente
