@@ -689,7 +689,8 @@ function nextStepP1(){
     document.querySelector('.step.active').classList.remove('active');
     const p11 = document.getElementById('step-1-1');
     p11.classList.add('active');
-    updateProgress(2);
+    // P1.1 es subpregunta de P1, mantener dot-1 activo
+    document.getElementById('progress').style.width=(1/TOTAL*100*0.7)+'%';
   } else {
     delete answers.intensidad;
     nextStep(2);
@@ -703,7 +704,7 @@ function ocultarP11(){
   document.getElementById('next-1').onclick = function(){ nextStep(2); };
 }
 function volverP1(){
-  document.getElementById('step-1-1').classList.remove('active');
+  document.querySelector('.step.active').classList.remove('active');
   document.getElementById('step-1').classList.add('active');
   updateProgress(1);
 }
