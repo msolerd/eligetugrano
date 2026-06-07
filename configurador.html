@@ -205,7 +205,7 @@
   </div>
 
   <!-- P1.1 — solo si P1=clasico -->
-  <div class="step" id="step-1-1" style="display:none">
+  <div class="step" id="step-1-1">
     <div class="step-counter">Pregunta 1.1 de 5 <span class="step-weight">×1.5</span></div>
     <div class="step-question">¿Cómo de intenso y potente te gusta el café?</div>
     <div class="step-hint">De ti depende cuánto café quieres sentir en cada sorbo.</div>
@@ -688,7 +688,6 @@ function nextStepP1(){
   if(answers.sabor === 'clasico'){
     document.querySelector('.step.active').classList.remove('active');
     const p11 = document.getElementById('step-1-1');
-    p11.style.display = 'flex';
     p11.classList.add('active');
     updateProgress(2);
   } else {
@@ -705,7 +704,6 @@ function ocultarP11(){
 }
 function volverP1(){
   document.getElementById('step-1-1').classList.remove('active');
-  document.getElementById('step-1-1').style.display = 'none';
   document.getElementById('step-1').classList.add('active');
   updateProgress(1);
 }
