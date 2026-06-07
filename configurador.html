@@ -585,7 +585,7 @@ function showResults(){
       carItems.forEach((item,j) => {
         desgloseHTML += `
           <div class="marca-item">
-            <div class="marca-item-img ${item.imagen ? '' : getBgClass(j)}" style="${item.imagen ? 'background:white;' : ''}">${item.imagen ? `<img src="${item.imagen}" alt="${item.name}" style="width:100%;height:100%;object-fit:contain;padding:3px;">` : '☕'}</div>
+            <a href="${item.url}" style="text-decoration:none;display:block;"><div class="marca-item-img ${item.imagen ? '' : getBgClass(j)}" style="${item.imagen ? 'background:white;cursor:pointer;' : 'cursor:pointer;'}">${item.imagen ? `<img src="${item.imagen}" alt="${item.name}" style="width:100%;height:100%;object-fit:contain;padding:3px;">` : '☕'}</div></a>
             <div class="marca-item-name">${item.name}</div>
             <div class="marca-item-pct">${item.pct}%</div>
             <div class="marca-item-btns">
@@ -616,7 +616,7 @@ function showResults(){
     extra.forEach((item,j) => {
       extraHTML += `
         <div class="extra-item">
-          <div class="extra-item-img ${item.imagen ? '' : getBgClass(j)}" style="${item.imagen ? 'background:white;' : ''}">${item.imagen ? `<img src="${item.imagen}" alt="${item.name}" style="width:100%;height:100%;object-fit:contain;padding:3px;">` : '☕'}</div>
+          <a href="${item.url}" style="text-decoration:none;display:block;"><div class="extra-item-img ${item.imagen ? '' : getBgClass(j)}" style="${item.imagen ? 'background:white;cursor:pointer;' : 'cursor:pointer;'}">${item.imagen ? `<img src="${item.imagen}" alt="${item.name}" style="width:100%;height:100%;object-fit:contain;padding:3px;">` : '☕'}</div></a>
           <div class="extra-item-brand">${item.brand}</div>
           <div class="extra-item-name">${item.name}</div>
           <div class="extra-item-pct">${item.pct}%</div>
