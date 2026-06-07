@@ -22,10 +22,6 @@
 .progress-wrap{margin:0 -20px;}
 .progress-bar{height:2px;background:rgba(44,24,16,0.1);}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--caramel),var(--honey));transition:width 0.5s cubic-bezier(0.4,0,0.2,1);}
-.progress-dots{display:flex;justify-content:space-around;padding:8px 20px 20px;}
-.pdot{width:6px;height:6px;border-radius:50%;background:rgba(44,24,16,0.15);transition:all 0.3s;}
-.pdot.done{background:var(--caramel);}
-.pdot.active{background:var(--honey);transform:scale(1.5);}
 .step{display:none;animation:fadeUp 0.4s ease;}
 .step.active{display:block;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
@@ -178,7 +174,7 @@
 <div class="configurator">
   <div class="progress-wrap">
     <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
-    <div class="progress-dots" id="dots"></div>
+    
   </div>
 
   <!-- P1 -->
@@ -357,20 +353,9 @@ const TOTAL=5;
 
 let DB = [];
 
-function buildDots(){
-  const w=document.getElementById('dots');
-  for(let i=1;i<=TOTAL;i++){
-    const d=document.createElement('div');
-    d.className='pdot'+(i===1?' active':'');
-    d.id='dot-'+i;
-    w.appendChild(d);
-  }
-}
+function buildDots(){ /* dots eliminados */ }
 function updateProgress(step){
   document.getElementById('progress').style.width=((step-1)/TOTAL*100)+'%';
-  for(let i=1;i<=TOTAL;i++){
-    document.getElementById('dot-'+i).className='pdot'+(i<step?' done':i===step?' active':'');
-  }
 }
 function selectOption(btn){
   answers[btn.dataset.key]=btn.dataset.val;
@@ -483,7 +468,7 @@ function showResults(){
   dataLayer.push({ event: 'clic_ver_podium' });
 
   document.getElementById('progress').style.width='100%';
-  for(let i=1;i<=TOTAL;i++)document.getElementById('dot-'+i).className='pdot done';
+
   document.querySelector('.step.active').classList.remove('active');
 
   // 1. Rank all coffees
@@ -534,7 +519,7 @@ function showResults(){
     podiumHTML += `
       <div class="p-col ${colClass}">
         <div class="p-card ${pClass[vi]}">
-          <div class="p-emoji">☕</div>
+          <a href="${cafe.url}" style="text-decoration:none;display:block;width:52px;height:52px;margin:0 auto 4px;border-radius:8px;overflow:hidden;background:${cafe.imagen ? 'white' : 'rgba(0,0,0,0.1)'};">${cafe.imagen ? `<img src="${cafe.imagen}" alt="${cafe.name}" style="width:100%;height:100%;object-fit:contain;padding:4px;">` : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:22px;">☕</div>'}</a>
           <div class="p-brand">${cafe.brand}</div>
           <div class="p-name">${cafe.name}</div>
           <div class="p-pct">${cafe.pct}%</div>
@@ -560,7 +545,7 @@ function showResults(){
     desgloseHTML += `
     <div class="result-card ${i===0?'winner':i===1?'second':'third'}">
       <div class="rc-top">
-        <div class="rc-img ${bgClass}">☕</div>
+        <a href="${cafe.url}" style="text-decoration:none;flex-shrink:0;"><div class="rc-img ${cafe.imagen ? '' : bgClass}" style="${cafe.imagen ? 'background:white;cursor:pointer;' : 'cursor:pointer;'}">${cafe.imagen ? `<img src="${cafe.imagen}" alt="${cafe.name}" style="width:100%;height:100%;object-fit:contain;padding:6px;">` : '☕'}</div></a>
         <div class="rc-info">
           <div class="rc-rank ${rcClass[i]}">${medals[i]} ${rl[i]}</div>
           <div class="rc-brand">${cafe.brand}</div>
@@ -666,6 +651,7 @@ async function cargarDB() {
           tags: f.Tags ? f.Tags.split(',').map(t=>t.trim()).slice(0,3) : [],
           amazon: f.URL_Amazon || '#',
           sponsored: f.Patrocinado == 1,
+          imagen: f.Imagen && f.Imagen[0] ? f.Imagen[0].url : null,
           scores: {
             sabor:     { clasico: f.P1_clasico||0, aromatico: f.P1_aromatico||0 },
             intensidad:{ contundente: f.P11_contundente||0, caracter: f.P11_caracter||0, suave: f.P11_suave||0 },
@@ -689,8 +675,8 @@ function nextStepP1(){
     document.querySelector('.step.active').classList.remove('active');
     const p11 = document.getElementById('step-1-1');
     p11.classList.add('active');
-    // P1.1 es subpregunta de P1, mantener dot-1 activo
-    document.getElementById('progress').style.width=(1/TOTAL*100*0.7)+'%';
+    // P1.1 es subpregunta de P1, avance parcial de barra
+    document.getElementById('progress').style.width='12%';
   } else {
     delete answers.intensidad;
     nextStep(2);
