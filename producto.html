@@ -153,7 +153,11 @@ async function fetchTodos(){
     headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` }
   });
   const data = await res.json();
-  return data.records.map(r => ({ id: r.id, ...r.fields }));
+  return data.records.map(r => ({
+    id: r.id,
+    ...r.fields,
+    Perfil: (r.fields.Perfil||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+  }));
 }
 
 // ── RENDER PÁGINA NO DISPONIBLE ──

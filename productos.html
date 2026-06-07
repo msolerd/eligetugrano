@@ -512,7 +512,7 @@ async function cargarCafes() {
     const data = await res.json();
     return data.records
       .map(r => ({ id: r.fields.ID, nombre: r.fields.Nombre, marca: r.fields.Marca,
-        perfil: r.fields.Perfil, url: `producto.html?id=${r.fields.Slug}`,
+        perfil: (r.fields.Perfil||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''), url: `producto.html?id=${r.fields.Slug}`,
         tags: r.fields.Tags ? r.fields.Tags.split(',').map(t=>t.trim()).slice(0,3) : [],
         intensidad: r.fields.Attr_Intensidad || 0, caracter: r.fields.Attr_Caracter || 0,
         cuerpo: r.fields.Attr_Cuerpo || 0, dulzura: r.fields.Attr_Dulzura || 0,
