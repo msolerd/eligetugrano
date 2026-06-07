@@ -376,7 +376,7 @@ function renderPDP(cafe, todos){
     </div>
 
     ${renderCarrusel(mismaMarca, `Otros cafés de <em>${cafe.Marca}</em>`, 'c1')}
-    ${renderCarrusel(mismoPerfil, `Otros con perfil <em>${cafe.Perfil}</em>`, 'c2')}
+    ${renderCarrusel(mismoPerfil, `Otros con perfil <em>${PERFIL_LABELS_CAR[cafe.Perfil] || cafe.Perfil}</em>`, 'c2')}
     ${renderCarrusel(otrosPerfil, `Otros perfiles de café`, 'c3')}
 
   </div>`;
