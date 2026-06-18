@@ -257,8 +257,7 @@ document.querySelectorAll('.como-card,.fade-in').forEach(el=>obs.observe(el));
 document.querySelectorAll('.como-card').forEach((c,i)=>c.style.transitionDelay=`${i*0.12}s`);
 
 // ── AIRTABLE ──
-const AT_TOKEN = 'patQdzm6Gx3iHvsbB.d9d4213b9ea3fa38b2ea942538bb63563dab9a97c8857f237c2458e0ea175c33';
-const AT_URL = 'https://api.airtable.com/v0/appU497HbKExBkz2V/tbladJ82IdKnwI1oq';
+const AT_URL = 'https://eligetugrano-airtable.mariosolerdoria.workers.dev';
 
 const BG_CLASSES = ['bg-a','bg-b','bg-c','bg-d','bg-e','bg-f'];
 const PERFIL_LABELS = {clasico:'Clásico',intenso:'Intenso',gourmet:'Gourmet',desca:'Descafeinado'};
@@ -274,7 +273,7 @@ function imgHTML(cafe, i){
 
 async function cargarHome(){
   try {
-    const res = await fetch(`${AT_URL}?pageSize=100`, { headers: { Authorization: `Bearer ${AT_TOKEN}` } });
+    const res = await fetch(`${AT_URL}?pageSize=100`);
     const data = await res.json();
     const cafes = data.records.map(r => r.fields).filter(f => f.Activo == 1);
 

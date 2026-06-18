@@ -119,10 +119,7 @@
 <script src="config.js"></script>
 <script>
 // ── CONFIGURACIÓN AIRTABLE ──
-const AIRTABLE_TOKEN = 'patQdzm6Gx3iHvsbB.d9d4213b9ea3fa38b2ea942538bb63563dab9a97c8857f237c2458e0ea175c33';
-const BASE_ID = 'appU497HbKExBkz2V';
-const TABLE_ID = 'tbladJ82IdKnwI1oq';
-const API_URL = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`;
+const API_URL = 'https://eligetugrano-airtable.mariosolerdoria.workers.dev';
 
 function toggleNav(){ document.getElementById('nav-links').classList.toggle('open'); }
 
@@ -150,7 +147,7 @@ function tagsHTML(tagsStr){
 // ── LLAMADA A AIRTABLE ──
 async function fetchTodos(){
   const res = await fetch(`${API_URL}?pageSize=100`, {
-    headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` }
+    headers: {}
   });
   const data = await res.json();
   return data.records.map(r => ({
