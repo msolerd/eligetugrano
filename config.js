@@ -29,8 +29,11 @@ function iniciarTooltips() {
     el.addEventListener('mouseenter', () => {
       tip.style.display = 'block';
       const rect = el.getBoundingClientRect();
+      const margin = 8;
+      let leftPos = rect.left + rect.width / 2 - tip.offsetWidth / 2;
+      leftPos = Math.max(margin, Math.min(leftPos, window.innerWidth - tip.offsetWidth - margin));
       tip.style.top  = (rect.top - tip.offsetHeight - 8) + 'px';
-      tip.style.left = (rect.left + rect.width / 2 - tip.offsetWidth / 2) + 'px';
+      tip.style.left = leftPos + 'px';
     });
     el.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
   });

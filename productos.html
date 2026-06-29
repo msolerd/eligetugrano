@@ -40,6 +40,9 @@
 .btn-ver-mas-marcas.expandido .arrow { transform:rotate(180deg); }
 
 .filtros-panel { background:white; border-radius:var(--radius-lg); border:1px solid rgba(106,58,31,0.08); padding:24px; position:sticky; top:84px; max-height:calc(100vh - 104px); overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--latte) transparent; }
+.filtros-panel::-webkit-scrollbar { width:4px; }
+.filtros-panel::-webkit-scrollbar-track { background:transparent; }
+.filtros-panel::-webkit-scrollbar-thumb { background:var(--latte); border-radius:4px; }
 .filtros-titulo { font-family:var(--font-serif); font-size:18px; font-weight:600; color:var(--espresso); margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid rgba(106,58,31,0.08); }
 .filtro-grupo { margin-bottom:24px; }
 .filtro-label { display:flex; align-items:center; gap:6px; font-size:12px; font-weight:500; color:var(--text-dark); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; }
